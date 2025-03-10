@@ -1,0 +1,1940 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.6.40">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Your Name">
+<meta name="dcterms.date" content="2025-03-10">
+
+<title>Lecture 3: Rational Agents – Your Site Name</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-549806ee2085284f45b00abea8c6df48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-6bd9cfa162949bde0a231f530c97869d.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="./index.html">
+    <span class="navbar-title">Your Site Name</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="./index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+    <div class="dropdown">
+      <a href="" title="" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" role="link" aria-label=""><i class="bi bi-list"></i></a>
+      <ul class="dropdown-menu" aria-labelledby="quarto-navigation-tool-dropdown-0">
+          <li>
+            <a class="dropdown-item quarto-navbar-tools-item" href="./IA_L01-20250303_091724-Meeting_Recording.mp4.html">
+            Introduction to Artificial Intelligence
+            </a>
+          </li>
+          <li>
+            <a class="dropdown-item quarto-navbar-tools-item" href="./IA_L02-20250304_151855-Meeting_Recording.mp4.html">
+            Lecture Notes on Artificial Intelligence - Lecture 2: Introduction and History
+            </a>
+          </li>
+          <li>
+            <a class="dropdown-item quarto-navbar-tools-item" href="./IA_L03-20250310_091808-Meeting_Recording.mp4.html">
+            Lecture 3: Rational Agents
+            </a>
+          </li>
+      </ul>
+    </div>
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul class="collapse">
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a></li>
+  <li><a href="#review-of-previous-lectures-foundations-of-ai" id="toc-review-of-previous-lectures-foundations-of-ai" class="nav-link" data-scroll-target="#review-of-previous-lectures-foundations-of-ai">Review of Previous Lectures: Foundations of AI</a>
+  <ul class="collapse">
+  <li><a href="#defining-artificial-intelligence-from-human-simulation-to-rational-action" id="toc-defining-artificial-intelligence-from-human-simulation-to-rational-action" class="nav-link" data-scroll-target="#defining-artificial-intelligence-from-human-simulation-to-rational-action">Defining Artificial Intelligence: From Human Simulation to Rational Action</a></li>
+  <li><a href="#historical-context-tracing-the-evolution-of-ai" id="toc-historical-context-tracing-the-evolution-of-ai" class="nav-link" data-scroll-target="#historical-context-tracing-the-evolution-of-ai">Historical Context: Tracing the Evolution of AI</a></li>
+  <li><a href="#current-state-and-future-perspectives-of-artificial-intelligence" id="toc-current-state-and-future-perspectives-of-artificial-intelligence" class="nav-link" data-scroll-target="#current-state-and-future-perspectives-of-artificial-intelligence">Current State and Future Perspectives of Artificial Intelligence</a></li>
+  </ul></li>
+  <li><a href="#rational-agents-the-central-paradigm-of-modern-ai" id="toc-rational-agents-the-central-paradigm-of-modern-ai" class="nav-link" data-scroll-target="#rational-agents-the-central-paradigm-of-modern-ai">Rational Agents: The Central Paradigm of Modern AI</a>
+  <ul class="collapse">
+  <li><a href="#why-agents" id="toc-why-agents" class="nav-link" data-scroll-target="#why-agents">Why Agents?</a></li>
+  <li><a href="#defining-agents-and-rationality" id="toc-defining-agents-and-rationality" class="nav-link" data-scroll-target="#defining-agents-and-rationality">Defining Agents and Rationality</a></li>
+  <li><a href="#agent-function-and-agent-program" id="toc-agent-function-and-agent-program" class="nav-link" data-scroll-target="#agent-function-and-agent-program">Agent Function and Agent Program</a></li>
+  <li><a href="#table-driven-agents-a-conceptual-but-impractical-approach" id="toc-table-driven-agents-a-conceptual-but-impractical-approach" class="nav-link" data-scroll-target="#table-driven-agents-a-conceptual-but-impractical-approach">Table-Driven Agents: A Conceptual but Impractical Approach</a></li>
+  <li><a href="#detailed-examples-of-task-environments-and-p-e-a-s-analysis" id="toc-detailed-examples-of-task-environments-and-p-e-a-s-analysis" class="nav-link" data-scroll-target="#detailed-examples-of-task-environments-and-p-e-a-s-analysis">Detailed Examples of Task Environments and P-E-A-S Analysis</a></li>
+  <li><a href="#properties-of-task-environments-classifying-environmental-characteristics" id="toc-properties-of-task-environments-classifying-environmental-characteristics" class="nav-link" data-scroll-target="#properties-of-task-environments-classifying-environmental-characteristics">Properties of Task Environments: Classifying Environmental Characteristics</a></li>
+  </ul></li>
+  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<div class="quarto-title-block"><div><h1 class="title">Lecture 3: Rational Agents</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Your Name </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">March 10, 2025</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="introduction" class="level1">
+<h1>Introduction</h1>
+<p>Good morning. We are at lecture 3 of Artificial Intelligence. The main topic of today’s lecture is the concept of an agent, or rational agent, but we will get there calmly. First, there are a few points to address.</p>
+<p>Regarding announcements: Firstly, I remind you to fill out the questionnaire if you have not already done so. There are already 26 responses. An interesting observation is that most of you come from computer science and haven’t taken the Machine Learning course. This is something I should have asked in the questionnaire; I will note it for next year. Therefore, I will try to revisit some examples I have in mind. For those who have not yet done so, please complete the questionnaire.</p>
+<p>Secondly, there is a doctoral course on artificial intelligence. The title is a bit long: Advanced Natural Language Processing, which essentially means Large Language Models from Chat GPT onwards. It is taught by Professor Kevin Reutero, who has been studying these topics for some years and is an expert in the field. The dates are May 12th and 15th, an intensive 8-hour course, with 2 hours in the morning and 2 hours in the afternoon each day. It is designed for doctoral students, so it is of a more advanced level. Doctoral research is the third level of university education, after bachelor’s and master’s degrees. Although it is advanced and will be in English, as doctoral courses are, if you are interested in attending, Professor Reutero has agreed to welcome you as auditors. Please contact him beforehand to let him know so that he can book a suitably sized room if necessary. This course is not specifically for you but attending could be beneficial. It will be in May, and I will remind you again later. This is not the only doctoral course on these topics, but it seems the most adaptable to your interests. Other courses might be given by external lecturers with potentially less flexibility regarding audience size.</p>
+<p>Third announcement: Professor Serra might come by to discuss the Amsterdam trip. If you have any questions about that, you can discuss them with him.</p>
+</section>
+<section id="review-of-previous-lectures-foundations-of-ai" class="level1">
+<h1>Review of Previous Lectures: Foundations of AI</h1>
+<p>In the initial lectures, we laid the groundwork for understanding artificial intelligence, moving from initial definitions to historical context and current capabilities.</p>
+<section id="defining-artificial-intelligence-from-human-simulation-to-rational-action" class="level2">
+<h2 class="anchored" data-anchor-id="defining-artificial-intelligence-from-human-simulation-to-rational-action">Defining Artificial Intelligence: From Human Simulation to Rational Action</h2>
+<p>In our first lecture, we grappled with the definition of artificial intelligence. Initial attempts often equate AI to creating machines that <em>simulate human intelligence</em>. While intuitively appealing, this definition proves unsatisfactory due to the inherent difficulty in defining and measuring "intelligence" itself. Over time, the AI research community has shifted focus towards a more pragmatic and achievable goal: creating <em>rational agents</em>. The emphasis moved from mimicking human-like thought processes to designing agents that act optimally to achieve specific goals, regardless of whether their methods resemble human cognition.</p>
+<p>This evolution in definition can be visualized through a framework considering two dimensions: <em>thought processes vs.&nbsp;behavior</em> and <em>human-centered vs.&nbsp;rationality-centered</em> approaches, as depicted in Figure <a href="#fig:ai_definitions" data-reference-type="ref" data-reference="fig:ai_definitions">1</a>.</p>
+<figure id="fig:ai_definitions" class="figure">
+<figcaption>
+Different Approaches to Defining AI
+</figcaption>
+</figure>
+<p>The quadrant representing <em>rational action</em> (bottom right, quadrant 4 in Figure <a href="#fig:ai_definitions" data-reference-type="ref" data-reference="fig:ai_definitions">1</a>) embodies the modern, standard paradigm in AI. This approach prioritizes designing agents that make optimal decisions to achieve their objectives, even if these decision-making processes diverge from human-like thinking. This shift has yielded significant benefits, enabling the creation of AI systems that not only perform tasks effectively but, in some domains, surpass human capabilities. However, it also represents a departure from the original, perhaps more ambitious, goal of replicating human-level intelligence in machines. The concept of an <em>agent</em>, which acts within an environment, becomes central to this rational approach, setting the stage for today’s discussion.</p>
+</section>
+<section id="historical-context-tracing-the-evolution-of-ai" class="level2">
+<h2 class="anchored" data-anchor-id="historical-context-tracing-the-evolution-of-ai">Historical Context: Tracing the Evolution of AI</h2>
+<p>Lecture two provided a historical overview of AI, establishing a crucial framework for understanding the field’s development. This historical perspective serves as a backbone, allowing us to contextualize the various techniques and milestones we will explore in subsequent lectures. We briefly traced the evolution of AI from its inception in the 1950s to the present day, highlighting key periods, breakthroughs, and challenges. This historical journey underscores both the complexity and the interdisciplinary nature of AI, drawing upon diverse fields such as mathematics, logic, philosophy, neuroscience, and computer science. Furthermore, understanding the historical trajectory of AI helps appreciate its growing societal impact, particularly in recent years with the advent of AI systems capable of near-human interaction.</p>
+<section id="key-milestones-and-evolutionary-trajectory" class="level3">
+<h3 class="anchored" data-anchor-id="key-milestones-and-evolutionary-trajectory">Key Milestones and Evolutionary Trajectory</h3>
+<p>To further enrich our understanding of AI’s historical development, we referenced the work of Thomas Haigh, a scholar specializing in the history of computing. His articles in the Communications of the ACM (CACM) offer valuable insights into the intertwined histories of AI and computer science. Haigh’s research challenges the conventional narrative of distinct "AI winters," suggesting a more continuous, albeit fluctuating, research trajectory. He examines the cyclical nature of AI development, characterized by periods of optimistic booms followed by periods of disillusionment and reduced funding, often termed "AI winters." These cycles are crucial to understanding the field’s progress and the factors that have shaped its current state. Haigh’s articles, accessible through the ACM Digital Library links provided, offer a non-technical yet informative exploration of these historical trends, complementing the textbook material and providing a nuanced perspective on the field’s evolution. We encourage you to explore these resources, particularly as we delve deeper into specific AI techniques and algorithms later in the course, which will allow for a richer appreciation of their historical context.</p>
+</section>
+<section id="importance-and-interdisciplinary-nature-of-the-field" class="level3">
+<h3 class="anchored" data-anchor-id="importance-and-interdisciplinary-nature-of-the-field">Importance and Interdisciplinary Nature of the Field</h3>
+<p>The historical review also served to motivate the importance of studying AI. As an inherently interdisciplinary field, AI’s advancements have consistently spurred innovation across computer science and numerous other domains. Discoveries and techniques originating in AI research often find applications in diverse areas, ranging from software engineering to data science and beyond. Moreover, the increasing sophistication of AI, particularly in areas like natural language processing and computer vision, has profound societal implications. The ability of AI systems to interact with humans in increasingly natural and sophisticated ways raises significant ethical, social, and economic questions, making the study of AI not only intellectually stimulating but also critically relevant in today’s world. This course, positioned as a foundational element for a Master’s degree in Computer Science, aims to equip you with the fundamental knowledge and critical thinking skills necessary to navigate this rapidly evolving and impactful field.</p>
+</section>
+</section>
+<section id="current-state-and-future-perspectives-of-artificial-intelligence" class="level2">
+<h2 class="anchored" data-anchor-id="current-state-and-future-perspectives-of-artificial-intelligence">Current State and Future Perspectives of Artificial Intelligence</h2>
+<p>Building upon the historical context, we briefly examined the current state of AI, acknowledging its remarkable progress in recent decades. We highlighted several domains where AI has achieved significant success, transitioning from theoretical concepts to practical applications impacting daily life.</p>
+<section id="current-capabilities-of-ai" class="level3">
+<h3 class="anchored" data-anchor-id="current-capabilities-of-ai">Current Capabilities of AI</h3>
+<div class="tcolorbox">
+<p>Today’s AI demonstrates impressive capabilities across various domains:</p>
+<p>* <strong>Autonomous Systems:</strong> Self-driving vehicles, including cars and robots, showcase sophisticated autonomous navigation and decision-making, operating effectively in complex and dynamic environments. Robots on Mars exemplify extreme autonomy, capable of planning and executing tasks remotely due to communication delays. * <strong>Natural Language Processing (NLP):</strong> Large Language Models (LLMs) like Chat GPT have revolutionized human-computer interaction, exhibiting near-human fluency in multiple languages, translation capabilities, and text generation. Voice assistants such as Siri, Cortana, and Alexa demonstrate advancements in spoken language understanding and response generation. * <strong>Recommendation Systems:</strong> AI-powered recommendation systems are ubiquitous, effectively filtering and personalizing information across platforms, from suggesting media content to tailoring social media feeds. * <strong>Game Playing:</strong> AI has achieved superhuman performance in strategic games like chess and Go, demonstrating advanced algorithmic design and problem-solving capabilities. * <strong>Image Recognition and Computer Vision:</strong> Deep learning models have surpassed human accuracy in image classification tasks, with applications ranging from medical image analysis (e.g., detecting diseases in X-rays and scans) to object recognition in autonomous systems.</p>
+</div>
+<p>To illustrate the rapid advancements in AI, we revisited a slide from approximately five years ago (Figure <a href="#fig:ai_capabilities" data-reference-type="ref" data-reference="fig:ai_capabilities">[fig:ai_capabilities]</a>) that posed questions about AI capabilities. Remarkably, many tasks deemed challenging or impossible just a few years prior are now considered achievable, or even commonplace, for modern AI systems. This underscores the exponential pace of progress in the field and the need for continuous learning and adaptation.</p>
+</section>
+<section id="future-scenarios-and-ethical-considerations" class="level3">
+<h3 class="anchored" data-anchor-id="future-scenarios-and-ethical-considerations">Future Scenarios and Ethical Considerations</h3>
+<p>Looking towards the future, predicting the trajectory of AI remains a complex and uncertain endeavor. While science fiction often portrays apocalyptic scenarios, current expert opinions are divided, ranging from optimistic visions of AI-driven progress to concerns about more subtle societal impacts, such as the proliferation of deepfakes and misinformation. It is crucial to approach future predictions with caution, acknowledging the inherent difficulty in forecasting technological advancements and their long-term consequences. Historically, expert predictions in AI, and technology in general, have often proven no more accurate than those of non-experts, highlighting the unpredictable nature of innovation. Therefore, rather than focusing on speculative scenarios, it is more productive to concentrate on understanding the fundamental principles of AI, its current capabilities, and the ethical considerations that arise with its increasing integration into society. These ethical considerations, particularly concerning bias, fairness, transparency, and accountability in AI systems, will be addressed later in the course, recognizing their growing importance in shaping the responsible development and deployment of AI technologies.</p>
+<p>In summary, our initial lectures have provided a foundational understanding of AI, encompassing its evolving definition, historical context, current capabilities, and future challenges. This groundwork prepares us to delve into the core concepts and techniques of AI, starting with the concept of rational agents, the central topic of today’s lecture.</p>
+</section>
+</section>
+</section>
+<section id="rational-agents-the-central-paradigm-of-modern-ai" class="level1">
+<h1>Rational Agents: The Central Paradigm of Modern AI</h1>
+<p>Having established the foundational concepts of AI in the previous lectures, we now turn our attention to the central paradigm of modern AI: <strong>rational agents</strong>. This lecture will delve into the definition, architecture, and properties of rational agents, providing a framework for understanding and designing intelligent systems.</p>
+<section id="why-agents" class="level2">
+<h2 class="anchored" data-anchor-id="why-agents">Why Agents?</h2>
+<p>The concept of an agent serves as a unifying abstraction in AI. It allows us to model diverse AI systems within a common framework, regardless of their specific tasks or underlying technologies. Thinking in terms of agents provides several conceptual advantages:</p>
+<p>* <strong>Unified Perspective:</strong> The agent abstraction offers a homogeneous view of the AI field, encompassing various techniques and approaches under a single umbrella. This perspective, championed by Russell and Norvig in their seminal textbook, <em>Artificial Intelligence: A Modern Approach</em> (often referred to as "The Agent Book"), emphasizes the design of intelligent agents as the core objective of AI. * <strong>Rational Action Focus:</strong> The agent paradigm naturally aligns with the modern definition of AI, which prioritizes <em>rationality</em>. By focusing on agents that act rationally to achieve goals, we move away from the ambiguities of human-like intelligence and towards the design of systems that perform optimally in their environments. * <strong>Modular Design:</strong> The agent framework encourages a modular approach to AI system design. By clearly separating the agent from its environment, sensors, and actuators, we can design and analyze each component independently and then integrate them to create a complete intelligent system. * <strong>Broad Applicability:</strong> The agent concept is broadly applicable across diverse AI domains. From simple reflex agents to complex learning agents, and from single-agent systems to multi-agent systems, the agent abstraction provides a versatile tool for modeling and understanding intelligent behavior in various contexts.</p>
+</section>
+<section id="defining-agents-and-rationality" class="level2">
+<h2 class="anchored" data-anchor-id="defining-agents-and-rationality">Defining Agents and Rationality</h2>
+<div class="tcolorbox">
+<p>An <strong>agent</strong> is formally defined as an <strong>entity that perceives and acts</strong> in an environment.</p>
+</div>
+<p>This seemingly simple definition encompasses a wide range of systems, from software programs to robots and even biological organisms. Key components of an agent definition are illustrated in Figure <a href="#fig:agent_schema" data-reference-type="ref" data-reference="fig:agent_schema">2</a>.</p>
+<figure id="fig:agent_schema" class="figure">
+<figcaption>
+Agent Interaction with Environment
+</figcaption>
+</figure>
+<p>As shown in Figure <a href="#fig:agent_schema" data-reference-type="ref" data-reference="fig:agent_schema">2</a>, an agent interacts with its <strong>environment</strong> through <strong>sensors</strong> and <strong>actuators</strong>.</p>
+<p>* <strong>Sensors</strong> are devices that allow the agent to perceive its environment. These can range from physical sensors like cameras and microphones for robots to software interfaces that receive input data for software agents. The agent’s perceptual input at any given time is called a <strong>percept</strong>. * <strong>Actuators</strong> are devices that allow the agent to act upon its environment. For robots, actuators might include motors, wheels, and manipulators. For software agents, actuators could be functions that modify data, display information, or send commands over a network. * The <strong>environment</strong> is the external world with which the agent interacts. It can be physical, like a room or a city, or virtual, like a game world or a database.</p>
+<div class="tcolorbox">
+<p>A <strong>rational agent</strong> is an agent that strives to <strong>maximize its expected utility</strong>.</p>
+</div>
+<p>At each point in time, a rational agent selects an action from the available options that it expects will lead to the best outcome, based on its current knowledge and beliefs. This concept of rationality is central to modern AI and distinguishes it from earlier approaches focused on mimicking human behavior.</p>
+<div class="tcolorbox">
+<p>It is crucial to note that rationality, in the context of AI agents, does not imply omniscience or perfection. A rational agent is expected to act optimally <strong>given its limitations</strong>, including:</p>
+<p>* <strong>Limited Perception:</strong> Agents may have incomplete or noisy sensory information about their environment. For instance, humans can only perceive sounds within a specific frequency range, and visual perception can be obstructed. Similarly, a Roomba’s sensors might only detect obstacles immediately in its path, missing dust in corners it hasn’t reached yet. * <strong>Uncertainty:</strong> The outcomes of actions may be uncertain or probabilistic. For example, in a game like Pac-Man, the ghosts’ movements are not entirely predictable. Similarly, a self-driving car cannot be certain about the future actions of other drivers or pedestrians. * <strong>Computational Constraints:</strong> Agents may have limited computational resources and time to make decisions. A chess-playing AI, even with powerful hardware, cannot explore all possible game states within a reasonable timeframe. Real-time decision-making often requires agents to act under significant time pressure.</p>
+</div>
+<p>Therefore, a rational agent aims to maximize <strong>expected utility</strong>, acknowledging that perfect outcomes are not always achievable due to these inherent limitations. The design of rational agents involves developing mechanisms that enable them to make the best possible decisions under conditions of uncertainty and limited information.</p>
+</section>
+<section id="agent-function-and-agent-program" class="level2">
+<h2 class="anchored" data-anchor-id="agent-function-and-agent-program">Agent Function and Agent Program</h2>
+<p>To understand how an agent operates, we distinguish between two key concepts: the <strong>agent function</strong> and the <strong>agent program</strong>.</p>
+<div class="tcolorbox">
+<p>The <strong>agent function</strong> is a theoretical mapping from percept sequences to actions. Mathematically, it can be represented as: <span class="math display">\[f: \mathcal{P}^* \rightarrow \mathcal{A}\]</span> where <span class="math inline">\(\mathcal{P}^*\)</span> is the set of all possible percept sequences (histories of all percepts received so far), and <span class="math inline">\(\mathcal{A}\)</span> is the set of possible actions.</p>
+</div>
+<p>The agent function, in essence, specifies what action an agent should take in response to any possible history of perceptions. This function is an abstract ideal, defining the desired behavior of a rational agent in all circumstances. For example, in a chess game, the agent function would ideally map every possible sequence of moves (percepts) to the optimal next move (action).</p>
+<div class="tcolorbox">
+<p>The <strong>agent program</strong> is a concrete implementation of the agent function. It is the actual algorithm or code that runs inside the agent and determines its actions based on its percepts.</p>
+</div>
+<p>The agent program takes the current percept as input and any internal state maintained by the agent and outputs an action. It is a practical realization of the abstract agent function, often representing an approximation due to computational limitations and the complexity of implementing the ideal mapping for all possible percept sequences. For instance, a chess-playing program is an agent program that approximates the ideal agent function for chess, using algorithms and heuristics to choose moves without explicitly considering every possible game sequence.</p>
+<p>Figure <a href="#fig:agent_schema_2" data-reference-type="ref" data-reference="fig:agent_schema_2">3</a> illustrates the relationship between the agent function and the agent program within the agent architecture.</p>
+<figure id="fig:agent_schema_2" class="figure">
+<figcaption>
+Agent Function within Agent
+</figcaption>
+</figure>
+<p>The agent program aims to implement the agent function, but it often does so approximately due to practical constraints. For instance, a simple agent program might only consider the most recent percept, ignoring the history of past percepts, while a more sophisticated program might maintain an internal state to remember relevant aspects of the percept history. The choice of agent program depends on factors such as the complexity of the environment, the desired level of rationality, and the available computational resources.</p>
+</section>
+<section id="table-driven-agents-a-conceptual-but-impractical-approach" class="level2">
+<h2 class="anchored" data-anchor-id="table-driven-agents-a-conceptual-but-impractical-approach">Table-Driven Agents: A Conceptual but Impractical Approach</h2>
+<p>One way to conceptualize the agent function is through a <strong>table-driven agent</strong>. In this approach, the agent function is explicitly represented as a lookup table. The table maps every possible percept sequence to the corresponding action that the agent should take. Table <a href="#tab:vacuum_agent_table" data-reference-type="ref" data-reference="tab:vacuum_agent_table">1</a> shows a partial example for our toy vacuum cleaner agent.</p>
+<div class="tab:vacuum_agent_table">
+<table class="caption-top table">
+<caption>Partial Table for Vacuum Cleaner Agent Function</caption>
+<thead>
+<tr class="header">
+<th style="text-align: center;">Percept Sequence</th>
+<th style="text-align: center;">Location</th>
+<th style="text-align: center;">Action</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"><span class="math inline">\([Clean, A]\)</span></td>
+<td style="text-align: center;">A</td>
+<td style="text-align: center;">Right</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><span class="math inline">\([Clean, B]\)</span></td>
+<td style="text-align: center;">B</td>
+<td style="text-align: center;">Left</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><span class="math inline">\([Dirty, A]\)</span></td>
+<td style="text-align: center;">A</td>
+<td style="text-align: center;">Suck</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><span class="math inline">\([Dirty, B]\)</span></td>
+<td style="text-align: center;">B</td>
+<td style="text-align: center;">Suck</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><span class="math inline">\([Clean, A], [Clean, A]\)</span></td>
+<td style="text-align: center;">A</td>
+<td style="text-align: center;">Right</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><span class="math inline">\([Clean, A], [Dirty, B]\)</span></td>
+<td style="text-align: center;">B</td>
+<td style="text-align: center;">Suck</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">...</td>
+<td style="text-align: center;">...</td>
+<td style="text-align: center;">...</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Given a percept sequence, the table-driven agent simply looks up the corresponding action in the table and executes it. This approach is conceptually straightforward and guarantees rational behavior, provided that the table accurately represents the optimal agent function.</p>
+<div class="tcolorbox">
+<p>However, table-driven agents suffer from severe practical limitations due to <strong>combinatorial explosion</strong>. The number of possible percept sequences grows exponentially with the length of the sequence and the number of possible percepts.</p>
+</div>
+<p>Consider an environment with <span class="math inline">\(P\)</span> possible percepts and an agent operating for <span class="math inline">\(T\)</span> time steps. The number of possible percept sequences of length up to <span class="math inline">\(T\)</span> is given by:</p>
+<p><span class="math display">\[\sum_{i=1}^{T} P^i = \frac{P(P^T - 1)}{P - 1} \approx O(P^T)\]</span></p>
+<div class="tcolorbox">
+<p>For even moderately complex environments, the size of the lookup table becomes astronomically large, exceeding the memory capacity of any computer. For example, in a chess game, the number of possible game states is estimated to be around <span class="math inline">\(10^{40}\)</span>, and the number of possible game sequences is far larger, rendering a table-driven agent for chess completely infeasible. As mentioned in the transcript, for a game like chess, the table size could approach <span class="math inline">\(10^{150}\)</span> entries, far exceeding the number of atoms in the universe.</p>
+</div>
+<div class="tcolorbox">
+<p>Russell and Norvig propose the <strong>P-E-A-S</strong> framework as a structured method for specifying task environments. PEAS is an acronym for:</p>
+<ul>
+<li><p><strong>Performance Measure (P):</strong> This defines the criteria for success or failure of the agent’s actions. It specifies how the agent’s performance is to be evaluated. A well-defined performance measure is crucial for designing rational agents, as it guides the agent’s decision-making process towards maximizing this measure.</p></li>
+<li><p><strong>Environment (E):</strong> This specifies the world in which the agent operates. It includes the state space, the dynamics of the environment, and any relevant objects or entities within it.</p></li>
+<li><p><strong>Actuators (A):</strong> These are the means by which the agent can interact with and act upon the environment. Actuators define the set of actions the agent can perform.</p></li>
+<li><p><strong>Sensors (S):</strong> These are the means by which the agent perceives its environment. Sensors provide the agent with information about the current state of the environment, which it uses to make decisions.</p></li>
+</ul>
+</div>
+<p>The PEAS framework provides a structured approach to analyze and define any task environment, ensuring all crucial aspects for agent design are considered. Let’s illustrate this framework with several examples.</p>
+</section>
+<section id="detailed-examples-of-task-environments-and-p-e-a-s-analysis" class="level2">
+<h2 class="anchored" data-anchor-id="detailed-examples-of-task-environments-and-p-e-a-s-analysis">Detailed Examples of Task Environments and P-E-A-S Analysis</h2>
+<p>Applying the PEAS framework helps to concretely define the task environment for different types of agents. Let’s examine several examples discussed in the lecture.</p>
+<section id="example-1-toy-vacuum-cleaner-agent" class="level3">
+<h3 class="anchored" data-anchor-id="example-1-toy-vacuum-cleaner-agent">Example 1: Toy Vacuum Cleaner Agent</h3>
+<div class="tcolorbox">
+<p>Consider the toy vacuum cleaner agent operating in a simplified environment with two locations, A and B. We can define its task environment using PEAS as follows:</p>
+<ul>
+<li><p><strong>Performance Measure (P):</strong> Points are awarded for each clean location at each time step. A possible refinement, as discussed, could include penalizing the agent for each movement to encourage efficiency.</p></li>
+<li><p><strong>Environment (E):</strong> A discrete environment consisting of two locations, A and B. Each location can be either dirty or clean.</p></li>
+<li><p><strong>Actuators (A):</strong> The agent has three possible actions: <em>Move Left</em>, <em>Move Right</em>, and <em>Suck</em> (vacuum).</p></li>
+<li><p><strong>Sensors (S):</strong> The agent has two sensors: one to perceive its <em>current location</em> (A or B) and another to detect the <em>dirt status</em> of the current location (Dirty or Clean).</p></li>
+</ul>
+</div>
+<p>This PEAS description clearly outlines the task environment for the simple vacuum cleaner agent.</p>
+</section>
+<section id="example-2-pac-man-agent" class="level3">
+<h3 class="anchored" data-anchor-id="example-2-pac-man-agent">Example 2: Pac-Man Agent</h3>
+<div class="tcolorbox">
+<p>For a Pac-Man agent playing the classic arcade game, the PEAS description becomes more complex:</p>
+<ul>
+<li><p><strong>Performance Measure (P):</strong> A more intricate scoring system is needed to capture the game’s objectives. A possible performance measure could be:</p>
+<ul>
+<li><p><strong>Points for each move:</strong> -1 (to encourage efficient play)</p></li>
+<li><p><strong>Points for eating a small pellet:</strong> +10</p></li>
+<li><p><strong>Points for winning a level (eating all pellets):</strong> +500</p></li>
+<li><p><strong>Penalty for dying (being eaten by a ghost):</strong> -500</p></li>
+<li><p><strong>Points for eating a ghost (after power pellet):</strong> +200</p></li>
+</ul>
+<p>This performance measure incentivizes the agent to eat pellets, win levels, and strategically eat ghosts while avoiding being caught.</p></li>
+<li><p><strong>Environment (E):</strong> The Pac-Man game world, including:</p>
+<ul>
+<li><p>A grid of locations.</p></li>
+<li><p>Pellets (small and large/power pellets) at certain locations.</p></li>
+<li><p>Ghosts (with their positions and movement patterns).</p></li>
+<li><p>Walls that restrict movement.</p></li>
+</ul>
+<p>The environment dynamics include ghost movement rules (which may be partially random or designed to chase Pac-Man) and the effect of power pellets on ghost behavior.</p></li>
+<li><p><strong>Actuators (A):</strong> The agent can move in <em>four directions</em>: Up, Down, Left, Right.</p></li>
+<li><p><strong>Sensors (S):</strong> The agent perceives:</p>
+<ul>
+<li><p>The positions of all pellets (remaining and eaten).</p></li>
+<li><p>The positions of all ghosts.</p></li>
+<li><p>Its own current location.</p></li>
+<li><p>Potentially, the remaining duration of the power pellet effect (though this might be uncertain).</p></li>
+</ul></li>
+</ul>
+</div>
+<p>The Pac-Man PEAS description highlights the increased complexity compared to the vacuum cleaner, particularly in the performance measure and environment definition.</p>
+</section>
+<section id="example-3-autonomous-taxi-driving-agent" class="level3">
+<h3 class="anchored" data-anchor-id="example-3-autonomous-taxi-driving-agent">Example 3: Autonomous Taxi Driving Agent</h3>
+<div class="tcolorbox">
+<p>Designing an autonomous taxi requires a sophisticated task environment definition:</p>
+<ul>
+<li><p><strong>Performance Measure (P):</strong> This would likely involve multiple factors:</p>
+<ul>
+<li><p><strong>Monetary Earnings:</strong> Maximizing fares collected from passengers.</p></li>
+<li><p><strong>Passenger Satisfaction:</strong> Ensuring comfortable and safe rides, potentially measured through passenger feedback or proxies like ride duration and smoothness.</p></li>
+<li><p><strong>Operational Costs:</strong> Minimizing fuel consumption, vehicle wear and tear, and maintenance costs.</p></li>
+<li><p><strong>Safety and Legality:</strong> Avoiding accidents, traffic violations (fines), and ensuring passenger safety.</p></li>
+<li><p><strong>Reputation:</strong> Maintaining a good service reputation to attract more customers.</p></li>
+</ul>
+<p>Balancing these potentially conflicting objectives is a key challenge in designing the performance measure.</p></li>
+<li><p><strong>Environment (E):</strong> A complex, dynamic, and partially observable real-world environment, including:</p>
+<ul>
+<li><p>Road networks (streets, highways, intersections, traffic lights, etc.).</p></li>
+<li><p>Other vehicles (cars, motorcycles, bicycles, pedestrians).</p></li>
+<li><p>Traffic rules and regulations.</p></li>
+<li><p>Customers (passengers requesting rides, their destinations, and preferences).</p></li>
+<li><p>Weather conditions (rain, snow, fog, etc.).</p></li>
+<li><p>Traffic conditions (congestion, accidents, road closures).</p></li>
+<li><p>Law enforcement (police).</p></li>
+</ul>
+<p>The environment is highly dynamic and unpredictable, with numerous external factors influencing the agent’s performance.</p></li>
+<li><p><strong>Actuators (A):</strong> The standard controls of a car:</p>
+<ul>
+<li><p>Steering wheel (controlling direction).</p></li>
+<li><p>Accelerator (controlling speed).</p></li>
+<li><p>Brakes (controlling speed and stopping).</p></li>
+<li><p>Turn signals.</p></li>
+<li><p>Horn.</p></li>
+<li><p>Display/interface for passenger interaction (e.g., showing route, playing media).</p></li>
+</ul></li>
+<li><p><strong>Sensors (S):</strong> A suite of sensors is necessary for perceiving the driving environment:</p>
+<ul>
+<li><p>Cameras (for visual input, object detection, lane recognition).</p></li>
+<li><p>Radar and Lidar (for distance sensing, obstacle detection).</p></li>
+<li><p>GPS (for location and navigation).</p></li>
+<li><p>Accelerometer and Inertial Measurement Unit (IMU) (for motion and orientation).</p></li>
+<li><p>Engine sensors (for monitoring vehicle status).</p></li>
+<li><p>Microphone (for potential voice commands from passengers).</p></li>
+</ul></li>
+</ul>
+</div>
+<p>The self-driving taxi example demonstrates the complexity of real-world task environments, requiring sophisticated sensors, actuators, and performance measures to address the challenges of autonomous navigation and decision-making in dynamic and uncertain conditions.</p>
+</section>
+<section id="further-examples-medical-diagnosis-system-and-language-tutor" class="level3">
+<h3 class="anchored" data-anchor-id="further-examples-medical-diagnosis-system-and-language-tutor">Further Examples: Medical Diagnosis System and Language Tutor</h3>
+<div class="tcolorbox">
+<p>For a medical diagnosis system, the PEAS components can be described as:</p>
+<ul>
+<li><p><strong>Performance Measure (P):</strong> Patient health, treatment cost, and accuracy of diagnosis.</p></li>
+<li><p><strong>Environment (E):</strong> Patient, hospital, medical staff.</p></li>
+<li><p><strong>Actuators (A):</strong> Displaying diagnoses, recommending treatments, suggesting tests, alerting medical staff.</p></li>
+<li><p><strong>Sensors (S):</strong> Patient medical history, symptoms, test results, doctor’s notes.</p></li>
+</ul>
+</div>
+<div class="tcolorbox">
+<p>For a language tutor, the PEAS components can be described as:</p>
+<ul>
+<li><p><strong>Performance Measure (P):</strong> Student test scores, student engagement, time to achieve fluency.</p></li>
+<li><p><strong>Environment (E):</strong> Student, learning platform, exercises, language content.</p></li>
+<li><p><strong>Actuators (A):</strong> Providing exercises, giving feedback, offering hints, adapting difficulty, presenting new content.</p></li>
+<li><p><strong>Sensors (S):</strong> Student responses, performance data, time spent learning, student self-assessment.</p></li>
+</ul>
+</div>
+<p>These examples further illustrate the versatility of the PEAS framework in capturing diverse AI applications.</p>
+</section>
+</section>
+<section id="properties-of-task-environments-classifying-environmental-characteristics" class="level2">
+<h2 class="anchored" data-anchor-id="properties-of-task-environments-classifying-environmental-characteristics">Properties of Task Environments: Classifying Environmental Characteristics</h2>
+<p>To further understand and categorize task environments, we can analyze them based on several key properties. These properties help in selecting appropriate agent architectures and algorithms for different tasks. We will now discuss some of these properties, starting with observability.</p>
+<section id="observability-distinguishing-between-fully-and-partially-observable-environments" class="level3">
+<h3 class="anchored" data-anchor-id="observability-distinguishing-between-fully-and-partially-observable-environments">Observability: Distinguishing Between Fully and Partially Observable Environments</h3>
+<div class="tcolorbox">
+<p><strong>Observability</strong> refers to the degree to which an agent’s sensors can perceive the current state of the environment.</p>
+</div>
+<p>Task environments can be categorized as:</p>
+<ul>
+<li><p><strong>Fully Observable:</strong> In a fully observable environment, the agent’s sensors provide it with access to the complete state of the environment at each point in time. The agent knows everything relevant to making optimal decisions. Examples of approximately fully observable environments include:</p>
+<ul>
+<li><p><strong>Chess (with perfect information):</strong> The agent can see the entire chessboard, including the positions of all pieces.</p></li>
+<li><p><strong>Vacuum Cleaner in a simple, discretized environment (as initially described):</strong> If the agent always knows its location and the dirt status of both locations, it is a fully observable environment.</p></li>
+</ul>
+<p>In fully observable environments, agents do not need to maintain internal state to track aspects of the environment not directly perceived, as all relevant information is immediately available through sensors.</p></li>
+<li><p><strong>Partially Observable:</strong> In a partially observable environment, the agent’s sensors only provide limited or incomplete information about the environment’s state. The agent may not have direct access to all aspects relevant to its decision-making. Most real-world environments are partially observable. Examples include:</p>
+<ul>
+<li><p><strong>Pac-Man:</strong> While Pac-Man perceives the locations of pellets and ghosts in its vicinity, it might not have perfect information about the ghosts’ future movements or intentions.</p></li>
+<li><p><strong>Self-driving car:</strong> Sensors provide a view of the surroundings, but there are occlusions, limited sensor range, and uncertainties about the behavior of other agents (drivers, pedestrians). The agent does not have complete knowledge of the state of all traffic participants or road conditions at all times.</p></li>
+<li><p><strong>Vacuum cleaner in a more realistic setting:</strong> A Roomba might not know the dirt distribution in rooms it hasn’t yet explored or behind furniture. It relies on its local sensors and memory of visited areas to infer cleanliness.</p></li>
+</ul>
+<p>In partially observable environments, agents often need to maintain internal state to keep track of aspects of the environment that are not directly sensed. They may need to infer the hidden parts of the environment based on past percepts and their understanding of the environment dynamics. This often involves using memory, belief states, and probabilistic reasoning to make informed decisions under uncertainty.</p></li>
+<li><p><strong>Unobservable:</strong> In a completely unobservable environment (a theoretical extreme), the agent receives no sensory information about the environment at all. While practically rare, this extreme case helps to understand the spectrum of observability. In such scenarios, agents must operate based solely on prior knowledge or pre-programmed behaviors, without any feedback from the environment.</p></li>
+</ul>
+<p>The degree of observability significantly impacts the design of rational agents. Agents in fully observable environments can often employ simpler decision-making strategies, as they have complete information. Agents in partially observable environments require more sophisticated techniques to handle uncertainty and incomplete information, often involving state estimation, prediction, and memory.</p>
+</section>
+</section>
+</section>
+<section id="conclusion" class="level1">
+<h1>Conclusion</h1>
+<p>In today’s lecture, we introduced the concept of rational agents as a central paradigm in modern AI. We started by refining our understanding of AI, shifting from mere human simulation to the design of systems capable of rational action. We explored the historical context that led to this paradigm shift and discussed the current state and future perspectives of AI, highlighting its growing capabilities and ethical considerations.</p>
+<p>We delved into the definition of agents, emphasizing the principle of rationality, and examined the architecture of agents in terms of sensors, actuators, and their interaction with the environment. We discussed the agent function and program, focusing on how agents map perceptions to actions, and introduced the table-driven agent as a conceptual model, while also acknowledging its practical limitations due to computational complexity. Using the toy vacuum cleaner example, we illustrated these concepts in a simple environment. We underscored the importance of autonomy and learning for truly intelligent agents, contrasting them with purely reactive systems.</p>
+<p>Furthermore, we explored the concept of task environments using the PEAS framework (Performance, Environment, Actuators, Sensors). Through detailed examples like the vacuum cleaner, Pac-Man, autonomous taxi driving, medical diagnosis systems, and foreign language tutoring systems, we demonstrated how to analyze and specify different operational domains for agents. Finally, we began to classify task environments based on their properties, starting with observability, distinguishing between fully and partially observable environments.</p>
+<div class="tcolorbox">
+<p><strong>Important Remarks and Key Takeaways:</strong></p>
+<ul>
+<li><p><strong>Rationality over Human Simulation:</strong> We emphasized the modern AI paradigm shift towards designing <strong>rational agents</strong> that optimize performance based on clearly defined objectives, rather than merely attempting to replicate human-like intelligence. This focus on rationality provides a more concrete and measurable goal for AI development.</p></li>
+<li><p><strong>Agent-Centric View:</strong> The <strong>agent abstraction</strong> provides a powerful and unifying framework for understanding and designing intelligent systems. By viewing AI systems as agents interacting with environments, we gain a consistent perspective applicable across diverse AI domains and techniques.</p></li>
+<li><p><strong>Task Environment is Crucial:</strong> Defining the <strong>task environment</strong> using the <strong>PEAS framework</strong> is an essential first step in designing any intelligent agent. The PEAS framework ensures that all critical aspects of the problem, including performance metrics, environmental characteristics, and agent capabilities, are systematically considered.</p></li>
+<li><p><strong>Practical Limitations of Table-Driven Agents:</strong> While conceptually illustrative, <strong>table-driven agents</strong> highlight the challenge of <strong>combinatorial explosion</strong>. The exponential growth in the number of possible percept sequences renders this approach impractical for real-world problems, necessitating more efficient and scalable agent architectures.</p></li>
+<li><p><strong>Observability Impacts Agent Design:</strong> The <strong>observability</strong> of the task environment is a fundamental property that significantly influences agent design. Moving from fully observable to partially observable environments necessitates increasingly sophisticated agent programs capable of handling uncertainty, incomplete information, and the need for internal state and inference.</p></li>
+</ul>
+</div>
+<div class="tcolorbox">
+<p><strong>Follow-up Questions and Topics for Next Lecture:</strong></p>
+<ul>
+<li><p>How do the different properties of task environments, beyond observability (e.g., determinism, episodic vs.&nbsp;sequential), further constrain or enable different types of agent designs and learning mechanisms?</p></li>
+<li><p>Consider real-world scenarios beyond those discussed. Can you identify and analyze the PEAS components for an agent designed to:</p>
+<ul>
+<li><p>Manage a personal calendar and schedule appointments?</p></li>
+<li><p>Trade stocks on the stock market?</p></li>
+<li><p>Play a complex strategy game like StarCraft?</p></li>
+</ul></li>
+<li><p>How can agents effectively learn and operate in partially observable environments where their knowledge of the world is inherently incomplete? What types of internal representations and reasoning mechanisms are required?</p></li>
+<li><p>Building upon the limitations of table-driven agents, what alternative agent architectures can overcome the challenges of combinatorial complexity and enable the development of practical and intelligent systems for complex task environments?</p></li>
+</ul>
+</div>
+<p>In the next lecture, we will continue our exploration of task environment properties, examining determinism, environment dynamics, and discreteness. We will then begin to introduce more practical agent architectures that address the limitations of table-driven approaches and pave the way for designing intelligent agents capable of operating in increasingly complex and realistic environments.</p>
+
+
+<!-- -->
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+  const viewSource = window.document.getElementById('quarto-view-source') ||
+                     window.document.getElementById('quarto-code-tools-source');
+  if (viewSource) {
+    const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
+    viewSource.addEventListener("click", function(e) {
+      if (sourceUrl) {
+        // rstudio viewer pane
+        if (/\bcapabilities=\b/.test(window.location)) {
+          window.open(sourceUrl);
+        } else {
+          window.location.href = sourceUrl;
+        }
+      } else {
+        const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
+        modal.show();
+      }
+      return false;
+    });
+  }
+  function toggleCodeHandler(show) {
+    return function(e) {
+      const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
+      for (let i=0; i<detailsSrc.length; i++) {
+        const details = detailsSrc[i].parentElement;
+        if (show) {
+          details.open = true;
+        } else {
+          details.removeAttribute("open");
+        }
+      }
+      const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
+      const fromCls = show ? "hidden" : "unhidden";
+      const toCls = show ? "unhidden" : "hidden";
+      for (let i=0; i<cellCodeDivs.length; i++) {
+        const codeDiv = cellCodeDivs[i];
+        if (codeDiv.classList.contains(fromCls)) {
+          codeDiv.classList.remove(fromCls);
+          codeDiv.classList.add(toCls);
+        } 
+      }
+      return false;
+    }
+  }
+  const hideAllCode = window.document.getElementById("quarto-hide-all-code");
+  if (hideAllCode) {
+    hideAllCode.addEventListener("click", toggleCodeHandler(false));
+  }
+  const showAllCode = window.document.getElementById("quarto-show-all-code");
+  if (showAllCode) {
+    showAllCode.addEventListener("click", toggleCodeHandler(true));
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp("git@github\.com-TheGhoul21:TheGhoul21\/AI-2024-2025");
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
+<div class="sourceCode" id="cb1" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "Lecture 3: Rational Agents"</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="an">author:</span><span class="co"> "Your Name"</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="an">date:</span><span class="co"> "2025-03-10"</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="an">format:</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co">  html:</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co">    toc: true  # Table of Contents</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="co">    toc-depth: 2</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="co">    code-tools: true</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="co">    theme: cosmo  # Or "journal" for Distill-like minimalism</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="fu"># Introduction</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>Good morning. We are at lecture 3 of Artificial Intelligence. The main</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>topic of today's lecture is the concept of an agent, or rational agent,</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>but we will get there calmly. First, there are a few points to address.</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>Regarding announcements: Firstly, I remind you to fill out the</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>questionnaire if you have not already done so. There are already 26</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>responses. An interesting observation is that most of you come from</span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>computer science and haven't taken the Machine Learning course. This is</span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>something I should have asked in the questionnaire; I will note it for</span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>next year. Therefore, I will try to revisit some examples I have in</span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>mind. For those who have not yet done so, please complete the</span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>questionnaire.</span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>Secondly, there is a doctoral course on artificial intelligence. The</span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>title is a bit long: Advanced Natural Language Processing, which</span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>essentially means Large Language Models from Chat GPT onwards. It is</span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>taught by Professor Kevin Reutero, who has been studying these topics</span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a>for some years and is an expert in the field. The dates are May 12th and</span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>15th, an intensive 8-hour course, with 2 hours in the morning and 2</span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a>hours in the afternoon each day. It is designed for doctoral students,</span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a>so it is of a more advanced level. Doctoral research is the third level</span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a>of university education, after bachelor's and master's degrees. Although</span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a>it is advanced and will be in English, as doctoral courses are, if you</span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a>are interested in attending, Professor Reutero has agreed to welcome you</span>
+<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a>as auditors. Please contact him beforehand to let him know so that he</span>
+<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a>can book a suitably sized room if necessary. This course is not</span>
+<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a>specifically for you but attending could be beneficial. It will be in</span>
+<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a>May, and I will remind you again later. This is not the only doctoral</span>
+<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a>course on these topics, but it seems the most adaptable to your</span>
+<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a>interests. Other courses might be given by external lecturers with</span>
+<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a>potentially less flexibility regarding audience size.</span>
+<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a>Third announcement: Professor Serra might come by to discuss the</span>
+<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a>Amsterdam trip. If you have any questions about that, you can discuss</span>
+<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a>them with him.</span>
+<span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a><span class="fu"># Review of Previous Lectures: Foundations of AI</span></span>
+<span id="cb1-52"><a href="#cb1-52" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-53"><a href="#cb1-53" aria-hidden="true" tabindex="-1"></a>In the initial lectures, we laid the groundwork for understanding</span>
+<span id="cb1-54"><a href="#cb1-54" aria-hidden="true" tabindex="-1"></a>artificial intelligence, moving from initial definitions to historical</span>
+<span id="cb1-55"><a href="#cb1-55" aria-hidden="true" tabindex="-1"></a>context and current capabilities.</span>
+<span id="cb1-56"><a href="#cb1-56" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-57"><a href="#cb1-57" aria-hidden="true" tabindex="-1"></a><span class="fu">## Defining Artificial Intelligence: From Human Simulation to Rational Action</span></span>
+<span id="cb1-58"><a href="#cb1-58" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-59"><a href="#cb1-59" aria-hidden="true" tabindex="-1"></a>In our first lecture, we grappled with the definition of artificial</span>
+<span id="cb1-60"><a href="#cb1-60" aria-hidden="true" tabindex="-1"></a>intelligence. Initial attempts often equate AI to creating machines that</span>
+<span id="cb1-61"><a href="#cb1-61" aria-hidden="true" tabindex="-1"></a>*simulate human intelligence*. While intuitively appealing, this</span>
+<span id="cb1-62"><a href="#cb1-62" aria-hidden="true" tabindex="-1"></a>definition proves unsatisfactory due to the inherent difficulty in</span>
+<span id="cb1-63"><a href="#cb1-63" aria-hidden="true" tabindex="-1"></a>defining and measuring \"intelligence\" itself. Over time, the AI</span>
+<span id="cb1-64"><a href="#cb1-64" aria-hidden="true" tabindex="-1"></a>research community has shifted focus towards a more pragmatic and</span>
+<span id="cb1-65"><a href="#cb1-65" aria-hidden="true" tabindex="-1"></a>achievable goal: creating *rational agents*. The emphasis moved from</span>
+<span id="cb1-66"><a href="#cb1-66" aria-hidden="true" tabindex="-1"></a>mimicking human-like thought processes to designing agents that act</span>
+<span id="cb1-67"><a href="#cb1-67" aria-hidden="true" tabindex="-1"></a>optimally to achieve specific goals, regardless of whether their methods</span>
+<span id="cb1-68"><a href="#cb1-68" aria-hidden="true" tabindex="-1"></a>resemble human cognition.</span>
+<span id="cb1-69"><a href="#cb1-69" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-70"><a href="#cb1-70" aria-hidden="true" tabindex="-1"></a>This evolution in definition can be visualized through a framework</span>
+<span id="cb1-71"><a href="#cb1-71" aria-hidden="true" tabindex="-1"></a>considering two dimensions: *thought processes vs. behavior* and</span>
+<span id="cb1-72"><a href="#cb1-72" aria-hidden="true" tabindex="-1"></a>*human-centered vs. rationality-centered* approaches, as depicted in</span>
+<span id="cb1-73"><a href="#cb1-73" aria-hidden="true" tabindex="-1"></a>Figure <span class="co">[</span><span class="ot">1</span><span class="co">](#fig:ai_definitions)</span>{reference-type="ref"</span>
+<span id="cb1-74"><a href="#cb1-74" aria-hidden="true" tabindex="-1"></a>reference="fig:ai_definitions"}.</span>
+<span id="cb1-75"><a href="#cb1-75" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-76"><a href="#cb1-76" aria-hidden="true" tabindex="-1"></a>&lt;figure id="fig:ai_definitions"&gt;</span>
+<span id="cb1-77"><a href="#cb1-77" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-78"><a href="#cb1-78" aria-hidden="true" tabindex="-1"></a>&lt;figcaption&gt;Different Approaches to Defining AI&lt;/figcaption&gt;</span>
+<span id="cb1-79"><a href="#cb1-79" aria-hidden="true" tabindex="-1"></a>&lt;/figure&gt;</span>
+<span id="cb1-80"><a href="#cb1-80" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-81"><a href="#cb1-81" aria-hidden="true" tabindex="-1"></a>The quadrant representing *rational action* (bottom right, quadrant 4 in</span>
+<span id="cb1-82"><a href="#cb1-82" aria-hidden="true" tabindex="-1"></a>Figure <span class="co">[</span><span class="ot">1</span><span class="co">](#fig:ai_definitions)</span>{reference-type="ref"</span>
+<span id="cb1-83"><a href="#cb1-83" aria-hidden="true" tabindex="-1"></a>reference="fig:ai_definitions"}) embodies the modern, standard paradigm</span>
+<span id="cb1-84"><a href="#cb1-84" aria-hidden="true" tabindex="-1"></a>in AI. This approach prioritizes designing agents that make optimal</span>
+<span id="cb1-85"><a href="#cb1-85" aria-hidden="true" tabindex="-1"></a>decisions to achieve their objectives, even if these decision-making</span>
+<span id="cb1-86"><a href="#cb1-86" aria-hidden="true" tabindex="-1"></a>processes diverge from human-like thinking. This shift has yielded</span>
+<span id="cb1-87"><a href="#cb1-87" aria-hidden="true" tabindex="-1"></a>significant benefits, enabling the creation of AI systems that not only</span>
+<span id="cb1-88"><a href="#cb1-88" aria-hidden="true" tabindex="-1"></a>perform tasks effectively but, in some domains, surpass human</span>
+<span id="cb1-89"><a href="#cb1-89" aria-hidden="true" tabindex="-1"></a>capabilities. However, it also represents a departure from the original,</span>
+<span id="cb1-90"><a href="#cb1-90" aria-hidden="true" tabindex="-1"></a>perhaps more ambitious, goal of replicating human-level intelligence in</span>
+<span id="cb1-91"><a href="#cb1-91" aria-hidden="true" tabindex="-1"></a>machines. The concept of an *agent*, which acts within an environment,</span>
+<span id="cb1-92"><a href="#cb1-92" aria-hidden="true" tabindex="-1"></a>becomes central to this rational approach, setting the stage for today's</span>
+<span id="cb1-93"><a href="#cb1-93" aria-hidden="true" tabindex="-1"></a>discussion.</span>
+<span id="cb1-94"><a href="#cb1-94" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-95"><a href="#cb1-95" aria-hidden="true" tabindex="-1"></a><span class="fu">## Historical Context: Tracing the Evolution of AI</span></span>
+<span id="cb1-96"><a href="#cb1-96" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-97"><a href="#cb1-97" aria-hidden="true" tabindex="-1"></a>Lecture two provided a historical overview of AI, establishing a crucial</span>
+<span id="cb1-98"><a href="#cb1-98" aria-hidden="true" tabindex="-1"></a>framework for understanding the field's development. This historical</span>
+<span id="cb1-99"><a href="#cb1-99" aria-hidden="true" tabindex="-1"></a>perspective serves as a backbone, allowing us to contextualize the</span>
+<span id="cb1-100"><a href="#cb1-100" aria-hidden="true" tabindex="-1"></a>various techniques and milestones we will explore in subsequent</span>
+<span id="cb1-101"><a href="#cb1-101" aria-hidden="true" tabindex="-1"></a>lectures. We briefly traced the evolution of AI from its inception in</span>
+<span id="cb1-102"><a href="#cb1-102" aria-hidden="true" tabindex="-1"></a>the 1950s to the present day, highlighting key periods, breakthroughs,</span>
+<span id="cb1-103"><a href="#cb1-103" aria-hidden="true" tabindex="-1"></a>and challenges. This historical journey underscores both the complexity</span>
+<span id="cb1-104"><a href="#cb1-104" aria-hidden="true" tabindex="-1"></a>and the interdisciplinary nature of AI, drawing upon diverse fields such</span>
+<span id="cb1-105"><a href="#cb1-105" aria-hidden="true" tabindex="-1"></a>as mathematics, logic, philosophy, neuroscience, and computer science.</span>
+<span id="cb1-106"><a href="#cb1-106" aria-hidden="true" tabindex="-1"></a>Furthermore, understanding the historical trajectory of AI helps</span>
+<span id="cb1-107"><a href="#cb1-107" aria-hidden="true" tabindex="-1"></a>appreciate its growing societal impact, particularly in recent years</span>
+<span id="cb1-108"><a href="#cb1-108" aria-hidden="true" tabindex="-1"></a>with the advent of AI systems capable of near-human interaction.</span>
+<span id="cb1-109"><a href="#cb1-109" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-110"><a href="#cb1-110" aria-hidden="true" tabindex="-1"></a><span class="fu">### Key Milestones and Evolutionary Trajectory</span></span>
+<span id="cb1-111"><a href="#cb1-111" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-112"><a href="#cb1-112" aria-hidden="true" tabindex="-1"></a>To further enrich our understanding of AI's historical development, we</span>
+<span id="cb1-113"><a href="#cb1-113" aria-hidden="true" tabindex="-1"></a>referenced the work of Thomas Haigh, a scholar specializing in the</span>
+<span id="cb1-114"><a href="#cb1-114" aria-hidden="true" tabindex="-1"></a>history of computing. His articles in the Communications of the ACM</span>
+<span id="cb1-115"><a href="#cb1-115" aria-hidden="true" tabindex="-1"></a>(CACM) offer valuable insights into the intertwined histories of AI and</span>
+<span id="cb1-116"><a href="#cb1-116" aria-hidden="true" tabindex="-1"></a>computer science. Haigh's research challenges the conventional narrative</span>
+<span id="cb1-117"><a href="#cb1-117" aria-hidden="true" tabindex="-1"></a>of distinct \"AI winters,\" suggesting a more continuous, albeit</span>
+<span id="cb1-118"><a href="#cb1-118" aria-hidden="true" tabindex="-1"></a>fluctuating, research trajectory. He examines the cyclical nature of AI</span>
+<span id="cb1-119"><a href="#cb1-119" aria-hidden="true" tabindex="-1"></a>development, characterized by periods of optimistic booms followed by</span>
+<span id="cb1-120"><a href="#cb1-120" aria-hidden="true" tabindex="-1"></a>periods of disillusionment and reduced funding, often termed \"AI</span>
+<span id="cb1-121"><a href="#cb1-121" aria-hidden="true" tabindex="-1"></a>winters.\" These cycles are crucial to understanding the field's</span>
+<span id="cb1-122"><a href="#cb1-122" aria-hidden="true" tabindex="-1"></a>progress and the factors that have shaped its current state. Haigh's</span>
+<span id="cb1-123"><a href="#cb1-123" aria-hidden="true" tabindex="-1"></a>articles, accessible through the ACM Digital Library links provided,</span>
+<span id="cb1-124"><a href="#cb1-124" aria-hidden="true" tabindex="-1"></a>offer a non-technical yet informative exploration of these historical</span>
+<span id="cb1-125"><a href="#cb1-125" aria-hidden="true" tabindex="-1"></a>trends, complementing the textbook material and providing a nuanced</span>
+<span id="cb1-126"><a href="#cb1-126" aria-hidden="true" tabindex="-1"></a>perspective on the field's evolution. We encourage you to explore these</span>
+<span id="cb1-127"><a href="#cb1-127" aria-hidden="true" tabindex="-1"></a>resources, particularly as we delve deeper into specific AI techniques</span>
+<span id="cb1-128"><a href="#cb1-128" aria-hidden="true" tabindex="-1"></a>and algorithms later in the course, which will allow for a richer</span>
+<span id="cb1-129"><a href="#cb1-129" aria-hidden="true" tabindex="-1"></a>appreciation of their historical context.</span>
+<span id="cb1-130"><a href="#cb1-130" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-131"><a href="#cb1-131" aria-hidden="true" tabindex="-1"></a><span class="fu">### Importance and Interdisciplinary Nature of the Field</span></span>
+<span id="cb1-132"><a href="#cb1-132" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-133"><a href="#cb1-133" aria-hidden="true" tabindex="-1"></a>The historical review also served to motivate the importance of studying</span>
+<span id="cb1-134"><a href="#cb1-134" aria-hidden="true" tabindex="-1"></a>AI. As an inherently interdisciplinary field, AI's advancements have</span>
+<span id="cb1-135"><a href="#cb1-135" aria-hidden="true" tabindex="-1"></a>consistently spurred innovation across computer science and numerous</span>
+<span id="cb1-136"><a href="#cb1-136" aria-hidden="true" tabindex="-1"></a>other domains. Discoveries and techniques originating in AI research</span>
+<span id="cb1-137"><a href="#cb1-137" aria-hidden="true" tabindex="-1"></a>often find applications in diverse areas, ranging from software</span>
+<span id="cb1-138"><a href="#cb1-138" aria-hidden="true" tabindex="-1"></a>engineering to data science and beyond. Moreover, the increasing</span>
+<span id="cb1-139"><a href="#cb1-139" aria-hidden="true" tabindex="-1"></a>sophistication of AI, particularly in areas like natural language</span>
+<span id="cb1-140"><a href="#cb1-140" aria-hidden="true" tabindex="-1"></a>processing and computer vision, has profound societal implications. The</span>
+<span id="cb1-141"><a href="#cb1-141" aria-hidden="true" tabindex="-1"></a>ability of AI systems to interact with humans in increasingly natural</span>
+<span id="cb1-142"><a href="#cb1-142" aria-hidden="true" tabindex="-1"></a>and sophisticated ways raises significant ethical, social, and economic</span>
+<span id="cb1-143"><a href="#cb1-143" aria-hidden="true" tabindex="-1"></a>questions, making the study of AI not only intellectually stimulating</span>
+<span id="cb1-144"><a href="#cb1-144" aria-hidden="true" tabindex="-1"></a>but also critically relevant in today's world. This course, positioned</span>
+<span id="cb1-145"><a href="#cb1-145" aria-hidden="true" tabindex="-1"></a>as a foundational element for a Master's degree in Computer Science,</span>
+<span id="cb1-146"><a href="#cb1-146" aria-hidden="true" tabindex="-1"></a>aims to equip you with the fundamental knowledge and critical thinking</span>
+<span id="cb1-147"><a href="#cb1-147" aria-hidden="true" tabindex="-1"></a>skills necessary to navigate this rapidly evolving and impactful field.</span>
+<span id="cb1-148"><a href="#cb1-148" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-149"><a href="#cb1-149" aria-hidden="true" tabindex="-1"></a><span class="fu">## Current State and Future Perspectives of Artificial Intelligence</span></span>
+<span id="cb1-150"><a href="#cb1-150" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-151"><a href="#cb1-151" aria-hidden="true" tabindex="-1"></a>Building upon the historical context, we briefly examined the current</span>
+<span id="cb1-152"><a href="#cb1-152" aria-hidden="true" tabindex="-1"></a>state of AI, acknowledging its remarkable progress in recent decades. We</span>
+<span id="cb1-153"><a href="#cb1-153" aria-hidden="true" tabindex="-1"></a>highlighted several domains where AI has achieved significant success,</span>
+<span id="cb1-154"><a href="#cb1-154" aria-hidden="true" tabindex="-1"></a>transitioning from theoretical concepts to practical applications</span>
+<span id="cb1-155"><a href="#cb1-155" aria-hidden="true" tabindex="-1"></a>impacting daily life.</span>
+<span id="cb1-156"><a href="#cb1-156" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-157"><a href="#cb1-157" aria-hidden="true" tabindex="-1"></a><span class="fu">### Current Capabilities of AI</span></span>
+<span id="cb1-158"><a href="#cb1-158" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-159"><a href="#cb1-159" aria-hidden="true" tabindex="-1"></a>::: tcolorbox</span>
+<span id="cb1-160"><a href="#cb1-160" aria-hidden="true" tabindex="-1"></a>Today's AI demonstrates impressive capabilities across various domains:</span>
+<span id="cb1-161"><a href="#cb1-161" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-162"><a href="#cb1-162" aria-hidden="true" tabindex="-1"></a><span class="sc">\*</span> **Autonomous Systems:** Self-driving vehicles, including cars and</span>
+<span id="cb1-163"><a href="#cb1-163" aria-hidden="true" tabindex="-1"></a>robots, showcase sophisticated autonomous navigation and</span>
+<span id="cb1-164"><a href="#cb1-164" aria-hidden="true" tabindex="-1"></a>decision-making, operating effectively in complex and dynamic</span>
+<span id="cb1-165"><a href="#cb1-165" aria-hidden="true" tabindex="-1"></a>environments. Robots on Mars exemplify extreme autonomy, capable of</span>
+<span id="cb1-166"><a href="#cb1-166" aria-hidden="true" tabindex="-1"></a>planning and executing tasks remotely due to communication delays. <span class="sc">\*</span></span>
+<span id="cb1-167"><a href="#cb1-167" aria-hidden="true" tabindex="-1"></a>**Natural Language Processing (NLP):** Large Language Models (LLMs) like</span>
+<span id="cb1-168"><a href="#cb1-168" aria-hidden="true" tabindex="-1"></a>Chat GPT have revolutionized human-computer interaction, exhibiting</span>
+<span id="cb1-169"><a href="#cb1-169" aria-hidden="true" tabindex="-1"></a>near-human fluency in multiple languages, translation capabilities, and</span>
+<span id="cb1-170"><a href="#cb1-170" aria-hidden="true" tabindex="-1"></a>text generation. Voice assistants such as Siri, Cortana, and Alexa</span>
+<span id="cb1-171"><a href="#cb1-171" aria-hidden="true" tabindex="-1"></a>demonstrate advancements in spoken language understanding and response</span>
+<span id="cb1-172"><a href="#cb1-172" aria-hidden="true" tabindex="-1"></a>generation. <span class="sc">\*</span> **Recommendation Systems:** AI-powered recommendation</span>
+<span id="cb1-173"><a href="#cb1-173" aria-hidden="true" tabindex="-1"></a>systems are ubiquitous, effectively filtering and personalizing</span>
+<span id="cb1-174"><a href="#cb1-174" aria-hidden="true" tabindex="-1"></a>information across platforms, from suggesting media content to tailoring</span>
+<span id="cb1-175"><a href="#cb1-175" aria-hidden="true" tabindex="-1"></a>social media feeds. <span class="sc">\*</span> **Game Playing:** AI has achieved superhuman</span>
+<span id="cb1-176"><a href="#cb1-176" aria-hidden="true" tabindex="-1"></a>performance in strategic games like chess and Go, demonstrating advanced</span>
+<span id="cb1-177"><a href="#cb1-177" aria-hidden="true" tabindex="-1"></a>algorithmic design and problem-solving capabilities. <span class="sc">\*</span> **Image</span>
+<span id="cb1-178"><a href="#cb1-178" aria-hidden="true" tabindex="-1"></a>Recognition and Computer Vision:** Deep learning models have surpassed</span>
+<span id="cb1-179"><a href="#cb1-179" aria-hidden="true" tabindex="-1"></a>human accuracy in image classification tasks, with applications ranging</span>
+<span id="cb1-180"><a href="#cb1-180" aria-hidden="true" tabindex="-1"></a>from medical image analysis (e.g., detecting diseases in X-rays and</span>
+<span id="cb1-181"><a href="#cb1-181" aria-hidden="true" tabindex="-1"></a>scans) to object recognition in autonomous systems.</span>
+<span id="cb1-182"><a href="#cb1-182" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb1-183"><a href="#cb1-183" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-184"><a href="#cb1-184" aria-hidden="true" tabindex="-1"></a>To illustrate the rapid advancements in AI, we revisited a slide from</span>
+<span id="cb1-185"><a href="#cb1-185" aria-hidden="true" tabindex="-1"></a>approximately five years ago (Figure</span>
+<span id="cb1-186"><a href="#cb1-186" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">\[fig:ai_capabilities\]</span><span class="co">](#fig:ai_capabilities)</span>{reference-type="ref"</span>
+<span id="cb1-187"><a href="#cb1-187" aria-hidden="true" tabindex="-1"></a>reference="fig:ai_capabilities"}) that posed questions about AI</span>
+<span id="cb1-188"><a href="#cb1-188" aria-hidden="true" tabindex="-1"></a>capabilities. Remarkably, many tasks deemed challenging or impossible</span>
+<span id="cb1-189"><a href="#cb1-189" aria-hidden="true" tabindex="-1"></a>just a few years prior are now considered achievable, or even</span>
+<span id="cb1-190"><a href="#cb1-190" aria-hidden="true" tabindex="-1"></a>commonplace, for modern AI systems. This underscores the exponential</span>
+<span id="cb1-191"><a href="#cb1-191" aria-hidden="true" tabindex="-1"></a>pace of progress in the field and the need for continuous learning and</span>
+<span id="cb1-192"><a href="#cb1-192" aria-hidden="true" tabindex="-1"></a>adaptation.</span>
+<span id="cb1-193"><a href="#cb1-193" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-194"><a href="#cb1-194" aria-hidden="true" tabindex="-1"></a><span class="fu">### Future Scenarios and Ethical Considerations</span></span>
+<span id="cb1-195"><a href="#cb1-195" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-196"><a href="#cb1-196" aria-hidden="true" tabindex="-1"></a>Looking towards the future, predicting the trajectory of AI remains a</span>
+<span id="cb1-197"><a href="#cb1-197" aria-hidden="true" tabindex="-1"></a>complex and uncertain endeavor. While science fiction often portrays</span>
+<span id="cb1-198"><a href="#cb1-198" aria-hidden="true" tabindex="-1"></a>apocalyptic scenarios, current expert opinions are divided, ranging from</span>
+<span id="cb1-199"><a href="#cb1-199" aria-hidden="true" tabindex="-1"></a>optimistic visions of AI-driven progress to concerns about more subtle</span>
+<span id="cb1-200"><a href="#cb1-200" aria-hidden="true" tabindex="-1"></a>societal impacts, such as the proliferation of deepfakes and</span>
+<span id="cb1-201"><a href="#cb1-201" aria-hidden="true" tabindex="-1"></a>misinformation. It is crucial to approach future predictions with</span>
+<span id="cb1-202"><a href="#cb1-202" aria-hidden="true" tabindex="-1"></a>caution, acknowledging the inherent difficulty in forecasting</span>
+<span id="cb1-203"><a href="#cb1-203" aria-hidden="true" tabindex="-1"></a>technological advancements and their long-term consequences.</span>
+<span id="cb1-204"><a href="#cb1-204" aria-hidden="true" tabindex="-1"></a>Historically, expert predictions in AI, and technology in general, have</span>
+<span id="cb1-205"><a href="#cb1-205" aria-hidden="true" tabindex="-1"></a>often proven no more accurate than those of non-experts, highlighting</span>
+<span id="cb1-206"><a href="#cb1-206" aria-hidden="true" tabindex="-1"></a>the unpredictable nature of innovation. Therefore, rather than focusing</span>
+<span id="cb1-207"><a href="#cb1-207" aria-hidden="true" tabindex="-1"></a>on speculative scenarios, it is more productive to concentrate on</span>
+<span id="cb1-208"><a href="#cb1-208" aria-hidden="true" tabindex="-1"></a>understanding the fundamental principles of AI, its current</span>
+<span id="cb1-209"><a href="#cb1-209" aria-hidden="true" tabindex="-1"></a>capabilities, and the ethical considerations that arise with its</span>
+<span id="cb1-210"><a href="#cb1-210" aria-hidden="true" tabindex="-1"></a>increasing integration into society. These ethical considerations,</span>
+<span id="cb1-211"><a href="#cb1-211" aria-hidden="true" tabindex="-1"></a>particularly concerning bias, fairness, transparency, and accountability</span>
+<span id="cb1-212"><a href="#cb1-212" aria-hidden="true" tabindex="-1"></a>in AI systems, will be addressed later in the course, recognizing their</span>
+<span id="cb1-213"><a href="#cb1-213" aria-hidden="true" tabindex="-1"></a>growing importance in shaping the responsible development and deployment</span>
+<span id="cb1-214"><a href="#cb1-214" aria-hidden="true" tabindex="-1"></a>of AI technologies.</span>
+<span id="cb1-215"><a href="#cb1-215" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-216"><a href="#cb1-216" aria-hidden="true" tabindex="-1"></a>In summary, our initial lectures have provided a foundational</span>
+<span id="cb1-217"><a href="#cb1-217" aria-hidden="true" tabindex="-1"></a>understanding of AI, encompassing its evolving definition, historical</span>
+<span id="cb1-218"><a href="#cb1-218" aria-hidden="true" tabindex="-1"></a>context, current capabilities, and future challenges. This groundwork</span>
+<span id="cb1-219"><a href="#cb1-219" aria-hidden="true" tabindex="-1"></a>prepares us to delve into the core concepts and techniques of AI,</span>
+<span id="cb1-220"><a href="#cb1-220" aria-hidden="true" tabindex="-1"></a>starting with the concept of rational agents, the central topic of</span>
+<span id="cb1-221"><a href="#cb1-221" aria-hidden="true" tabindex="-1"></a>today's lecture.</span>
+<span id="cb1-222"><a href="#cb1-222" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-223"><a href="#cb1-223" aria-hidden="true" tabindex="-1"></a><span class="fu"># Rational Agents: The Central Paradigm of Modern AI</span></span>
+<span id="cb1-224"><a href="#cb1-224" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-225"><a href="#cb1-225" aria-hidden="true" tabindex="-1"></a>Having established the foundational concepts of AI in the previous</span>
+<span id="cb1-226"><a href="#cb1-226" aria-hidden="true" tabindex="-1"></a>lectures, we now turn our attention to the central paradigm of modern</span>
+<span id="cb1-227"><a href="#cb1-227" aria-hidden="true" tabindex="-1"></a>AI: **rational agents**. This lecture will delve into the definition,</span>
+<span id="cb1-228"><a href="#cb1-228" aria-hidden="true" tabindex="-1"></a>architecture, and properties of rational agents, providing a framework</span>
+<span id="cb1-229"><a href="#cb1-229" aria-hidden="true" tabindex="-1"></a>for understanding and designing intelligent systems.</span>
+<span id="cb1-230"><a href="#cb1-230" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-231"><a href="#cb1-231" aria-hidden="true" tabindex="-1"></a><span class="fu">## Why Agents?</span></span>
+<span id="cb1-232"><a href="#cb1-232" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-233"><a href="#cb1-233" aria-hidden="true" tabindex="-1"></a>The concept of an agent serves as a unifying abstraction in AI. It</span>
+<span id="cb1-234"><a href="#cb1-234" aria-hidden="true" tabindex="-1"></a>allows us to model diverse AI systems within a common framework,</span>
+<span id="cb1-235"><a href="#cb1-235" aria-hidden="true" tabindex="-1"></a>regardless of their specific tasks or underlying technologies. Thinking</span>
+<span id="cb1-236"><a href="#cb1-236" aria-hidden="true" tabindex="-1"></a>in terms of agents provides several conceptual advantages:</span>
+<span id="cb1-237"><a href="#cb1-237" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-238"><a href="#cb1-238" aria-hidden="true" tabindex="-1"></a><span class="sc">\*</span> **Unified Perspective:** The agent abstraction offers a homogeneous</span>
+<span id="cb1-239"><a href="#cb1-239" aria-hidden="true" tabindex="-1"></a>view of the AI field, encompassing various techniques and approaches</span>
+<span id="cb1-240"><a href="#cb1-240" aria-hidden="true" tabindex="-1"></a>under a single umbrella. This perspective, championed by Russell and</span>
+<span id="cb1-241"><a href="#cb1-241" aria-hidden="true" tabindex="-1"></a>Norvig in their seminal textbook, *Artificial Intelligence: A Modern</span>
+<span id="cb1-242"><a href="#cb1-242" aria-hidden="true" tabindex="-1"></a>Approach* (often referred to as \"The Agent Book\"), emphasizes the</span>
+<span id="cb1-243"><a href="#cb1-243" aria-hidden="true" tabindex="-1"></a>design of intelligent agents as the core objective of AI. <span class="sc">\*</span> **Rational</span>
+<span id="cb1-244"><a href="#cb1-244" aria-hidden="true" tabindex="-1"></a>Action Focus:** The agent paradigm naturally aligns with the modern</span>
+<span id="cb1-245"><a href="#cb1-245" aria-hidden="true" tabindex="-1"></a>definition of AI, which prioritizes *rationality*. By focusing on agents</span>
+<span id="cb1-246"><a href="#cb1-246" aria-hidden="true" tabindex="-1"></a>that act rationally to achieve goals, we move away from the ambiguities</span>
+<span id="cb1-247"><a href="#cb1-247" aria-hidden="true" tabindex="-1"></a>of human-like intelligence and towards the design of systems that</span>
+<span id="cb1-248"><a href="#cb1-248" aria-hidden="true" tabindex="-1"></a>perform optimally in their environments. <span class="sc">\*</span> **Modular Design:** The</span>
+<span id="cb1-249"><a href="#cb1-249" aria-hidden="true" tabindex="-1"></a>agent framework encourages a modular approach to AI system design. By</span>
+<span id="cb1-250"><a href="#cb1-250" aria-hidden="true" tabindex="-1"></a>clearly separating the agent from its environment, sensors, and</span>
+<span id="cb1-251"><a href="#cb1-251" aria-hidden="true" tabindex="-1"></a>actuators, we can design and analyze each component independently and</span>
+<span id="cb1-252"><a href="#cb1-252" aria-hidden="true" tabindex="-1"></a>then integrate them to create a complete intelligent system. <span class="sc">\*</span> **Broad</span>
+<span id="cb1-253"><a href="#cb1-253" aria-hidden="true" tabindex="-1"></a>Applicability:** The agent concept is broadly applicable across diverse</span>
+<span id="cb1-254"><a href="#cb1-254" aria-hidden="true" tabindex="-1"></a>AI domains. From simple reflex agents to complex learning agents, and</span>
+<span id="cb1-255"><a href="#cb1-255" aria-hidden="true" tabindex="-1"></a>from single-agent systems to multi-agent systems, the agent abstraction</span>
+<span id="cb1-256"><a href="#cb1-256" aria-hidden="true" tabindex="-1"></a>provides a versatile tool for modeling and understanding intelligent</span>
+<span id="cb1-257"><a href="#cb1-257" aria-hidden="true" tabindex="-1"></a>behavior in various contexts.</span>
+<span id="cb1-258"><a href="#cb1-258" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-259"><a href="#cb1-259" aria-hidden="true" tabindex="-1"></a><span class="fu">## Defining Agents and Rationality</span></span>
+<span id="cb1-260"><a href="#cb1-260" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-261"><a href="#cb1-261" aria-hidden="true" tabindex="-1"></a>::: tcolorbox</span>
+<span id="cb1-262"><a href="#cb1-262" aria-hidden="true" tabindex="-1"></a>An **agent** is formally defined as an **entity that perceives and</span>
+<span id="cb1-263"><a href="#cb1-263" aria-hidden="true" tabindex="-1"></a>acts** in an environment.</span>
+<span id="cb1-264"><a href="#cb1-264" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb1-265"><a href="#cb1-265" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-266"><a href="#cb1-266" aria-hidden="true" tabindex="-1"></a>This seemingly simple definition encompasses a wide range of systems,</span>
+<span id="cb1-267"><a href="#cb1-267" aria-hidden="true" tabindex="-1"></a>from software programs to robots and even biological organisms. Key</span>
+<span id="cb1-268"><a href="#cb1-268" aria-hidden="true" tabindex="-1"></a>components of an agent definition are illustrated in Figure</span>
+<span id="cb1-269"><a href="#cb1-269" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">2</span><span class="co">](#fig:agent_schema)</span>{reference-type="ref"</span>
+<span id="cb1-270"><a href="#cb1-270" aria-hidden="true" tabindex="-1"></a>reference="fig:agent_schema"}.</span>
+<span id="cb1-271"><a href="#cb1-271" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-272"><a href="#cb1-272" aria-hidden="true" tabindex="-1"></a>&lt;figure id="fig:agent_schema"&gt;</span>
+<span id="cb1-273"><a href="#cb1-273" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-274"><a href="#cb1-274" aria-hidden="true" tabindex="-1"></a>&lt;figcaption&gt;Agent Interaction with Environment&lt;/figcaption&gt;</span>
+<span id="cb1-275"><a href="#cb1-275" aria-hidden="true" tabindex="-1"></a>&lt;/figure&gt;</span>
+<span id="cb1-276"><a href="#cb1-276" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-277"><a href="#cb1-277" aria-hidden="true" tabindex="-1"></a>As shown in Figure <span class="co">[</span><span class="ot">2</span><span class="co">](#fig:agent_schema)</span>{reference-type="ref"</span>
+<span id="cb1-278"><a href="#cb1-278" aria-hidden="true" tabindex="-1"></a>reference="fig:agent_schema"}, an agent interacts with its</span>
+<span id="cb1-279"><a href="#cb1-279" aria-hidden="true" tabindex="-1"></a>**environment** through **sensors** and **actuators**.</span>
+<span id="cb1-280"><a href="#cb1-280" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-281"><a href="#cb1-281" aria-hidden="true" tabindex="-1"></a><span class="sc">\*</span> **Sensors** are devices that allow the agent to perceive its</span>
+<span id="cb1-282"><a href="#cb1-282" aria-hidden="true" tabindex="-1"></a>environment. These can range from physical sensors like cameras and</span>
+<span id="cb1-283"><a href="#cb1-283" aria-hidden="true" tabindex="-1"></a>microphones for robots to software interfaces that receive input data</span>
+<span id="cb1-284"><a href="#cb1-284" aria-hidden="true" tabindex="-1"></a>for software agents. The agent's perceptual input at any given time is</span>
+<span id="cb1-285"><a href="#cb1-285" aria-hidden="true" tabindex="-1"></a>called a **percept**. \* **Actuators** are devices that allow the agent</span>
+<span id="cb1-286"><a href="#cb1-286" aria-hidden="true" tabindex="-1"></a>to act upon its environment. For robots, actuators might include motors,</span>
+<span id="cb1-287"><a href="#cb1-287" aria-hidden="true" tabindex="-1"></a>wheels, and manipulators. For software agents, actuators could be</span>
+<span id="cb1-288"><a href="#cb1-288" aria-hidden="true" tabindex="-1"></a>functions that modify data, display information, or send commands over a</span>
+<span id="cb1-289"><a href="#cb1-289" aria-hidden="true" tabindex="-1"></a>network. <span class="sc">\*</span> The **environment** is the external world with which the</span>
+<span id="cb1-290"><a href="#cb1-290" aria-hidden="true" tabindex="-1"></a>agent interacts. It can be physical, like a room or a city, or virtual,</span>
+<span id="cb1-291"><a href="#cb1-291" aria-hidden="true" tabindex="-1"></a>like a game world or a database.</span>
+<span id="cb1-292"><a href="#cb1-292" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-293"><a href="#cb1-293" aria-hidden="true" tabindex="-1"></a>::: tcolorbox</span>
+<span id="cb1-294"><a href="#cb1-294" aria-hidden="true" tabindex="-1"></a>A **rational agent** is an agent that strives to **maximize its expected</span>
+<span id="cb1-295"><a href="#cb1-295" aria-hidden="true" tabindex="-1"></a>utility**.</span>
+<span id="cb1-296"><a href="#cb1-296" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb1-297"><a href="#cb1-297" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-298"><a href="#cb1-298" aria-hidden="true" tabindex="-1"></a>At each point in time, a rational agent selects an action from the</span>
+<span id="cb1-299"><a href="#cb1-299" aria-hidden="true" tabindex="-1"></a>available options that it expects will lead to the best outcome, based</span>
+<span id="cb1-300"><a href="#cb1-300" aria-hidden="true" tabindex="-1"></a>on its current knowledge and beliefs. This concept of rationality is</span>
+<span id="cb1-301"><a href="#cb1-301" aria-hidden="true" tabindex="-1"></a>central to modern AI and distinguishes it from earlier approaches</span>
+<span id="cb1-302"><a href="#cb1-302" aria-hidden="true" tabindex="-1"></a>focused on mimicking human behavior.</span>
+<span id="cb1-303"><a href="#cb1-303" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-304"><a href="#cb1-304" aria-hidden="true" tabindex="-1"></a>::: tcolorbox</span>
+<span id="cb1-305"><a href="#cb1-305" aria-hidden="true" tabindex="-1"></a>It is crucial to note that rationality, in the context of AI agents,</span>
+<span id="cb1-306"><a href="#cb1-306" aria-hidden="true" tabindex="-1"></a>does not imply omniscience or perfection. A rational agent is expected</span>
+<span id="cb1-307"><a href="#cb1-307" aria-hidden="true" tabindex="-1"></a>to act optimally **given its limitations**, including:</span>
+<span id="cb1-308"><a href="#cb1-308" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-309"><a href="#cb1-309" aria-hidden="true" tabindex="-1"></a><span class="sc">\*</span> **Limited Perception:** Agents may have incomplete or noisy sensory</span>
+<span id="cb1-310"><a href="#cb1-310" aria-hidden="true" tabindex="-1"></a>information about their environment. For instance, humans can only</span>
+<span id="cb1-311"><a href="#cb1-311" aria-hidden="true" tabindex="-1"></a>perceive sounds within a specific frequency range, and visual perception</span>
+<span id="cb1-312"><a href="#cb1-312" aria-hidden="true" tabindex="-1"></a>can be obstructed. Similarly, a Roomba's sensors might only detect</span>
+<span id="cb1-313"><a href="#cb1-313" aria-hidden="true" tabindex="-1"></a>obstacles immediately in its path, missing dust in corners it hasn't</span>
+<span id="cb1-314"><a href="#cb1-314" aria-hidden="true" tabindex="-1"></a>reached yet. <span class="sc">\*</span> **Uncertainty:** The outcomes of actions may be</span>
+<span id="cb1-315"><a href="#cb1-315" aria-hidden="true" tabindex="-1"></a>uncertain or probabilistic. For example, in a game like Pac-Man, the</span>
+<span id="cb1-316"><a href="#cb1-316" aria-hidden="true" tabindex="-1"></a>ghosts' movements are not entirely predictable. Similarly, a</span>
+<span id="cb1-317"><a href="#cb1-317" aria-hidden="true" tabindex="-1"></a>self-driving car cannot be certain about the future actions of other</span>
+<span id="cb1-318"><a href="#cb1-318" aria-hidden="true" tabindex="-1"></a>drivers or pedestrians. <span class="sc">\*</span> **Computational Constraints:** Agents may</span>
+<span id="cb1-319"><a href="#cb1-319" aria-hidden="true" tabindex="-1"></a>have limited computational resources and time to make decisions. A</span>
+<span id="cb1-320"><a href="#cb1-320" aria-hidden="true" tabindex="-1"></a>chess-playing AI, even with powerful hardware, cannot explore all</span>
+<span id="cb1-321"><a href="#cb1-321" aria-hidden="true" tabindex="-1"></a>possible game states within a reasonable timeframe. Real-time</span>
+<span id="cb1-322"><a href="#cb1-322" aria-hidden="true" tabindex="-1"></a>decision-making often requires agents to act under significant time</span>
+<span id="cb1-323"><a href="#cb1-323" aria-hidden="true" tabindex="-1"></a>pressure.</span>
+<span id="cb1-324"><a href="#cb1-324" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb1-325"><a href="#cb1-325" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-326"><a href="#cb1-326" aria-hidden="true" tabindex="-1"></a>Therefore, a rational agent aims to maximize **expected utility**,</span>
+<span id="cb1-327"><a href="#cb1-327" aria-hidden="true" tabindex="-1"></a>acknowledging that perfect outcomes are not always achievable due to</span>
+<span id="cb1-328"><a href="#cb1-328" aria-hidden="true" tabindex="-1"></a>these inherent limitations. The design of rational agents involves</span>
+<span id="cb1-329"><a href="#cb1-329" aria-hidden="true" tabindex="-1"></a>developing mechanisms that enable them to make the best possible</span>
+<span id="cb1-330"><a href="#cb1-330" aria-hidden="true" tabindex="-1"></a>decisions under conditions of uncertainty and limited information.</span>
+<span id="cb1-331"><a href="#cb1-331" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-332"><a href="#cb1-332" aria-hidden="true" tabindex="-1"></a><span class="fu">## Agent Function and Agent Program</span></span>
+<span id="cb1-333"><a href="#cb1-333" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-334"><a href="#cb1-334" aria-hidden="true" tabindex="-1"></a>To understand how an agent operates, we distinguish between two key</span>
+<span id="cb1-335"><a href="#cb1-335" aria-hidden="true" tabindex="-1"></a>concepts: the **agent function** and the **agent program**.</span>
+<span id="cb1-336"><a href="#cb1-336" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-337"><a href="#cb1-337" aria-hidden="true" tabindex="-1"></a>::: tcolorbox</span>
+<span id="cb1-338"><a href="#cb1-338" aria-hidden="true" tabindex="-1"></a>The **agent function** is a theoretical mapping from percept sequences</span>
+<span id="cb1-339"><a href="#cb1-339" aria-hidden="true" tabindex="-1"></a>to actions. Mathematically, it can be represented as:</span>
+<span id="cb1-340"><a href="#cb1-340" aria-hidden="true" tabindex="-1"></a>$$f: \mathcal{P}^* \rightarrow \mathcal{A}$$ where $\mathcal{P}^*$ is</span>
+<span id="cb1-341"><a href="#cb1-341" aria-hidden="true" tabindex="-1"></a>the set of all possible percept sequences (histories of all percepts</span>
+<span id="cb1-342"><a href="#cb1-342" aria-hidden="true" tabindex="-1"></a>received so far), and $\mathcal{A}$ is the set of possible actions.</span>
+<span id="cb1-343"><a href="#cb1-343" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb1-344"><a href="#cb1-344" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-345"><a href="#cb1-345" aria-hidden="true" tabindex="-1"></a>The agent function, in essence, specifies what action an agent should</span>
+<span id="cb1-346"><a href="#cb1-346" aria-hidden="true" tabindex="-1"></a>take in response to any possible history of perceptions. This function</span>
+<span id="cb1-347"><a href="#cb1-347" aria-hidden="true" tabindex="-1"></a>is an abstract ideal, defining the desired behavior of a rational agent</span>
+<span id="cb1-348"><a href="#cb1-348" aria-hidden="true" tabindex="-1"></a>in all circumstances. For example, in a chess game, the agent function</span>
+<span id="cb1-349"><a href="#cb1-349" aria-hidden="true" tabindex="-1"></a>would ideally map every possible sequence of moves (percepts) to the</span>
+<span id="cb1-350"><a href="#cb1-350" aria-hidden="true" tabindex="-1"></a>optimal next move (action).</span>
+<span id="cb1-351"><a href="#cb1-351" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-352"><a href="#cb1-352" aria-hidden="true" tabindex="-1"></a>::: tcolorbox</span>
+<span id="cb1-353"><a href="#cb1-353" aria-hidden="true" tabindex="-1"></a>The **agent program** is a concrete implementation of the agent</span>
+<span id="cb1-354"><a href="#cb1-354" aria-hidden="true" tabindex="-1"></a>function. It is the actual algorithm or code that runs inside the agent</span>
+<span id="cb1-355"><a href="#cb1-355" aria-hidden="true" tabindex="-1"></a>and determines its actions based on its percepts.</span>
+<span id="cb1-356"><a href="#cb1-356" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb1-357"><a href="#cb1-357" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-358"><a href="#cb1-358" aria-hidden="true" tabindex="-1"></a>The agent program takes the current percept as input and any internal</span>
+<span id="cb1-359"><a href="#cb1-359" aria-hidden="true" tabindex="-1"></a>state maintained by the agent and outputs an action. It is a practical</span>
+<span id="cb1-360"><a href="#cb1-360" aria-hidden="true" tabindex="-1"></a>realization of the abstract agent function, often representing an</span>
+<span id="cb1-361"><a href="#cb1-361" aria-hidden="true" tabindex="-1"></a>approximation due to computational limitations and the complexity of</span>
+<span id="cb1-362"><a href="#cb1-362" aria-hidden="true" tabindex="-1"></a>implementing the ideal mapping for all possible percept sequences. For</span>
+<span id="cb1-363"><a href="#cb1-363" aria-hidden="true" tabindex="-1"></a>instance, a chess-playing program is an agent program that approximates</span>
+<span id="cb1-364"><a href="#cb1-364" aria-hidden="true" tabindex="-1"></a>the ideal agent function for chess, using algorithms and heuristics to</span>
+<span id="cb1-365"><a href="#cb1-365" aria-hidden="true" tabindex="-1"></a>choose moves without explicitly considering every possible game</span>
+<span id="cb1-366"><a href="#cb1-366" aria-hidden="true" tabindex="-1"></a>sequence.</span>
+<span id="cb1-367"><a href="#cb1-367" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-368"><a href="#cb1-368" aria-hidden="true" tabindex="-1"></a>Figure <span class="co">[</span><span class="ot">3</span><span class="co">](#fig:agent_schema_2)</span>{reference-type="ref"</span>
+<span id="cb1-369"><a href="#cb1-369" aria-hidden="true" tabindex="-1"></a>reference="fig:agent_schema_2"} illustrates the relationship between the</span>
+<span id="cb1-370"><a href="#cb1-370" aria-hidden="true" tabindex="-1"></a>agent function and the agent program within the agent architecture.</span>
+<span id="cb1-371"><a href="#cb1-371" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-372"><a href="#cb1-372" aria-hidden="true" tabindex="-1"></a>&lt;figure id="fig:agent_schema_2"&gt;</span>
+<span id="cb1-373"><a href="#cb1-373" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-374"><a href="#cb1-374" aria-hidden="true" tabindex="-1"></a>&lt;figcaption&gt;Agent Function within Agent&lt;/figcaption&gt;</span>
+<span id="cb1-375"><a href="#cb1-375" aria-hidden="true" tabindex="-1"></a>&lt;/figure&gt;</span>
+<span id="cb1-376"><a href="#cb1-376" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-377"><a href="#cb1-377" aria-hidden="true" tabindex="-1"></a>The agent program aims to implement the agent function, but it often</span>
+<span id="cb1-378"><a href="#cb1-378" aria-hidden="true" tabindex="-1"></a>does so approximately due to practical constraints. For instance, a</span>
+<span id="cb1-379"><a href="#cb1-379" aria-hidden="true" tabindex="-1"></a>simple agent program might only consider the most recent percept,</span>
+<span id="cb1-380"><a href="#cb1-380" aria-hidden="true" tabindex="-1"></a>ignoring the history of past percepts, while a more sophisticated</span>
+<span id="cb1-381"><a href="#cb1-381" aria-hidden="true" tabindex="-1"></a>program might maintain an internal state to remember relevant aspects of</span>
+<span id="cb1-382"><a href="#cb1-382" aria-hidden="true" tabindex="-1"></a>the percept history. The choice of agent program depends on factors such</span>
+<span id="cb1-383"><a href="#cb1-383" aria-hidden="true" tabindex="-1"></a>as the complexity of the environment, the desired level of rationality,</span>
+<span id="cb1-384"><a href="#cb1-384" aria-hidden="true" tabindex="-1"></a>and the available computational resources.</span>
+<span id="cb1-385"><a href="#cb1-385" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-386"><a href="#cb1-386" aria-hidden="true" tabindex="-1"></a><span class="fu">## Table-Driven Agents: A Conceptual but Impractical Approach</span></span>
+<span id="cb1-387"><a href="#cb1-387" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-388"><a href="#cb1-388" aria-hidden="true" tabindex="-1"></a>One way to conceptualize the agent function is through a **table-driven</span>
+<span id="cb1-389"><a href="#cb1-389" aria-hidden="true" tabindex="-1"></a>agent**. In this approach, the agent function is explicitly represented</span>
+<span id="cb1-390"><a href="#cb1-390" aria-hidden="true" tabindex="-1"></a>as a lookup table. The table maps every possible percept sequence to the</span>
+<span id="cb1-391"><a href="#cb1-391" aria-hidden="true" tabindex="-1"></a>corresponding action that the agent should take. Table</span>
+<span id="cb1-392"><a href="#cb1-392" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">1</span><span class="co">](#tab:vacuum_agent_table)</span>{reference-type="ref"</span>
+<span id="cb1-393"><a href="#cb1-393" aria-hidden="true" tabindex="-1"></a>reference="tab:vacuum_agent_table"} shows a partial example for our toy</span>
+<span id="cb1-394"><a href="#cb1-394" aria-hidden="true" tabindex="-1"></a>vacuum cleaner agent.</span>
+<span id="cb1-395"><a href="#cb1-395" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-396"><a href="#cb1-396" aria-hidden="true" tabindex="-1"></a>::: tab:vacuum_agent_table</span>
+<span id="cb1-397"><a href="#cb1-397" aria-hidden="true" tabindex="-1"></a>       Percept Sequence       Location   Action</span>
+<span id="cb1-398"><a href="#cb1-398" aria-hidden="true" tabindex="-1"></a>  -------------------------- ---------- --------</span>
+<span id="cb1-399"><a href="#cb1-399" aria-hidden="true" tabindex="-1"></a><span class="in">         $[Clean, A]$            A       Right</span></span>
+<span id="cb1-400"><a href="#cb1-400" aria-hidden="true" tabindex="-1"></a><span class="in">         $[Clean, B]$            B        Left</span></span>
+<span id="cb1-401"><a href="#cb1-401" aria-hidden="true" tabindex="-1"></a><span class="in">         $[Dirty, A]$            A        Suck</span></span>
+<span id="cb1-402"><a href="#cb1-402" aria-hidden="true" tabindex="-1"></a><span class="in">         $[Dirty, B]$            B        Suck</span></span>
+<span id="cb1-403"><a href="#cb1-403" aria-hidden="true" tabindex="-1"></a>   $<span class="co">[</span><span class="ot">Clean, A</span><span class="co">]</span>, <span class="co">[</span><span class="ot">Clean, A</span><span class="co">]</span>$      A       Right</span>
+<span id="cb1-404"><a href="#cb1-404" aria-hidden="true" tabindex="-1"></a>   $<span class="co">[</span><span class="ot">Clean, A</span><span class="co">]</span>, <span class="co">[</span><span class="ot">Dirty, B</span><span class="co">]</span>$      B        Suck</span>
+<span id="cb1-405"><a href="#cb1-405" aria-hidden="true" tabindex="-1"></a>             <span class="sc">\.</span>..               <span class="sc">\.</span>..      <span class="sc">\.</span>..</span>
+<span id="cb1-406"><a href="#cb1-406" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-407"><a href="#cb1-407" aria-hidden="true" tabindex="-1"></a>  : Partial Table for Vacuum Cleaner Agent Function</span>
+<span id="cb1-408"><a href="#cb1-408" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb1-409"><a href="#cb1-409" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-410"><a href="#cb1-410" aria-hidden="true" tabindex="-1"></a>Given a percept sequence, the table-driven agent simply looks up the</span>
+<span id="cb1-411"><a href="#cb1-411" aria-hidden="true" tabindex="-1"></a>corresponding action in the table and executes it. This approach is</span>
+<span id="cb1-412"><a href="#cb1-412" aria-hidden="true" tabindex="-1"></a>conceptually straightforward and guarantees rational behavior, provided</span>
+<span id="cb1-413"><a href="#cb1-413" aria-hidden="true" tabindex="-1"></a>that the table accurately represents the optimal agent function.</span>
+<span id="cb1-414"><a href="#cb1-414" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-415"><a href="#cb1-415" aria-hidden="true" tabindex="-1"></a>::: tcolorbox</span>
+<span id="cb1-416"><a href="#cb1-416" aria-hidden="true" tabindex="-1"></a>However, table-driven agents suffer from severe practical limitations</span>
+<span id="cb1-417"><a href="#cb1-417" aria-hidden="true" tabindex="-1"></a>due to **combinatorial explosion**. The number of possible percept</span>
+<span id="cb1-418"><a href="#cb1-418" aria-hidden="true" tabindex="-1"></a>sequences grows exponentially with the length of the sequence and the</span>
+<span id="cb1-419"><a href="#cb1-419" aria-hidden="true" tabindex="-1"></a>number of possible percepts.</span>
+<span id="cb1-420"><a href="#cb1-420" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb1-421"><a href="#cb1-421" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-422"><a href="#cb1-422" aria-hidden="true" tabindex="-1"></a>Consider an environment with $P$ possible percepts and an agent</span>
+<span id="cb1-423"><a href="#cb1-423" aria-hidden="true" tabindex="-1"></a>operating for $T$ time steps. The number of possible percept sequences</span>
+<span id="cb1-424"><a href="#cb1-424" aria-hidden="true" tabindex="-1"></a>of length up to $T$ is given by:</span>
+<span id="cb1-425"><a href="#cb1-425" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-426"><a href="#cb1-426" aria-hidden="true" tabindex="-1"></a>$$\sum_{i=1}^{T} P^i = \frac{P(P^T - 1)}{P - 1} \approx O(P^T)$$</span>
+<span id="cb1-427"><a href="#cb1-427" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-428"><a href="#cb1-428" aria-hidden="true" tabindex="-1"></a>::: tcolorbox</span>
+<span id="cb1-429"><a href="#cb1-429" aria-hidden="true" tabindex="-1"></a>For even moderately complex environments, the size of the lookup table</span>
+<span id="cb1-430"><a href="#cb1-430" aria-hidden="true" tabindex="-1"></a>becomes astronomically large, exceeding the memory capacity of any</span>
+<span id="cb1-431"><a href="#cb1-431" aria-hidden="true" tabindex="-1"></a>computer. For example, in a chess game, the number of possible game</span>
+<span id="cb1-432"><a href="#cb1-432" aria-hidden="true" tabindex="-1"></a>states is estimated to be around $10^{40}$, and the number of possible</span>
+<span id="cb1-433"><a href="#cb1-433" aria-hidden="true" tabindex="-1"></a>game sequences is far larger, rendering a table-driven agent for chess</span>
+<span id="cb1-434"><a href="#cb1-434" aria-hidden="true" tabindex="-1"></a>completely infeasible. As mentioned in the transcript, for a game like</span>
+<span id="cb1-435"><a href="#cb1-435" aria-hidden="true" tabindex="-1"></a>chess, the table size could approach $10^{150}$ entries, far exceeding</span>
+<span id="cb1-436"><a href="#cb1-436" aria-hidden="true" tabindex="-1"></a>the number of atoms in the universe.</span>
+<span id="cb1-437"><a href="#cb1-437" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb1-438"><a href="#cb1-438" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-439"><a href="#cb1-439" aria-hidden="true" tabindex="-1"></a>::: tcolorbox</span>
+<span id="cb1-440"><a href="#cb1-440" aria-hidden="true" tabindex="-1"></a>Russell and Norvig propose the **P-E-A-S** framework as a structured</span>
+<span id="cb1-441"><a href="#cb1-441" aria-hidden="true" tabindex="-1"></a>method for specifying task environments. PEAS is an acronym for:</span>
+<span id="cb1-442"><a href="#cb1-442" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-443"><a href="#cb1-443" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>**Performance Measure (P):** This defines the criteria for success</span>
+<span id="cb1-444"><a href="#cb1-444" aria-hidden="true" tabindex="-1"></a>    or failure of the agent's actions. It specifies how the agent's</span>
+<span id="cb1-445"><a href="#cb1-445" aria-hidden="true" tabindex="-1"></a>    performance is to be evaluated. A well-defined performance measure</span>
+<span id="cb1-446"><a href="#cb1-446" aria-hidden="true" tabindex="-1"></a>    is crucial for designing rational agents, as it guides the agent's</span>
+<span id="cb1-447"><a href="#cb1-447" aria-hidden="true" tabindex="-1"></a>    decision-making process towards maximizing this measure.</span>
+<span id="cb1-448"><a href="#cb1-448" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-449"><a href="#cb1-449" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>**Environment (E):** This specifies the world in which the agent</span>
+<span id="cb1-450"><a href="#cb1-450" aria-hidden="true" tabindex="-1"></a>    operates. It includes the state space, the dynamics of the</span>
+<span id="cb1-451"><a href="#cb1-451" aria-hidden="true" tabindex="-1"></a>    environment, and any relevant objects or entities within it.</span>
+<span id="cb1-452"><a href="#cb1-452" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-453"><a href="#cb1-453" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>**Actuators (A):** These are the means by which the agent can</span>
+<span id="cb1-454"><a href="#cb1-454" aria-hidden="true" tabindex="-1"></a>    interact with and act upon the environment. Actuators define the set</span>
+<span id="cb1-455"><a href="#cb1-455" aria-hidden="true" tabindex="-1"></a>    of actions the agent can perform.</span>
+<span id="cb1-456"><a href="#cb1-456" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-457"><a href="#cb1-457" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>**Sensors (S):** These are the means by which the agent perceives</span>
+<span id="cb1-458"><a href="#cb1-458" aria-hidden="true" tabindex="-1"></a>    its environment. Sensors provide the agent with information about</span>
+<span id="cb1-459"><a href="#cb1-459" aria-hidden="true" tabindex="-1"></a>    the current state of the environment, which it uses to make</span>
+<span id="cb1-460"><a href="#cb1-460" aria-hidden="true" tabindex="-1"></a>    decisions.</span>
+<span id="cb1-461"><a href="#cb1-461" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb1-462"><a href="#cb1-462" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-463"><a href="#cb1-463" aria-hidden="true" tabindex="-1"></a>The PEAS framework provides a structured approach to analyze and define</span>
+<span id="cb1-464"><a href="#cb1-464" aria-hidden="true" tabindex="-1"></a>any task environment, ensuring all crucial aspects for agent design are</span>
+<span id="cb1-465"><a href="#cb1-465" aria-hidden="true" tabindex="-1"></a>considered. Let's illustrate this framework with several examples.</span>
+<span id="cb1-466"><a href="#cb1-466" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-467"><a href="#cb1-467" aria-hidden="true" tabindex="-1"></a><span class="fu">## Detailed Examples of Task Environments and P-E-A-S Analysis</span></span>
+<span id="cb1-468"><a href="#cb1-468" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-469"><a href="#cb1-469" aria-hidden="true" tabindex="-1"></a>Applying the PEAS framework helps to concretely define the task</span>
+<span id="cb1-470"><a href="#cb1-470" aria-hidden="true" tabindex="-1"></a>environment for different types of agents. Let's examine several</span>
+<span id="cb1-471"><a href="#cb1-471" aria-hidden="true" tabindex="-1"></a>examples discussed in the lecture.</span>
+<span id="cb1-472"><a href="#cb1-472" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-473"><a href="#cb1-473" aria-hidden="true" tabindex="-1"></a><span class="fu">### Example 1: Toy Vacuum Cleaner Agent</span></span>
+<span id="cb1-474"><a href="#cb1-474" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-475"><a href="#cb1-475" aria-hidden="true" tabindex="-1"></a>::: tcolorbox</span>
+<span id="cb1-476"><a href="#cb1-476" aria-hidden="true" tabindex="-1"></a>Consider the toy vacuum cleaner agent operating in a simplified</span>
+<span id="cb1-477"><a href="#cb1-477" aria-hidden="true" tabindex="-1"></a>environment with two locations, A and B. We can define its task</span>
+<span id="cb1-478"><a href="#cb1-478" aria-hidden="true" tabindex="-1"></a>environment using PEAS as follows:</span>
+<span id="cb1-479"><a href="#cb1-479" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-480"><a href="#cb1-480" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>**Performance Measure (P):** Points are awarded for each clean</span>
+<span id="cb1-481"><a href="#cb1-481" aria-hidden="true" tabindex="-1"></a>    location at each time step. A possible refinement, as discussed,</span>
+<span id="cb1-482"><a href="#cb1-482" aria-hidden="true" tabindex="-1"></a>    could include penalizing the agent for each movement to encourage</span>
+<span id="cb1-483"><a href="#cb1-483" aria-hidden="true" tabindex="-1"></a>    efficiency.</span>
+<span id="cb1-484"><a href="#cb1-484" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-485"><a href="#cb1-485" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>**Environment (E):** A discrete environment consisting of two</span>
+<span id="cb1-486"><a href="#cb1-486" aria-hidden="true" tabindex="-1"></a>    locations, A and B. Each location can be either dirty or clean.</span>
+<span id="cb1-487"><a href="#cb1-487" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-488"><a href="#cb1-488" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>**Actuators (A):** The agent has three possible actions: *Move</span>
+<span id="cb1-489"><a href="#cb1-489" aria-hidden="true" tabindex="-1"></a>    Left*, *Move Right*, and *Suck* (vacuum).</span>
+<span id="cb1-490"><a href="#cb1-490" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-491"><a href="#cb1-491" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>**Sensors (S):** The agent has two sensors: one to perceive its</span>
+<span id="cb1-492"><a href="#cb1-492" aria-hidden="true" tabindex="-1"></a>    *current location* (A or B) and another to detect the *dirt status*</span>
+<span id="cb1-493"><a href="#cb1-493" aria-hidden="true" tabindex="-1"></a>    of the current location (Dirty or Clean).</span>
+<span id="cb1-494"><a href="#cb1-494" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb1-495"><a href="#cb1-495" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-496"><a href="#cb1-496" aria-hidden="true" tabindex="-1"></a>This PEAS description clearly outlines the task environment for the</span>
+<span id="cb1-497"><a href="#cb1-497" aria-hidden="true" tabindex="-1"></a>simple vacuum cleaner agent.</span>
+<span id="cb1-498"><a href="#cb1-498" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-499"><a href="#cb1-499" aria-hidden="true" tabindex="-1"></a><span class="fu">### Example 2: Pac-Man Agent</span></span>
+<span id="cb1-500"><a href="#cb1-500" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-501"><a href="#cb1-501" aria-hidden="true" tabindex="-1"></a>::: tcolorbox</span>
+<span id="cb1-502"><a href="#cb1-502" aria-hidden="true" tabindex="-1"></a>For a Pac-Man agent playing the classic arcade game, the PEAS</span>
+<span id="cb1-503"><a href="#cb1-503" aria-hidden="true" tabindex="-1"></a>description becomes more complex:</span>
+<span id="cb1-504"><a href="#cb1-504" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-505"><a href="#cb1-505" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>**Performance Measure (P):** A more intricate scoring system is</span>
+<span id="cb1-506"><a href="#cb1-506" aria-hidden="true" tabindex="-1"></a>    needed to capture the game's objectives. A possible performance</span>
+<span id="cb1-507"><a href="#cb1-507" aria-hidden="true" tabindex="-1"></a>    measure could be:</span>
+<span id="cb1-508"><a href="#cb1-508" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-509"><a href="#cb1-509" aria-hidden="true" tabindex="-1"></a><span class="ss">    -   </span>**Points for each move:** -1 (to encourage efficient play)</span>
+<span id="cb1-510"><a href="#cb1-510" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-511"><a href="#cb1-511" aria-hidden="true" tabindex="-1"></a><span class="ss">    -   </span>**Points for eating a small pellet:** +10</span>
+<span id="cb1-512"><a href="#cb1-512" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-513"><a href="#cb1-513" aria-hidden="true" tabindex="-1"></a><span class="ss">    -   </span>**Points for winning a level (eating all pellets):** +500</span>
+<span id="cb1-514"><a href="#cb1-514" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-515"><a href="#cb1-515" aria-hidden="true" tabindex="-1"></a><span class="ss">    -   </span>**Penalty for dying (being eaten by a ghost):** -500</span>
+<span id="cb1-516"><a href="#cb1-516" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-517"><a href="#cb1-517" aria-hidden="true" tabindex="-1"></a><span class="ss">    -   </span>**Points for eating a ghost (after power pellet):** +200</span>
+<span id="cb1-518"><a href="#cb1-518" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-519"><a href="#cb1-519" aria-hidden="true" tabindex="-1"></a>    This performance measure incentivizes the agent to eat pellets, win</span>
+<span id="cb1-520"><a href="#cb1-520" aria-hidden="true" tabindex="-1"></a>    levels, and strategically eat ghosts while avoiding being caught.</span>
+<span id="cb1-521"><a href="#cb1-521" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-522"><a href="#cb1-522" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>**Environment (E):** The Pac-Man game world, including:</span>
+<span id="cb1-523"><a href="#cb1-523" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-524"><a href="#cb1-524" aria-hidden="true" tabindex="-1"></a><span class="ss">    -   </span>A grid of locations.</span>
+<span id="cb1-525"><a href="#cb1-525" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-526"><a href="#cb1-526" aria-hidden="true" tabindex="-1"></a><span class="ss">    -   </span>Pellets (small and large/power pellets) at certain locations.</span>
+<span id="cb1-527"><a href="#cb1-527" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-528"><a href="#cb1-528" aria-hidden="true" tabindex="-1"></a><span class="ss">    -   </span>Ghosts (with their positions and movement patterns).</span>
+<span id="cb1-529"><a href="#cb1-529" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-530"><a href="#cb1-530" aria-hidden="true" tabindex="-1"></a><span class="ss">    -   </span>Walls that restrict movement.</span>
+<span id="cb1-531"><a href="#cb1-531" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-532"><a href="#cb1-532" aria-hidden="true" tabindex="-1"></a>    The environment dynamics include ghost movement rules (which may be</span>
+<span id="cb1-533"><a href="#cb1-533" aria-hidden="true" tabindex="-1"></a>    partially random or designed to chase Pac-Man) and the effect of</span>
+<span id="cb1-534"><a href="#cb1-534" aria-hidden="true" tabindex="-1"></a>    power pellets on ghost behavior.</span>
+<span id="cb1-535"><a href="#cb1-535" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-536"><a href="#cb1-536" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>**Actuators (A):** The agent can move in *four directions*: Up,</span>
+<span id="cb1-537"><a href="#cb1-537" aria-hidden="true" tabindex="-1"></a>    Down, Left, Right.</span>
+<span id="cb1-538"><a href="#cb1-538" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-539"><a href="#cb1-539" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>**Sensors (S):** The agent perceives:</span>
+<span id="cb1-540"><a href="#cb1-540" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-541"><a href="#cb1-541" aria-hidden="true" tabindex="-1"></a><span class="ss">    -   </span>The positions of all pellets (remaining and eaten).</span>
+<span id="cb1-542"><a href="#cb1-542" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-543"><a href="#cb1-543" aria-hidden="true" tabindex="-1"></a><span class="ss">    -   </span>The positions of all ghosts.</span>
+<span id="cb1-544"><a href="#cb1-544" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-545"><a href="#cb1-545" aria-hidden="true" tabindex="-1"></a><span class="ss">    -   </span>Its own current location.</span>
+<span id="cb1-546"><a href="#cb1-546" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-547"><a href="#cb1-547" aria-hidden="true" tabindex="-1"></a><span class="ss">    -   </span>Potentially, the remaining duration of the power pellet effect</span>
+<span id="cb1-548"><a href="#cb1-548" aria-hidden="true" tabindex="-1"></a>        (though this might be uncertain).</span>
+<span id="cb1-549"><a href="#cb1-549" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb1-550"><a href="#cb1-550" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-551"><a href="#cb1-551" aria-hidden="true" tabindex="-1"></a>The Pac-Man PEAS description highlights the increased complexity</span>
+<span id="cb1-552"><a href="#cb1-552" aria-hidden="true" tabindex="-1"></a>compared to the vacuum cleaner, particularly in the performance measure</span>
+<span id="cb1-553"><a href="#cb1-553" aria-hidden="true" tabindex="-1"></a>and environment definition.</span>
+<span id="cb1-554"><a href="#cb1-554" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-555"><a href="#cb1-555" aria-hidden="true" tabindex="-1"></a><span class="fu">### Example 3: Autonomous Taxi Driving Agent</span></span>
+<span id="cb1-556"><a href="#cb1-556" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-557"><a href="#cb1-557" aria-hidden="true" tabindex="-1"></a>::: tcolorbox</span>
+<span id="cb1-558"><a href="#cb1-558" aria-hidden="true" tabindex="-1"></a>Designing an autonomous taxi requires a sophisticated task environment</span>
+<span id="cb1-559"><a href="#cb1-559" aria-hidden="true" tabindex="-1"></a>definition:</span>
+<span id="cb1-560"><a href="#cb1-560" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-561"><a href="#cb1-561" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>**Performance Measure (P):** This would likely involve multiple</span>
+<span id="cb1-562"><a href="#cb1-562" aria-hidden="true" tabindex="-1"></a>    factors:</span>
+<span id="cb1-563"><a href="#cb1-563" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-564"><a href="#cb1-564" aria-hidden="true" tabindex="-1"></a><span class="ss">    -   </span>**Monetary Earnings:** Maximizing fares collected from</span>
+<span id="cb1-565"><a href="#cb1-565" aria-hidden="true" tabindex="-1"></a>        passengers.</span>
+<span id="cb1-566"><a href="#cb1-566" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-567"><a href="#cb1-567" aria-hidden="true" tabindex="-1"></a><span class="ss">    -   </span>**Passenger Satisfaction:** Ensuring comfortable and safe rides,</span>
+<span id="cb1-568"><a href="#cb1-568" aria-hidden="true" tabindex="-1"></a>        potentially measured through passenger feedback or proxies like</span>
+<span id="cb1-569"><a href="#cb1-569" aria-hidden="true" tabindex="-1"></a>        ride duration and smoothness.</span>
+<span id="cb1-570"><a href="#cb1-570" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-571"><a href="#cb1-571" aria-hidden="true" tabindex="-1"></a><span class="ss">    -   </span>**Operational Costs:** Minimizing fuel consumption, vehicle wear</span>
+<span id="cb1-572"><a href="#cb1-572" aria-hidden="true" tabindex="-1"></a>        and tear, and maintenance costs.</span>
+<span id="cb1-573"><a href="#cb1-573" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-574"><a href="#cb1-574" aria-hidden="true" tabindex="-1"></a><span class="ss">    -   </span>**Safety and Legality:** Avoiding accidents, traffic violations</span>
+<span id="cb1-575"><a href="#cb1-575" aria-hidden="true" tabindex="-1"></a>        (fines), and ensuring passenger safety.</span>
+<span id="cb1-576"><a href="#cb1-576" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-577"><a href="#cb1-577" aria-hidden="true" tabindex="-1"></a><span class="ss">    -   </span>**Reputation:** Maintaining a good service reputation to attract</span>
+<span id="cb1-578"><a href="#cb1-578" aria-hidden="true" tabindex="-1"></a>        more customers.</span>
+<span id="cb1-579"><a href="#cb1-579" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-580"><a href="#cb1-580" aria-hidden="true" tabindex="-1"></a>    Balancing these potentially conflicting objectives is a key</span>
+<span id="cb1-581"><a href="#cb1-581" aria-hidden="true" tabindex="-1"></a>    challenge in designing the performance measure.</span>
+<span id="cb1-582"><a href="#cb1-582" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-583"><a href="#cb1-583" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>**Environment (E):** A complex, dynamic, and partially observable</span>
+<span id="cb1-584"><a href="#cb1-584" aria-hidden="true" tabindex="-1"></a>    real-world environment, including:</span>
+<span id="cb1-585"><a href="#cb1-585" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-586"><a href="#cb1-586" aria-hidden="true" tabindex="-1"></a><span class="ss">    -   </span>Road networks (streets, highways, intersections, traffic lights,</span>
+<span id="cb1-587"><a href="#cb1-587" aria-hidden="true" tabindex="-1"></a>        etc.).</span>
+<span id="cb1-588"><a href="#cb1-588" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-589"><a href="#cb1-589" aria-hidden="true" tabindex="-1"></a><span class="ss">    -   </span>Other vehicles (cars, motorcycles, bicycles, pedestrians).</span>
+<span id="cb1-590"><a href="#cb1-590" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-591"><a href="#cb1-591" aria-hidden="true" tabindex="-1"></a><span class="ss">    -   </span>Traffic rules and regulations.</span>
+<span id="cb1-592"><a href="#cb1-592" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-593"><a href="#cb1-593" aria-hidden="true" tabindex="-1"></a><span class="ss">    -   </span>Customers (passengers requesting rides, their destinations, and</span>
+<span id="cb1-594"><a href="#cb1-594" aria-hidden="true" tabindex="-1"></a>        preferences).</span>
+<span id="cb1-595"><a href="#cb1-595" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-596"><a href="#cb1-596" aria-hidden="true" tabindex="-1"></a><span class="ss">    -   </span>Weather conditions (rain, snow, fog, etc.).</span>
+<span id="cb1-597"><a href="#cb1-597" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-598"><a href="#cb1-598" aria-hidden="true" tabindex="-1"></a><span class="ss">    -   </span>Traffic conditions (congestion, accidents, road closures).</span>
+<span id="cb1-599"><a href="#cb1-599" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-600"><a href="#cb1-600" aria-hidden="true" tabindex="-1"></a><span class="ss">    -   </span>Law enforcement (police).</span>
+<span id="cb1-601"><a href="#cb1-601" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-602"><a href="#cb1-602" aria-hidden="true" tabindex="-1"></a>    The environment is highly dynamic and unpredictable, with numerous</span>
+<span id="cb1-603"><a href="#cb1-603" aria-hidden="true" tabindex="-1"></a>    external factors influencing the agent's performance.</span>
+<span id="cb1-604"><a href="#cb1-604" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-605"><a href="#cb1-605" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>**Actuators (A):** The standard controls of a car:</span>
+<span id="cb1-606"><a href="#cb1-606" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-607"><a href="#cb1-607" aria-hidden="true" tabindex="-1"></a><span class="ss">    -   </span>Steering wheel (controlling direction).</span>
+<span id="cb1-608"><a href="#cb1-608" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-609"><a href="#cb1-609" aria-hidden="true" tabindex="-1"></a><span class="ss">    -   </span>Accelerator (controlling speed).</span>
+<span id="cb1-610"><a href="#cb1-610" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-611"><a href="#cb1-611" aria-hidden="true" tabindex="-1"></a><span class="ss">    -   </span>Brakes (controlling speed and stopping).</span>
+<span id="cb1-612"><a href="#cb1-612" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-613"><a href="#cb1-613" aria-hidden="true" tabindex="-1"></a><span class="ss">    -   </span>Turn signals.</span>
+<span id="cb1-614"><a href="#cb1-614" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-615"><a href="#cb1-615" aria-hidden="true" tabindex="-1"></a><span class="ss">    -   </span>Horn.</span>
+<span id="cb1-616"><a href="#cb1-616" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-617"><a href="#cb1-617" aria-hidden="true" tabindex="-1"></a><span class="ss">    -   </span>Display/interface for passenger interaction (e.g., showing</span>
+<span id="cb1-618"><a href="#cb1-618" aria-hidden="true" tabindex="-1"></a>        route, playing media).</span>
+<span id="cb1-619"><a href="#cb1-619" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-620"><a href="#cb1-620" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>**Sensors (S):** A suite of sensors is necessary for perceiving the</span>
+<span id="cb1-621"><a href="#cb1-621" aria-hidden="true" tabindex="-1"></a>    driving environment:</span>
+<span id="cb1-622"><a href="#cb1-622" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-623"><a href="#cb1-623" aria-hidden="true" tabindex="-1"></a><span class="ss">    -   </span>Cameras (for visual input, object detection, lane recognition).</span>
+<span id="cb1-624"><a href="#cb1-624" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-625"><a href="#cb1-625" aria-hidden="true" tabindex="-1"></a><span class="ss">    -   </span>Radar and Lidar (for distance sensing, obstacle detection).</span>
+<span id="cb1-626"><a href="#cb1-626" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-627"><a href="#cb1-627" aria-hidden="true" tabindex="-1"></a><span class="ss">    -   </span>GPS (for location and navigation).</span>
+<span id="cb1-628"><a href="#cb1-628" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-629"><a href="#cb1-629" aria-hidden="true" tabindex="-1"></a><span class="ss">    -   </span>Accelerometer and Inertial Measurement Unit (IMU) (for motion</span>
+<span id="cb1-630"><a href="#cb1-630" aria-hidden="true" tabindex="-1"></a>        and orientation).</span>
+<span id="cb1-631"><a href="#cb1-631" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-632"><a href="#cb1-632" aria-hidden="true" tabindex="-1"></a><span class="ss">    -   </span>Engine sensors (for monitoring vehicle status).</span>
+<span id="cb1-633"><a href="#cb1-633" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-634"><a href="#cb1-634" aria-hidden="true" tabindex="-1"></a><span class="ss">    -   </span>Microphone (for potential voice commands from passengers).</span>
+<span id="cb1-635"><a href="#cb1-635" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb1-636"><a href="#cb1-636" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-637"><a href="#cb1-637" aria-hidden="true" tabindex="-1"></a>The self-driving taxi example demonstrates the complexity of real-world</span>
+<span id="cb1-638"><a href="#cb1-638" aria-hidden="true" tabindex="-1"></a>task environments, requiring sophisticated sensors, actuators, and</span>
+<span id="cb1-639"><a href="#cb1-639" aria-hidden="true" tabindex="-1"></a>performance measures to address the challenges of autonomous navigation</span>
+<span id="cb1-640"><a href="#cb1-640" aria-hidden="true" tabindex="-1"></a>and decision-making in dynamic and uncertain conditions.</span>
+<span id="cb1-641"><a href="#cb1-641" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-642"><a href="#cb1-642" aria-hidden="true" tabindex="-1"></a><span class="fu">### Further Examples: Medical Diagnosis System and Language Tutor</span></span>
+<span id="cb1-643"><a href="#cb1-643" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-644"><a href="#cb1-644" aria-hidden="true" tabindex="-1"></a>::: tcolorbox</span>
+<span id="cb1-645"><a href="#cb1-645" aria-hidden="true" tabindex="-1"></a>For a medical diagnosis system, the PEAS components can be described as:</span>
+<span id="cb1-646"><a href="#cb1-646" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-647"><a href="#cb1-647" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>**Performance Measure (P):** Patient health, treatment cost, and</span>
+<span id="cb1-648"><a href="#cb1-648" aria-hidden="true" tabindex="-1"></a>    accuracy of diagnosis.</span>
+<span id="cb1-649"><a href="#cb1-649" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-650"><a href="#cb1-650" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>**Environment (E):** Patient, hospital, medical staff.</span>
+<span id="cb1-651"><a href="#cb1-651" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-652"><a href="#cb1-652" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>**Actuators (A):** Displaying diagnoses, recommending treatments,</span>
+<span id="cb1-653"><a href="#cb1-653" aria-hidden="true" tabindex="-1"></a>    suggesting tests, alerting medical staff.</span>
+<span id="cb1-654"><a href="#cb1-654" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-655"><a href="#cb1-655" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>**Sensors (S):** Patient medical history, symptoms, test results,</span>
+<span id="cb1-656"><a href="#cb1-656" aria-hidden="true" tabindex="-1"></a>    doctor's notes.</span>
+<span id="cb1-657"><a href="#cb1-657" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb1-658"><a href="#cb1-658" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-659"><a href="#cb1-659" aria-hidden="true" tabindex="-1"></a>::: tcolorbox</span>
+<span id="cb1-660"><a href="#cb1-660" aria-hidden="true" tabindex="-1"></a>For a language tutor, the PEAS components can be described as:</span>
+<span id="cb1-661"><a href="#cb1-661" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-662"><a href="#cb1-662" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>**Performance Measure (P):** Student test scores, student</span>
+<span id="cb1-663"><a href="#cb1-663" aria-hidden="true" tabindex="-1"></a>    engagement, time to achieve fluency.</span>
+<span id="cb1-664"><a href="#cb1-664" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-665"><a href="#cb1-665" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>**Environment (E):** Student, learning platform, exercises, language</span>
+<span id="cb1-666"><a href="#cb1-666" aria-hidden="true" tabindex="-1"></a>    content.</span>
+<span id="cb1-667"><a href="#cb1-667" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-668"><a href="#cb1-668" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>**Actuators (A):** Providing exercises, giving feedback, offering</span>
+<span id="cb1-669"><a href="#cb1-669" aria-hidden="true" tabindex="-1"></a>    hints, adapting difficulty, presenting new content.</span>
+<span id="cb1-670"><a href="#cb1-670" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-671"><a href="#cb1-671" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>**Sensors (S):** Student responses, performance data, time spent</span>
+<span id="cb1-672"><a href="#cb1-672" aria-hidden="true" tabindex="-1"></a>    learning, student self-assessment.</span>
+<span id="cb1-673"><a href="#cb1-673" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb1-674"><a href="#cb1-674" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-675"><a href="#cb1-675" aria-hidden="true" tabindex="-1"></a>These examples further illustrate the versatility of the PEAS framework</span>
+<span id="cb1-676"><a href="#cb1-676" aria-hidden="true" tabindex="-1"></a>in capturing diverse AI applications.</span>
+<span id="cb1-677"><a href="#cb1-677" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-678"><a href="#cb1-678" aria-hidden="true" tabindex="-1"></a><span class="fu">## Properties of Task Environments: Classifying Environmental Characteristics</span></span>
+<span id="cb1-679"><a href="#cb1-679" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-680"><a href="#cb1-680" aria-hidden="true" tabindex="-1"></a>To further understand and categorize task environments, we can analyze</span>
+<span id="cb1-681"><a href="#cb1-681" aria-hidden="true" tabindex="-1"></a>them based on several key properties. These properties help in selecting</span>
+<span id="cb1-682"><a href="#cb1-682" aria-hidden="true" tabindex="-1"></a>appropriate agent architectures and algorithms for different tasks. We</span>
+<span id="cb1-683"><a href="#cb1-683" aria-hidden="true" tabindex="-1"></a>will now discuss some of these properties, starting with observability.</span>
+<span id="cb1-684"><a href="#cb1-684" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-685"><a href="#cb1-685" aria-hidden="true" tabindex="-1"></a><span class="fu">### Observability: Distinguishing Between Fully and Partially Observable Environments</span></span>
+<span id="cb1-686"><a href="#cb1-686" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-687"><a href="#cb1-687" aria-hidden="true" tabindex="-1"></a>::: tcolorbox</span>
+<span id="cb1-688"><a href="#cb1-688" aria-hidden="true" tabindex="-1"></a>**Observability** refers to the degree to which an agent's sensors can</span>
+<span id="cb1-689"><a href="#cb1-689" aria-hidden="true" tabindex="-1"></a>perceive the current state of the environment.</span>
+<span id="cb1-690"><a href="#cb1-690" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb1-691"><a href="#cb1-691" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-692"><a href="#cb1-692" aria-hidden="true" tabindex="-1"></a>Task environments can be categorized as:</span>
+<span id="cb1-693"><a href="#cb1-693" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-694"><a href="#cb1-694" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>**Fully Observable:** In a fully observable environment, the agent's</span>
+<span id="cb1-695"><a href="#cb1-695" aria-hidden="true" tabindex="-1"></a>    sensors provide it with access to the complete state of the</span>
+<span id="cb1-696"><a href="#cb1-696" aria-hidden="true" tabindex="-1"></a>    environment at each point in time. The agent knows everything</span>
+<span id="cb1-697"><a href="#cb1-697" aria-hidden="true" tabindex="-1"></a>    relevant to making optimal decisions. Examples of approximately</span>
+<span id="cb1-698"><a href="#cb1-698" aria-hidden="true" tabindex="-1"></a>    fully observable environments include:</span>
+<span id="cb1-699"><a href="#cb1-699" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-700"><a href="#cb1-700" aria-hidden="true" tabindex="-1"></a><span class="ss">    -   </span>**Chess (with perfect information):** The agent can see the</span>
+<span id="cb1-701"><a href="#cb1-701" aria-hidden="true" tabindex="-1"></a>        entire chessboard, including the positions of all pieces.</span>
+<span id="cb1-702"><a href="#cb1-702" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-703"><a href="#cb1-703" aria-hidden="true" tabindex="-1"></a><span class="ss">    -   </span>**Vacuum Cleaner in a simple, discretized environment (as</span>
+<span id="cb1-704"><a href="#cb1-704" aria-hidden="true" tabindex="-1"></a>        initially described):** If the agent always knows its location</span>
+<span id="cb1-705"><a href="#cb1-705" aria-hidden="true" tabindex="-1"></a>        and the dirt status of both locations, it is a fully observable</span>
+<span id="cb1-706"><a href="#cb1-706" aria-hidden="true" tabindex="-1"></a>        environment.</span>
+<span id="cb1-707"><a href="#cb1-707" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-708"><a href="#cb1-708" aria-hidden="true" tabindex="-1"></a>    In fully observable environments, agents do not need to maintain</span>
+<span id="cb1-709"><a href="#cb1-709" aria-hidden="true" tabindex="-1"></a>    internal state to track aspects of the environment not directly</span>
+<span id="cb1-710"><a href="#cb1-710" aria-hidden="true" tabindex="-1"></a>    perceived, as all relevant information is immediately available</span>
+<span id="cb1-711"><a href="#cb1-711" aria-hidden="true" tabindex="-1"></a>    through sensors.</span>
+<span id="cb1-712"><a href="#cb1-712" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-713"><a href="#cb1-713" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>**Partially Observable:** In a partially observable environment, the</span>
+<span id="cb1-714"><a href="#cb1-714" aria-hidden="true" tabindex="-1"></a>    agent's sensors only provide limited or incomplete information about</span>
+<span id="cb1-715"><a href="#cb1-715" aria-hidden="true" tabindex="-1"></a>    the environment's state. The agent may not have direct access to all</span>
+<span id="cb1-716"><a href="#cb1-716" aria-hidden="true" tabindex="-1"></a>    aspects relevant to its decision-making. Most real-world</span>
+<span id="cb1-717"><a href="#cb1-717" aria-hidden="true" tabindex="-1"></a>    environments are partially observable. Examples include:</span>
+<span id="cb1-718"><a href="#cb1-718" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-719"><a href="#cb1-719" aria-hidden="true" tabindex="-1"></a><span class="ss">    -   </span>**Pac-Man:** While Pac-Man perceives the locations of pellets</span>
+<span id="cb1-720"><a href="#cb1-720" aria-hidden="true" tabindex="-1"></a>        and ghosts in its vicinity, it might not have perfect</span>
+<span id="cb1-721"><a href="#cb1-721" aria-hidden="true" tabindex="-1"></a>        information about the ghosts' future movements or intentions.</span>
+<span id="cb1-722"><a href="#cb1-722" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-723"><a href="#cb1-723" aria-hidden="true" tabindex="-1"></a><span class="ss">    -   </span>**Self-driving car:** Sensors provide a view of the</span>
+<span id="cb1-724"><a href="#cb1-724" aria-hidden="true" tabindex="-1"></a>        surroundings, but there are occlusions, limited sensor range,</span>
+<span id="cb1-725"><a href="#cb1-725" aria-hidden="true" tabindex="-1"></a>        and uncertainties about the behavior of other agents (drivers,</span>
+<span id="cb1-726"><a href="#cb1-726" aria-hidden="true" tabindex="-1"></a>        pedestrians). The agent does not have complete knowledge of the</span>
+<span id="cb1-727"><a href="#cb1-727" aria-hidden="true" tabindex="-1"></a>        state of all traffic participants or road conditions at all</span>
+<span id="cb1-728"><a href="#cb1-728" aria-hidden="true" tabindex="-1"></a>        times.</span>
+<span id="cb1-729"><a href="#cb1-729" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-730"><a href="#cb1-730" aria-hidden="true" tabindex="-1"></a><span class="ss">    -   </span>**Vacuum cleaner in a more realistic setting:** A Roomba might</span>
+<span id="cb1-731"><a href="#cb1-731" aria-hidden="true" tabindex="-1"></a>        not know the dirt distribution in rooms it hasn't yet explored</span>
+<span id="cb1-732"><a href="#cb1-732" aria-hidden="true" tabindex="-1"></a>        or behind furniture. It relies on its local sensors and memory</span>
+<span id="cb1-733"><a href="#cb1-733" aria-hidden="true" tabindex="-1"></a>        of visited areas to infer cleanliness.</span>
+<span id="cb1-734"><a href="#cb1-734" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-735"><a href="#cb1-735" aria-hidden="true" tabindex="-1"></a>    In partially observable environments, agents often need to maintain</span>
+<span id="cb1-736"><a href="#cb1-736" aria-hidden="true" tabindex="-1"></a>    internal state to keep track of aspects of the environment that are</span>
+<span id="cb1-737"><a href="#cb1-737" aria-hidden="true" tabindex="-1"></a>    not directly sensed. They may need to infer the hidden parts of the</span>
+<span id="cb1-738"><a href="#cb1-738" aria-hidden="true" tabindex="-1"></a>    environment based on past percepts and their understanding of the</span>
+<span id="cb1-739"><a href="#cb1-739" aria-hidden="true" tabindex="-1"></a>    environment dynamics. This often involves using memory, belief</span>
+<span id="cb1-740"><a href="#cb1-740" aria-hidden="true" tabindex="-1"></a>    states, and probabilistic reasoning to make informed decisions under</span>
+<span id="cb1-741"><a href="#cb1-741" aria-hidden="true" tabindex="-1"></a>    uncertainty.</span>
+<span id="cb1-742"><a href="#cb1-742" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-743"><a href="#cb1-743" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>**Unobservable:** In a completely unobservable environment (a</span>
+<span id="cb1-744"><a href="#cb1-744" aria-hidden="true" tabindex="-1"></a>    theoretical extreme), the agent receives no sensory information</span>
+<span id="cb1-745"><a href="#cb1-745" aria-hidden="true" tabindex="-1"></a>    about the environment at all. While practically rare, this extreme</span>
+<span id="cb1-746"><a href="#cb1-746" aria-hidden="true" tabindex="-1"></a>    case helps to understand the spectrum of observability. In such</span>
+<span id="cb1-747"><a href="#cb1-747" aria-hidden="true" tabindex="-1"></a>    scenarios, agents must operate based solely on prior knowledge or</span>
+<span id="cb1-748"><a href="#cb1-748" aria-hidden="true" tabindex="-1"></a>    pre-programmed behaviors, without any feedback from the environment.</span>
+<span id="cb1-749"><a href="#cb1-749" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-750"><a href="#cb1-750" aria-hidden="true" tabindex="-1"></a>The degree of observability significantly impacts the design of rational</span>
+<span id="cb1-751"><a href="#cb1-751" aria-hidden="true" tabindex="-1"></a>agents. Agents in fully observable environments can often employ simpler</span>
+<span id="cb1-752"><a href="#cb1-752" aria-hidden="true" tabindex="-1"></a>decision-making strategies, as they have complete information. Agents in</span>
+<span id="cb1-753"><a href="#cb1-753" aria-hidden="true" tabindex="-1"></a>partially observable environments require more sophisticated techniques</span>
+<span id="cb1-754"><a href="#cb1-754" aria-hidden="true" tabindex="-1"></a>to handle uncertainty and incomplete information, often involving state</span>
+<span id="cb1-755"><a href="#cb1-755" aria-hidden="true" tabindex="-1"></a>estimation, prediction, and memory.</span>
+<span id="cb1-756"><a href="#cb1-756" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-757"><a href="#cb1-757" aria-hidden="true" tabindex="-1"></a><span class="fu"># Conclusion</span></span>
+<span id="cb1-758"><a href="#cb1-758" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-759"><a href="#cb1-759" aria-hidden="true" tabindex="-1"></a>In today's lecture, we introduced the concept of rational agents as a</span>
+<span id="cb1-760"><a href="#cb1-760" aria-hidden="true" tabindex="-1"></a>central paradigm in modern AI. We started by refining our understanding</span>
+<span id="cb1-761"><a href="#cb1-761" aria-hidden="true" tabindex="-1"></a>of AI, shifting from mere human simulation to the design of systems</span>
+<span id="cb1-762"><a href="#cb1-762" aria-hidden="true" tabindex="-1"></a>capable of rational action. We explored the historical context that led</span>
+<span id="cb1-763"><a href="#cb1-763" aria-hidden="true" tabindex="-1"></a>to this paradigm shift and discussed the current state and future</span>
+<span id="cb1-764"><a href="#cb1-764" aria-hidden="true" tabindex="-1"></a>perspectives of AI, highlighting its growing capabilities and ethical</span>
+<span id="cb1-765"><a href="#cb1-765" aria-hidden="true" tabindex="-1"></a>considerations.</span>
+<span id="cb1-766"><a href="#cb1-766" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-767"><a href="#cb1-767" aria-hidden="true" tabindex="-1"></a>We delved into the definition of agents, emphasizing the principle of</span>
+<span id="cb1-768"><a href="#cb1-768" aria-hidden="true" tabindex="-1"></a>rationality, and examined the architecture of agents in terms of</span>
+<span id="cb1-769"><a href="#cb1-769" aria-hidden="true" tabindex="-1"></a>sensors, actuators, and their interaction with the environment. We</span>
+<span id="cb1-770"><a href="#cb1-770" aria-hidden="true" tabindex="-1"></a>discussed the agent function and program, focusing on how agents map</span>
+<span id="cb1-771"><a href="#cb1-771" aria-hidden="true" tabindex="-1"></a>perceptions to actions, and introduced the table-driven agent as a</span>
+<span id="cb1-772"><a href="#cb1-772" aria-hidden="true" tabindex="-1"></a>conceptual model, while also acknowledging its practical limitations due</span>
+<span id="cb1-773"><a href="#cb1-773" aria-hidden="true" tabindex="-1"></a>to computational complexity. Using the toy vacuum cleaner example, we</span>
+<span id="cb1-774"><a href="#cb1-774" aria-hidden="true" tabindex="-1"></a>illustrated these concepts in a simple environment. We underscored the</span>
+<span id="cb1-775"><a href="#cb1-775" aria-hidden="true" tabindex="-1"></a>importance of autonomy and learning for truly intelligent agents,</span>
+<span id="cb1-776"><a href="#cb1-776" aria-hidden="true" tabindex="-1"></a>contrasting them with purely reactive systems.</span>
+<span id="cb1-777"><a href="#cb1-777" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-778"><a href="#cb1-778" aria-hidden="true" tabindex="-1"></a>Furthermore, we explored the concept of task environments using the PEAS</span>
+<span id="cb1-779"><a href="#cb1-779" aria-hidden="true" tabindex="-1"></a>framework (Performance, Environment, Actuators, Sensors). Through</span>
+<span id="cb1-780"><a href="#cb1-780" aria-hidden="true" tabindex="-1"></a>detailed examples like the vacuum cleaner, Pac-Man, autonomous taxi</span>
+<span id="cb1-781"><a href="#cb1-781" aria-hidden="true" tabindex="-1"></a>driving, medical diagnosis systems, and foreign language tutoring</span>
+<span id="cb1-782"><a href="#cb1-782" aria-hidden="true" tabindex="-1"></a>systems, we demonstrated how to analyze and specify different</span>
+<span id="cb1-783"><a href="#cb1-783" aria-hidden="true" tabindex="-1"></a>operational domains for agents. Finally, we began to classify task</span>
+<span id="cb1-784"><a href="#cb1-784" aria-hidden="true" tabindex="-1"></a>environments based on their properties, starting with observability,</span>
+<span id="cb1-785"><a href="#cb1-785" aria-hidden="true" tabindex="-1"></a>distinguishing between fully and partially observable environments.</span>
+<span id="cb1-786"><a href="#cb1-786" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-787"><a href="#cb1-787" aria-hidden="true" tabindex="-1"></a>::: tcolorbox</span>
+<span id="cb1-788"><a href="#cb1-788" aria-hidden="true" tabindex="-1"></a>**Important Remarks and Key Takeaways:**</span>
+<span id="cb1-789"><a href="#cb1-789" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-790"><a href="#cb1-790" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>**Rationality over Human Simulation:** We emphasized the modern AI</span>
+<span id="cb1-791"><a href="#cb1-791" aria-hidden="true" tabindex="-1"></a>    paradigm shift towards designing **rational agents** that optimize</span>
+<span id="cb1-792"><a href="#cb1-792" aria-hidden="true" tabindex="-1"></a>    performance based on clearly defined objectives, rather than merely</span>
+<span id="cb1-793"><a href="#cb1-793" aria-hidden="true" tabindex="-1"></a>    attempting to replicate human-like intelligence. This focus on</span>
+<span id="cb1-794"><a href="#cb1-794" aria-hidden="true" tabindex="-1"></a>    rationality provides a more concrete and measurable goal for AI</span>
+<span id="cb1-795"><a href="#cb1-795" aria-hidden="true" tabindex="-1"></a>    development.</span>
+<span id="cb1-796"><a href="#cb1-796" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-797"><a href="#cb1-797" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>**Agent-Centric View:** The **agent abstraction** provides a</span>
+<span id="cb1-798"><a href="#cb1-798" aria-hidden="true" tabindex="-1"></a>    powerful and unifying framework for understanding and designing</span>
+<span id="cb1-799"><a href="#cb1-799" aria-hidden="true" tabindex="-1"></a>    intelligent systems. By viewing AI systems as agents interacting</span>
+<span id="cb1-800"><a href="#cb1-800" aria-hidden="true" tabindex="-1"></a>    with environments, we gain a consistent perspective applicable</span>
+<span id="cb1-801"><a href="#cb1-801" aria-hidden="true" tabindex="-1"></a>    across diverse AI domains and techniques.</span>
+<span id="cb1-802"><a href="#cb1-802" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-803"><a href="#cb1-803" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>**Task Environment is Crucial:** Defining the **task environment**</span>
+<span id="cb1-804"><a href="#cb1-804" aria-hidden="true" tabindex="-1"></a>    using the **PEAS framework** is an essential first step in designing</span>
+<span id="cb1-805"><a href="#cb1-805" aria-hidden="true" tabindex="-1"></a>    any intelligent agent. The PEAS framework ensures that all critical</span>
+<span id="cb1-806"><a href="#cb1-806" aria-hidden="true" tabindex="-1"></a>    aspects of the problem, including performance metrics, environmental</span>
+<span id="cb1-807"><a href="#cb1-807" aria-hidden="true" tabindex="-1"></a>    characteristics, and agent capabilities, are systematically</span>
+<span id="cb1-808"><a href="#cb1-808" aria-hidden="true" tabindex="-1"></a>    considered.</span>
+<span id="cb1-809"><a href="#cb1-809" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-810"><a href="#cb1-810" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>**Practical Limitations of Table-Driven Agents:** While conceptually</span>
+<span id="cb1-811"><a href="#cb1-811" aria-hidden="true" tabindex="-1"></a>    illustrative, **table-driven agents** highlight the challenge of</span>
+<span id="cb1-812"><a href="#cb1-812" aria-hidden="true" tabindex="-1"></a>    **combinatorial explosion**. The exponential growth in the number of</span>
+<span id="cb1-813"><a href="#cb1-813" aria-hidden="true" tabindex="-1"></a>    possible percept sequences renders this approach impractical for</span>
+<span id="cb1-814"><a href="#cb1-814" aria-hidden="true" tabindex="-1"></a>    real-world problems, necessitating more efficient and scalable agent</span>
+<span id="cb1-815"><a href="#cb1-815" aria-hidden="true" tabindex="-1"></a>    architectures.</span>
+<span id="cb1-816"><a href="#cb1-816" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-817"><a href="#cb1-817" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>**Observability Impacts Agent Design:** The **observability** of the</span>
+<span id="cb1-818"><a href="#cb1-818" aria-hidden="true" tabindex="-1"></a>    task environment is a fundamental property that significantly</span>
+<span id="cb1-819"><a href="#cb1-819" aria-hidden="true" tabindex="-1"></a>    influences agent design. Moving from fully observable to partially</span>
+<span id="cb1-820"><a href="#cb1-820" aria-hidden="true" tabindex="-1"></a>    observable environments necessitates increasingly sophisticated</span>
+<span id="cb1-821"><a href="#cb1-821" aria-hidden="true" tabindex="-1"></a>    agent programs capable of handling uncertainty, incomplete</span>
+<span id="cb1-822"><a href="#cb1-822" aria-hidden="true" tabindex="-1"></a>    information, and the need for internal state and inference.</span>
+<span id="cb1-823"><a href="#cb1-823" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb1-824"><a href="#cb1-824" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-825"><a href="#cb1-825" aria-hidden="true" tabindex="-1"></a>::: tcolorbox</span>
+<span id="cb1-826"><a href="#cb1-826" aria-hidden="true" tabindex="-1"></a>**Follow-up Questions and Topics for Next Lecture:**</span>
+<span id="cb1-827"><a href="#cb1-827" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-828"><a href="#cb1-828" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>How do the different properties of task environments, beyond</span>
+<span id="cb1-829"><a href="#cb1-829" aria-hidden="true" tabindex="-1"></a>    observability (e.g., determinism, episodic vs. sequential), further</span>
+<span id="cb1-830"><a href="#cb1-830" aria-hidden="true" tabindex="-1"></a>    constrain or enable different types of agent designs and learning</span>
+<span id="cb1-831"><a href="#cb1-831" aria-hidden="true" tabindex="-1"></a>    mechanisms?</span>
+<span id="cb1-832"><a href="#cb1-832" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-833"><a href="#cb1-833" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>Consider real-world scenarios beyond those discussed. Can you</span>
+<span id="cb1-834"><a href="#cb1-834" aria-hidden="true" tabindex="-1"></a>    identify and analyze the PEAS components for an agent designed to:</span>
+<span id="cb1-835"><a href="#cb1-835" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-836"><a href="#cb1-836" aria-hidden="true" tabindex="-1"></a><span class="ss">    -   </span>Manage a personal calendar and schedule appointments?</span>
+<span id="cb1-837"><a href="#cb1-837" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-838"><a href="#cb1-838" aria-hidden="true" tabindex="-1"></a><span class="ss">    -   </span>Trade stocks on the stock market?</span>
+<span id="cb1-839"><a href="#cb1-839" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-840"><a href="#cb1-840" aria-hidden="true" tabindex="-1"></a><span class="ss">    -   </span>Play a complex strategy game like StarCraft?</span>
+<span id="cb1-841"><a href="#cb1-841" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-842"><a href="#cb1-842" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>How can agents effectively learn and operate in partially observable</span>
+<span id="cb1-843"><a href="#cb1-843" aria-hidden="true" tabindex="-1"></a>    environments where their knowledge of the world is inherently</span>
+<span id="cb1-844"><a href="#cb1-844" aria-hidden="true" tabindex="-1"></a>    incomplete? What types of internal representations and reasoning</span>
+<span id="cb1-845"><a href="#cb1-845" aria-hidden="true" tabindex="-1"></a>    mechanisms are required?</span>
+<span id="cb1-846"><a href="#cb1-846" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-847"><a href="#cb1-847" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>Building upon the limitations of table-driven agents, what</span>
+<span id="cb1-848"><a href="#cb1-848" aria-hidden="true" tabindex="-1"></a>    alternative agent architectures can overcome the challenges of</span>
+<span id="cb1-849"><a href="#cb1-849" aria-hidden="true" tabindex="-1"></a>    combinatorial complexity and enable the development of practical and</span>
+<span id="cb1-850"><a href="#cb1-850" aria-hidden="true" tabindex="-1"></a>    intelligent systems for complex task environments?</span>
+<span id="cb1-851"><a href="#cb1-851" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb1-852"><a href="#cb1-852" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-853"><a href="#cb1-853" aria-hidden="true" tabindex="-1"></a>In the next lecture, we will continue our exploration of task</span>
+<span id="cb1-854"><a href="#cb1-854" aria-hidden="true" tabindex="-1"></a>environment properties, examining determinism, environment dynamics, and</span>
+<span id="cb1-855"><a href="#cb1-855" aria-hidden="true" tabindex="-1"></a>discreteness. We will then begin to introduce more practical agent</span>
+<span id="cb1-856"><a href="#cb1-856" aria-hidden="true" tabindex="-1"></a>architectures that address the limitations of table-driven approaches</span>
+<span id="cb1-857"><a href="#cb1-857" aria-hidden="true" tabindex="-1"></a>and pave the way for designing intelligent agents capable of operating</span>
+<span id="cb1-858"><a href="#cb1-858" aria-hidden="true" tabindex="-1"></a>in increasingly complex and realistic environments.</span></code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
+</div></div></div></div></div>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
