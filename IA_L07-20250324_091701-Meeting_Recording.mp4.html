@@ -1,0 +1,1696 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.6.40">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Your Name">
+<meta name="dcterms.date" content="2025-03-24">
+
+<title>Artificial Intelligence - Lecture 7: Logic and Knowledge-Based Systems – Your Site Name</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-549806ee2085284f45b00abea8c6df48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-6bd9cfa162949bde0a231f530c97869d.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="./index.html">
+    <span class="navbar-title">Your Site Name</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="./index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+    <div class="dropdown">
+      <a href="" title="" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" role="link" aria-label=""><i class="bi bi-list"></i></a>
+      <ul class="dropdown-menu" aria-labelledby="quarto-navigation-tool-dropdown-0">
+          <li>
+            <a class="dropdown-item quarto-navbar-tools-item" href="./IA_L01-20250303_091724-Meeting_Recording.mp4.html">
+            Introduction to Artificial Intelligence
+            </a>
+          </li>
+          <li>
+            <a class="dropdown-item quarto-navbar-tools-item" href="./IA_L02-20250304_151855-Meeting_Recording.mp4.html">
+            Lecture Notes on Artificial Intelligence - Lecture 2: Introduction and History
+            </a>
+          </li>
+          <li>
+            <a class="dropdown-item quarto-navbar-tools-item" href="./IA_L03-20250310_091808-Meeting_Recording.mp4.html">
+            Lecture 3: Rational Agents
+            </a>
+          </li>
+          <li>
+            <a class="dropdown-item quarto-navbar-tools-item" href="./IA_L04-20250311_151928-Meeting_Recording.mp4.html">
+            Lecture Notes on Artificial Intelligence - Part 2: Agents and Search Problems
+            </a>
+          </li>
+          <li>
+            <a class="dropdown-item quarto-navbar-tools-item" href="./IA_L05-20250317_091733-Meeting_Recording.mp4.html">
+            Lecture 5: Search Problems and Uninformed Search Algorithms
+            </a>
+          </li>
+          <li>
+            <a class="dropdown-item quarto-navbar-tools-item" href="./IA_L06-20250318_151650-Meeting_Recording.mp4.html">
+            Lecture 6: Advanced Search Techniques in Artificial Intelligence
+            </a>
+          </li>
+          <li>
+            <a class="dropdown-item quarto-navbar-tools-item" href="./IA_L07-20250324_091701-Meeting_Recording.mp4.html">
+            Artificial Intelligence - Lecture 7: Logic and Knowledge-Based Systems
+            </a>
+          </li>
+      </ul>
+    </div>
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul class="collapse">
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a></li>
+  <li><a href="#course-logistics-and-schedule" id="toc-course-logistics-and-schedule" class="nav-link" data-scroll-target="#course-logistics-and-schedule">Course Logistics and Schedule</a>
+  <ul class="collapse">
+  <li><a href="#exam-dates-and-format" id="toc-exam-dates-and-format" class="nav-link" data-scroll-target="#exam-dates-and-format">Exam Dates and Format</a></li>
+  <li><a href="#lecture-schedule-changes" id="toc-lecture-schedule-changes" class="nav-link" data-scroll-target="#lecture-schedule-changes">Lecture Schedule Changes</a></li>
+  </ul></li>
+  <li><a href="#search-and-game-playing" id="toc-search-and-game-playing" class="nav-link" data-scroll-target="#search-and-game-playing">Search and Game Playing</a>
+  <ul class="collapse">
+  <li><a href="#the-minimax-algorithm" id="toc-the-minimax-algorithm" class="nav-link" data-scroll-target="#the-minimax-algorithm">The Minimax Algorithm</a></li>
+  <li><a href="#alpha-beta-pruning" id="toc-alpha-beta-pruning" class="nav-link" data-scroll-target="#alpha-beta-pruning">Alpha-Beta Pruning</a></li>
+  <li><a href="#applications-in-games" id="toc-applications-in-games" class="nav-link" data-scroll-target="#applications-in-games">Applications in Games</a></li>
+  </ul></li>
+  <li><a href="#knowledge-based-agents-foundations" id="toc-knowledge-based-agents-foundations" class="nav-link" data-scroll-target="#knowledge-based-agents-foundations">Knowledge-Based Agents: Foundations</a>
+  <ul class="collapse">
+  <li><a href="#introduction-and-motivation" id="toc-introduction-and-motivation" class="nav-link" data-scroll-target="#introduction-and-motivation">Introduction and Motivation</a></li>
+  <li><a href="#knowledge-representation-and-knowledge-bases" id="toc-knowledge-representation-and-knowledge-bases" class="nav-link" data-scroll-target="#knowledge-representation-and-knowledge-bases">Knowledge Representation and Knowledge Bases</a></li>
+  <li><a href="#inference-engines" id="toc-inference-engines" class="nav-link" data-scroll-target="#inference-engines">Inference Engines</a></li>
+  <li><a href="#agent-architecture" id="toc-agent-architecture" class="nav-link" data-scroll-target="#agent-architecture">Agent Architecture</a></li>
+  </ul></li>
+  <li><a href="#the-wumpus-world-a-case-study" id="toc-the-wumpus-world-a-case-study" class="nav-link" data-scroll-target="#the-wumpus-world-a-case-study">The Wumpus World: A Case Study</a>
+  <ul class="collapse">
+  <li><a href="#environment-definition-peas" id="toc-environment-definition-peas" class="nav-link" data-scroll-target="#environment-definition-peas">Environment Definition (PEAS)</a></li>
+  <li><a href="#example-reasoning-scenario" id="toc-example-reasoning-scenario" class="nav-link" data-scroll-target="#example-reasoning-scenario">Example Reasoning Scenario</a></li>
+  </ul></li>
+  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<div class="quarto-title-block"><div><h1 class="title">Artificial Intelligence - Lecture 7: Logic and Knowledge-Based Systems</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Your Name </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">March 24, 2025</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="introduction" class="level1">
+<h1>Introduction</h1>
+<p>This lecture introduces logic and knowledge-based systems. We will complete the discussion on search and game playing from the previous lecture, and then transition to the main topic. The primary objectives are:</p>
+<ul>
+<li><p>Understand the Minimax algorithm and Alpha-Beta pruning.</p></li>
+<li><p>Introduce the concept of knowledge-based agents.</p></li>
+<li><p>Define the Wumpus World environment as a case study.</p></li>
+</ul>
+</section>
+<section id="course-logistics-and-schedule" class="level1">
+<h1>Course Logistics and Schedule</h1>
+<section id="exam-dates-and-format" class="level2">
+<h2 class="anchored" data-anchor-id="exam-dates-and-format">Exam Dates and Format</h2>
+<p>The proposed exam dates are:</p>
+<ul>
+<li><p>First Call: June 19th</p></li>
+<li><p>Second Call: July 4th</p></li>
+<li><p>Third Call: September 25th</p></li>
+</ul>
+<p>These dates are tentative and will be confirmed later. The plan is to have the written exam in the morning (9:00 AM) and the oral exam in the afternoon (2:00 PM). This schedule may be adjusted for the first call (June 19th) due to higher attendance.</p>
+</section>
+<section id="lecture-schedule-changes" class="level2">
+<h2 class="anchored" data-anchor-id="lecture-schedule-changes">Lecture Schedule Changes</h2>
+<p>The lecture on the following day will end at 4:00 PM sharp due to a seminar with foreign guests. There will likely be no break during that lecture.</p>
+</section>
+</section>
+<section id="search-and-game-playing" class="level1">
+<h1>Search and Game Playing</h1>
+<section id="the-minimax-algorithm" class="level2">
+<h2 class="anchored" data-anchor-id="the-minimax-algorithm">The Minimax Algorithm</h2>
+<section id="core-idea-and-game-tree-example" class="level3">
+<h3 class="anchored" data-anchor-id="core-idea-and-game-tree-example">Core Idea and Game Tree Example</h3>
+<p>The Minimax algorithm is used in two-player, zero-sum games. The two players are typically called Max and Min. Max aims to maximize the utility, while Min aims to minimize it. The game is represented as a tree, where nodes represent game states and edges represent moves. The algorithm works by propagating utility values from the leaf nodes (terminal states) up the tree.</p>
+<ul>
+<li><p><strong>Max Nodes</strong>: Choose the move that maximizes the utility.</p></li>
+<li><p><strong>Min Nodes</strong>: Choose the move that minimizes the utility (assuming perfect play by the opponent).</p></li>
+</ul>
+<p><em>Example:</em> The lecture uses the example of Pacman and a ghost, where Pacman (Max) tries to maximize its score by eating pellets, and the ghost (Min) tries to minimize Pacman’s score. Another example shown is the Tic-Tac-Toe game.</p>
+</section>
+<section id="formal-definition-recursive" class="level3">
+<h3 class="anchored" data-anchor-id="formal-definition-recursive">Formal Definition (Recursive)</h3>
+<p>The Minimax value of a node can be defined recursively:</p>
+<div class="tcolorbox">
+<p>Let <span class="math inline">\(S\)</span> be a node in the game tree. The Minimax value, denoted by <span class="math inline">\(\text{Minimax}(S)\)</span>, is defined as follows:</p>
+<ul>
+<li><p>If <span class="math inline">\(S\)</span> is a terminal node, then <span class="math inline">\(\text{Minimax}(S) = \text{Utility}(S, \text{Max})\)</span>, where <span class="math inline">\(\text{Utility}(S, \text{Max})\)</span> is the utility of the state <span class="math inline">\(S\)</span> for player Max.</p></li>
+<li><p>If it’s Max’s turn to move at node <span class="math inline">\(S\)</span>, then <span class="math display">\[\text{Minimax}(S) = \max_{a \in \text{Actions}(S)} \text{Minimax}(\text{Result}(S, a))\]</span> where <span class="math inline">\(\text{Actions}(S)\)</span> is the set of possible actions at state <span class="math inline">\(S\)</span>, and <span class="math inline">\(\text{Result}(S, a)\)</span> is the state resulting from taking action <span class="math inline">\(a\)</span> in state <span class="math inline">\(S\)</span>.</p></li>
+<li><p>If it’s Min’s turn to move at node <span class="math inline">\(S\)</span>, then <span class="math display">\[\text{Minimax}(S) = \min_{a \in \text{Actions}(S)} \text{Minimax}(\text{Result}(S, a))\]</span></p></li>
+</ul>
+</div>
+</section>
+<section id="implementation-pseudocode-and-book-version" class="level3">
+<h3 class="anchored" data-anchor-id="implementation-pseudocode-and-book-version">Implementation (Pseudocode and Book Version)</h3>
+<p>The lecture presents two versions of the Minimax algorithm implementation.</p>
+<p><strong>Version 1 (Pseudocode):</strong></p>
+<pre><code>function Minimax-Decision(state) returns an action
+  return argmax_{a in Actions(state)} Minimax-Value(Result(state, a))
+
+function Minimax-Value(state) returns a utility value
+  if Terminal-Test(state) then return Utility(state)
+  if To-Move(state) = Max then return max_{a in Actions(state)} Minimax-Value(Result(state, a))
+  else return min_{a in Actions(state)} Minimax-Value(Result(state, a))</code></pre>
+<p><strong>Version 2 (Book Version - Figure 6.3):</strong> This version is more detailed and uses three functions: ‘Minimax-Search’, ‘Max-Value’, and ‘Min-Value’.</p>
+<pre><code>function Minimax-Search(game, state) returns an action
+  player = game.To-Move(state)
+  value, move = Max-Value(game, state)
+  return move
+
+function Max-Value(game, state) returns a (utility, move) pair
+  if game.Is-Terminal(state) then return game.Utility(state, player), null
+  v = -Infinity
+  move = -Infinity // Note: Initialization to -Infinity might be unnecessary
+  for each a in game.Actions(state) do
+    v2, a2 = Min-Value(game, game.Result(state, a))
+    if v2 &gt; v then
+      v = v2
+      move = a
+  return v, move
+
+function Min-Value(game, state) returns a (utility, move) pair
+  if game.Is-Terminal(state) then return game.Utility(state, player), null
+  v = Infinity
+  move = -Infinity // Note: Initialization to -Infinity might be unnecessary
+  for each a in game.Actions(state) do
+    v2, a2 = Max-Value(game, game.Result(state, a))
+    if v2 &lt; v then
+      v = v2
+      move = a
+  return v, move</code></pre>
+<p>The book version, while more verbose, is closer to executable code. It explicitly returns both the utility and the best move found. The pseudocode version is more concise and focuses on the core logic.</p>
+</section>
+</section>
+<section id="alpha-beta-pruning" class="level2">
+<h2 class="anchored" data-anchor-id="alpha-beta-pruning">Alpha-Beta Pruning</h2>
+<section id="efficiency-issues-with-minimax" class="level3">
+<h3 class="anchored" data-anchor-id="efficiency-issues-with-minimax">Efficiency Issues with Minimax</h3>
+<p>The Minimax algorithm has a time complexity of <span class="math inline">\(O(b^m)\)</span>, where <span class="math inline">\(b\)</span> is the branching factor (number of possible moves at each state) and <span class="math inline">\(m\)</span> is the maximum depth of the game tree. This makes it computationally infeasible for games like chess, where <span class="math inline">\(b \approx 35\)</span> and <span class="math inline">\(m \approx 100\)</span> (considering 50 moves per player). Such exponential complexity severely limits the depth of the search tree that can be explored in a reasonable amount of time.</p>
+</section>
+<section id="pruning-concept-and-example" class="level3">
+<h3 class="anchored" data-anchor-id="pruning-concept-and-example">Pruning Concept and Example</h3>
+<p>Alpha-Beta pruning is a technique to improve the efficiency of Minimax by avoiding the exploration of parts of the game tree that are guaranteed not to affect the final decision. The core idea is to maintain two values:</p>
+<ul>
+<li><p><span class="math inline">\(\alpha\)</span>: The best (highest) value found so far for Max along the path. This represents the minimum score that Max is guaranteed to achieve.</p></li>
+<li><p><span class="math inline">\(\beta\)</span>: The best (lowest) value found so far for Min along the path. This represents the maximum score that Min can achieve (or, equivalently, the maximum score that Max can be limited to).</p></li>
+</ul>
+<p>The lecture provides a detailed example demonstrating how Alpha-Beta pruning works. The key idea is that if a Min node finds a value less than or equal to <span class="math inline">\(\alpha\)</span>, the rest of its children can be pruned because Max will never choose that branch (since Max already has a better option with value <span class="math inline">\(\alpha\)</span>). Similarly, if a Max node finds a value greater than or equal to <span class="math inline">\(\beta\)</span>, the rest of its children can be pruned (since Min already has a better option with value <span class="math inline">\(\beta\)</span>).</p>
+</section>
+<section id="formalizing-alpha-beta-pruning" class="level3">
+<h3 class="anchored" data-anchor-id="formalizing-alpha-beta-pruning">Formalizing Alpha-Beta Pruning</h3>
+<p>The general idea of Alpha-Beta pruning is as follows:</p>
+<ul>
+<li><p>Maintain <span class="math inline">\(\alpha\)</span> (best for Max) and <span class="math inline">\(\beta\)</span> (best for Min) values along the path from the root to the current node. These values are updated as the search progresses.</p></li>
+<li><p>At a Min node <span class="math inline">\(n\)</span>, if the value <span class="math inline">\(v\)</span> of <span class="math inline">\(n\)</span> (after evaluating a child) is less than or equal to <span class="math inline">\(\alpha\)</span> (considering all Max ancestors), prune the remaining children of <span class="math inline">\(n\)</span>. This is because Max already has a guaranteed score of at least <span class="math inline">\(\alpha\)</span>, and Min is trying to minimize the score, so any further exploration of <span class="math inline">\(n\)</span>’s children will only lead to values less than or equal to <span class="math inline">\(v\)</span>, which are worse for Max.</p></li>
+<li><p>At a Max node <span class="math inline">\(n\)</span>, if the value <span class="math inline">\(v\)</span> of <span class="math inline">\(n\)</span> (after evaluating a child) is greater than or equal to <span class="math inline">\(\beta\)</span> (considering all Min ancestors), prune the remaining children of <span class="math inline">\(n\)</span>. This is because Min already has a guaranteed score of at most <span class="math inline">\(\beta\)</span>, and Max is trying to maximize the score, so any further exploration of <span class="math inline">\(n\)</span>’s children will only lead to values greater than or equal to <span class="math inline">\(v\)</span>, which are worse for Min.</p></li>
+</ul>
+</section>
+<section id="implementation-and-efficiency-gains" class="level3">
+<h3 class="anchored" data-anchor-id="implementation-and-efficiency-gains">Implementation and Efficiency Gains</h3>
+<p>The Alpha-Beta pruning algorithm is a modification of the Minimax algorithm. The ‘Max-Value’ and ‘Min-Value’ functions are updated to take <span class="math inline">\(\alpha\)</span> and <span class="math inline">\(\beta\)</span> as parameters, and the pruning logic is incorporated.</p>
+<pre><code>function Alpha-Beta-Search(game, state) returns an action
+  player = game.To-Move(state)
+  value, move = Max-Value(game, state, -Infinity, Infinity)
+  return move
+
+function Max-Value(game, state, alpha, beta) returns a (utility, move) pair
+  if game.Is-Terminal(state) then return game.Utility(state, player), null
+  v = -Infinity
+  move = null
+  for each a in game.Actions(state) do
+    v2, a2 = Min-Value(game, game.Result(state, a), alpha, beta)
+    if v2 &gt; v then
+      v = v2
+      move = a
+      alpha = max(alpha, v)
+    if v &gt;= beta then return v, move // Pruning
+  return v, move
+
+function Min-Value(game, state, alpha, beta) returns a (utility, move) pair
+  if game.Is-Terminal(state) then return game.Utility(state, player), null
+  v = Infinity
+  move = null
+  for each a in game.Actions(state) do
+    v2, a2 = Max-Value(game, game.Result(state, a), alpha, beta)
+    if v2 &lt; v then
+      v = v2
+      move = a
+      beta = min(beta, v)
+    if v &lt;= alpha then return v, move // Pruning
+  return v, move</code></pre>
+<p>Alpha-Beta pruning does *not* change the Minimax value; it only improves efficiency. It returns the same move as Minimax would, but it often does so much faster. With perfect ordering of the children (i.e., the best moves for each player are considered first), the time complexity can be reduced to <span class="math inline">\(O(b^{m/2})\)</span>, effectively doubling the searchable depth. However, even with Alpha-Beta pruning, chess remains computationally challenging, as <span class="math inline">\(O(35^{50})\)</span> is still a very large number. In practice, the actual performance of Alpha-Beta pruning depends on the order in which the children are evaluated. Heuristics are often used to try to achieve near-optimal ordering.</p>
+</section>
+</section>
+<section id="applications-in-games" class="level2">
+<h2 class="anchored" data-anchor-id="applications-in-games">Applications in Games</h2>
+<section id="historical-context-samuels-checkers-program" class="level3">
+<h3 class="anchored" data-anchor-id="historical-context-samuels-checkers-program">Historical Context: Samuel’s Checkers Program</h3>
+<p>Arthur Samuel’s checkers program (1950s) was an early example of AI using game playing. It used Minimax, Alpha-Beta pruning, and some learning techniques. Samuel’s program was notable for its ability to learn from its mistakes and improve its play over time. This was achieved through a combination of rote learning (memorizing board positions and their values) and generalization (using a scoring function to evaluate new positions).</p>
+</section>
+<section id="deep-blue-kasparov-and-ai" class="level3">
+<h3 class="anchored" data-anchor-id="deep-blue-kasparov-and-ai">Deep Blue, Kasparov, and AI</h3>
+<p>Deep Blue’s victory over Garry Kasparov in chess (1997) was a significant milestone in AI. Deep Blue used Alpha-Beta Minimax search with a static evaluation function, along with extensive hardware optimization. The evaluation function was handcrafted by chess experts and assigned numerical values to various features of a chess position (e.g., material balance, pawn structure, king safety). There was debate at the time about whether this constituted "true" AI or just brute force, as Deep Blue relied heavily on its ability to search a vast number of positions very quickly.</p>
+</section>
+<section id="alphago-alphago-zero-and-monte-carlo-tree-search" class="level3">
+<h3 class="anchored" data-anchor-id="alphago-alphago-zero-and-monte-carlo-tree-search">AlphaGo, AlphaGo Zero, and Monte Carlo Tree Search</h3>
+<p>AlphaGo and AlphaGo Zero represent more recent advancements in AI game playing. AlphaGo used a combination of deep neural networks (trained through supervised learning from expert games and reinforcement learning from self-play) and Monte Carlo Tree Search (MCTS). AlphaGo Zero learned to play Go by playing against itself, without any human knowledge, relying solely on reinforcement learning. MCTS is often preferred over Alpha-Beta pruning for efficiency in games with large branching factors, like Go. MCTS works by selectively expanding the game tree, guided by simulations, and gradually converging towards the optimal moves.</p>
+<p>Even with techniques like Alpha-Beta pruning and MCTS, pure search has limitations. Heuristic evaluation functions and learning techniques are often necessary to achieve high performance in complex games. For games like chess and Go, it’s impossible to search the entire game tree, so the agent must rely on an evaluation function to estimate the value of non-terminal positions. The quality of this evaluation function is crucial to the agent’s performance. Learning techniques, such as those used in AlphaGo and AlphaGo Zero, allow the agent to improve its evaluation function and its search strategy over time.</p>
+</section>
+</section>
+</section>
+<section id="knowledge-based-agents-foundations" class="level1">
+<h1>Knowledge-Based Agents: Foundations</h1>
+<section id="introduction-and-motivation" class="level2">
+<h2 class="anchored" data-anchor-id="introduction-and-motivation">Introduction and Motivation</h2>
+<section id="human-knowledge-and-reasoning" class="level3">
+<h3 class="anchored" data-anchor-id="human-knowledge-and-reasoning">Human Knowledge and Reasoning</h3>
+<p>Humans possess a vast amount of knowledge about the world and use it to reason, make decisions, and solve problems. For example, we know that if it rains, we should take an umbrella. We also know that umbrellas provide protection from rain, and that getting wet in the rain can be unpleasant or lead to illness. This interconnected web of knowledge allows us to make informed choices.</p>
+</section>
+<section id="limitations-of-previous-agents" class="level3">
+<h3 class="anchored" data-anchor-id="limitations-of-previous-agents">Limitations of Previous Agents</h3>
+<p>The problem-solving agents discussed previously (search-based agents, like those using A* or Minimax) have limited knowledge. They can solve specific, well-defined problems (e.g., finding a path in a graph, playing chess), but they lack general knowledge about the world (e.g., weather, distances, object properties). They cannot answer questions outside their narrow domain of expertise or adapt to novel situations that require common sense reasoning. For instance, a chess-playing agent doesn’t understand the concept of "tomorrow" or "weather."</p>
+</section>
+</section>
+<section id="knowledge-representation-and-knowledge-bases" class="level2">
+<h2 class="anchored" data-anchor-id="knowledge-representation-and-knowledge-bases">Knowledge Representation and Knowledge Bases</h2>
+<section id="sentences-and-formal-languages" class="level3">
+<h3 class="anchored" data-anchor-id="sentences-and-formal-languages">Sentences and Formal Languages</h3>
+<p>Knowledge-based agents store knowledge explicitly in a <strong>knowledge base (KB)</strong>. The knowledge base is a set of <strong>sentences</strong> expressed in a formal language. A formal language has a well-defined syntax (rules for forming valid sentences) and semantics (rules for determining the meaning of sentences). Historically, this language has often been first-order predicate calculus (logic), but other representations are possible, including semantic networks, frames, and, more recently, natural language (with the aid of large language models).</p>
+</section>
+<section id="axioms-and-derived-knowledge" class="level3">
+<h3 class="anchored" data-anchor-id="axioms-and-derived-knowledge">Axioms and Derived Knowledge</h3>
+<p>The knowledge base contains:</p>
+<ul>
+<li><p><strong>Axioms</strong>: Sentences that are given as true initially (provided by the system designer or learned through some initial training process). These are the foundational facts and rules that the agent starts with.</p></li>
+<li><p><strong>Derived Knowledge</strong>: Sentences that are inferred from the axioms and other derived sentences using an inference engine. This is the knowledge that the agent deduces based on its initial knowledge and reasoning capabilities.</p></li>
+</ul>
+</section>
+</section>
+<section id="inference-engines" class="level2">
+<h2 class="anchored" data-anchor-id="inference-engines">Inference Engines</h2>
+<section id="tell-and-ask-functions" class="level3">
+<h3 class="anchored" data-anchor-id="tell-and-ask-functions">Tell and Ask Functions</h3>
+<p>Knowledge-based agents interact with the knowledge base through two primary functions:</p>
+<ul>
+<li><p><strong>Tell</strong>: Adds new sentences to the knowledge base. This is how the agent learns new facts or rules, either from external input (e.g., a user telling it something) or from its own perception and learning mechanisms.</p></li>
+<li><p><strong>Ask</strong>: Queries the knowledge base, potentially requiring inference. This is how the agent retrieves information and makes decisions. The query might be a simple question about a known fact, or it might require the agent to deduce an answer based on its existing knowledge.</p></li>
+</ul>
+</section>
+<section id="deriving-consequences" class="level3">
+<h3 class="anchored" data-anchor-id="deriving-consequences">Deriving Consequences</h3>
+<p>The inference engine is responsible for deriving logical consequences from the knowledge base. This is what distinguishes a knowledge base from a simple database. A database typically stores facts and retrieves them directly. A knowledge base, on the other hand, can infer new facts that are not explicitly stored but are logically implied by the existing knowledge. The ‘Ask’ function can return not only explicitly stored facts but also inferred facts.</p>
+<p><em>Example:</em> If the KB knows that <span class="math inline">\(A = 0\)</span>, and it is asked if <span class="math inline">\(A \times B = 0\)</span>, it can infer the answer (yes) even if it’s not explicitly stored, because it has knowledge about the properties of multiplication. Similarly, if it knows <span class="math inline">\(x + y = 2\)</span> and <span class="math inline">\(x = 1\)</span>, it can infer that <span class="math inline">\(y = 1\)</span> using basic algebraic principles. More complex inferences are possible, involving multiple steps of reasoning and combining different pieces of knowledge.</p>
+</section>
+</section>
+<section id="agent-architecture" class="level2">
+<h2 class="anchored" data-anchor-id="agent-architecture">Agent Architecture</h2>
+<section id="generic-knowledge-based-agent-code" class="level3">
+<h3 class="anchored" data-anchor-id="generic-knowledge-based-agent-code">Generic Knowledge-Based Agent Code</h3>
+<p>A generic knowledge-based agent can be described with the following pseudocode:</p>
+<div class="tcolorbox">
+<pre><code>function KB-Agent(percept) returns an action
+  persistent: KB, a knowledge base
+              t, a counter, initially 0
+
+  Tell(KB, Make-Percept-Sentence(percept, t))
+  action = Ask(KB, Make-Action-Query(t))
+  Tell(KB, Make-Action-Sentence(action, t))
+  t = t + 1
+  return action</code></pre>
+</div>
+<p>The "intelligence" of this agent resides in the knowledge base (the ‘KB’) and the ‘Ask’ function’s implementation (the inference engine). The agent’s behavior is determined by what it knows and how it can reason with that knowledge. The ‘Make-Percept-Sentence’, ‘Make-Action-Query’, and ‘Make-Action-Sentence’ functions are responsible for translating between the agent’s internal representation and the external world (percepts and actions).</p>
+</section>
+<section id="declarative-vs.-procedural-approaches" class="level3">
+<h3 class="anchored" data-anchor-id="declarative-vs.-procedural-approaches">Declarative vs.&nbsp;Procedural Approaches</h3>
+<p>Knowledge-based agents represent a <strong>declarative</strong> approach, where knowledge is represented explicitly as sentences in a formal language. This contrasts with a <strong>procedural</strong> approach, where knowledge is encoded implicitly within the program’s code (e.g., the specific steps of the Minimax algorithm or the weights in a neural network). Historically, there were debates about which approach was better for building intelligent systems, but it’s now understood that both have their strengths and weaknesses, and a combination of both is often beneficial. Declarative approaches are often more flexible and easier to understand and modify, while procedural approaches can be more efficient for specific tasks.</p>
+</section>
+<section id="knowledge-level" class="level3">
+<h3 class="anchored" data-anchor-id="knowledge-level">Knowledge Level</h3>
+<p>Knowledge-based agents allow reasoning at the <strong>knowledge level</strong>, meaning we can discuss what the agent *knows* rather than just how it’s implemented. We can analyze the agent’s behavior in terms of its beliefs, goals, and the inferences it can make, independent of the specific algorithms or data structures used to implement the knowledge base and inference engine. This provides a higher level of abstraction for understanding and designing intelligent systems.</p>
+</section>
+</section>
+</section>
+<section id="the-wumpus-world-a-case-study" class="level1">
+<h1>The Wumpus World: A Case Study</h1>
+<section id="environment-definition-peas" class="level2">
+<h2 class="anchored" data-anchor-id="environment-definition-peas">Environment Definition (PEAS)</h2>
+<section id="performance-measure" class="level3">
+<h3 class="anchored" data-anchor-id="performance-measure">Performance Measure</h3>
+<p>The agent’s performance is measured by a score that reflects its success in achieving its goals and avoiding dangers:</p>
+<ul>
+<li><p>+1000 for finding the gold, returning to the starting square (1,1), and climbing out of the cave.</p></li>
+<li><p>-1000 for falling into a pit or being eaten by the Wumpus (game over).</p></li>
+<li><p>-1 for each action taken (to encourage efficiency).</p></li>
+<li><p>-10 for using the arrow (to encourage using it strategically).</p></li>
+</ul>
+</section>
+<section id="environment-structure" class="level3">
+<h3 class="anchored" data-anchor-id="environment-structure">Environment Structure</h3>
+<p>The Wumpus World is a 4x4 grid of rooms (a cave) with the following characteristics:</p>
+<ul>
+<li><p><strong>Grid Size:</strong> 4x4, totaling 16 rooms.</p></li>
+<li><p><strong>Agent Starting Position:</strong> The agent always starts in the square (1,1), facing east.</p></li>
+<li><p><strong>Wumpus and Pit Locations:</strong> The locations of the Wumpus and pits are randomly chosen at the beginning of each game, with the following constraints:</p>
+<ul>
+<li><p>The Wumpus and pits cannot be in the starting square (1,1).</p></li>
+<li><p>There is exactly one Wumpus, placed uniformly randomly in one of the remaining 15 squares.</p></li>
+<li><p>Each room (except (1,1)) has an independent probability of 0.2 of containing a pit. This means there could be anywhere from zero to 15 pits.</p></li>
+</ul></li>
+<li><p><strong>Gold Location:</strong> There is one piece of gold, placed randomly in one of the squares.</p></li>
+<li><p><strong>Walls:</strong> The entire grid is surrounded by walls.</p></li>
+</ul>
+</section>
+<section id="actuatorsactions" class="level3">
+<h3 class="anchored" data-anchor-id="actuatorsactions">Actuators/Actions</h3>
+<p>The agent has the following actions available:</p>
+<ul>
+<li><p><code>Forward</code>: Move forward one square in the direction the agent is facing. If the agent attempts to move into a wall, it stays in the same square and receives a "bump" percept.</p></li>
+<li><p><code>TurnLeft</code>: Turn 90 degrees to the left (counterclockwise).</p></li>
+<li><p><code>TurnRight</code>: Turn 90 degrees to the right (clockwise).</p></li>
+<li><p><code>Grab</code>: Pick up the gold if the agent is in the same square as the gold.</p></li>
+<li><p><code>Shoot</code>: Fire the arrow in a straight line in the direction the agent is facing. The arrow continues until it hits the Wumpus (killing it) or a wall. The agent has only one arrow.</p></li>
+<li><p><code>Climb</code>: Exit the cave. This action is only successful if the agent is in the starting square (1,1).</p></li>
+</ul>
+</section>
+<section id="sensors" class="level3">
+<h3 class="anchored" data-anchor-id="sensors">Sensors</h3>
+<p>The agent has five sensors that provide information about its immediate surroundings:</p>
+<ul>
+<li><p><code>Stench</code>: Detects if the agent is in a square directly adjacent (north, south, east, or west, but not diagonally) to the Wumpus.</p></li>
+<li><p><code>Breeze</code>: Detects if the agent is in a square directly adjacent (north, south, east, or west) to a pit.</p></li>
+<li><p><code>Glitter</code>: Detects if the agent is in the same square as the gold.</p></li>
+<li><p><code>Bump</code>: Detects if the agent has attempted to move into a wall.</p></li>
+<li><p><code>Scream</code>: Detects the Wumpus’s scream when it is killed by the arrow. This scream is perceived anywhere in the cave.</p></li>
+</ul>
+<p>"Adjacent" means directly north, south, east, or west (not diagonal).</p>
+</section>
+</section>
+<section id="example-reasoning-scenario" class="level2">
+<h2 class="anchored" data-anchor-id="example-reasoning-scenario">Example Reasoning Scenario</h2>
+<section id="why-simple-search-fails" class="level3">
+<h3 class="anchored" data-anchor-id="why-simple-search-fails">Why Simple Search Fails</h3>
+<p>Simple search algorithms, like breadth-first search or depth-first search, are inadequate for the Wumpus World because the environment is <em>partially observable</em>. The agent cannot directly perceive the location of the Wumpus or pits. It only receives local sensory information (stench, breeze, glitter, bump, scream). Trying a random action (e.g., moving forward) can lead to death if the agent unknowingly moves into a square with a pit or the Wumpus. A pure search approach, without reasoning about the implications of percepts, would be extremely inefficient and dangerous.</p>
+</section>
+<section id="deductive-reasoning" class="level3">
+<h3 class="anchored" data-anchor-id="deductive-reasoning">Deductive Reasoning</h3>
+<p>The agent must use deductive reasoning, combining its percepts with its knowledge of the rules of the Wumpus World, to infer the locations of dangers and safe squares. It needs to build a model of the world and update that model as it gathers more information.</p>
+<p><em>Example:</em></p>
+<ol type="1">
+<li><p>The agent starts in (1,1) and perceives nothing (no stench, no breeze, no glitter). It can safely conclude that the adjacent squares (1,2) and (2,1) are safe (no Wumpus, no pit). It can then safely move to, say, (2,1).</p></li>
+<li><p>In (2,1), the agent perceives a breeze. This means there’s a pit in at least one of the adjacent squares: (2,2) or (3,1) (or both), but the agent doesn’t know which. It cannot safely move to either of those squares without more information.</p></li>
+<li><p>The agent can return to (1,1) (which it knows is safe) and then move to (1,2).</p></li>
+<li><p>In (1,2), the agent perceives a stench but no breeze. Since there’s no breeze, the agent can deduce that there is *no* pit in (2,2). This is a crucial step that requires logical reasoning, not just search. If there *were* a pit in (2,2), the agent would have perceived a breeze in (1,2). The stench indicates the Wumpus is nearby, likely in (1,3) or (2,3).</p></li>
+</ol>
+<p>This example illustrates how the agent must use logic to combine percepts and deduce the state of the world. It cannot simply explore the search space blindly. It needs to reason about the implications of its percepts to avoid danger and find the gold.</p>
+</section>
+</section>
+</section>
+<section id="conclusion" class="level1">
+<h1>Conclusion</h1>
+<p>This lecture introduced knowledge-based agents and the Wumpus World. Key takeaways include:</p>
+<ul>
+<li><p>Knowledge-based agents store knowledge explicitly in a knowledge base, allowing for a declarative approach to AI.</p></li>
+<li><p>Inference engines derive new knowledge from existing knowledge, enabling the agent to go beyond simple retrieval of facts.</p></li>
+<li><p>The Wumpus World is a partially observable environment that requires reasoning and deduction, highlighting the limitations of pure search.</p></li>
+<li><p>Simple search algorithms are insufficient for the Wumpus World due to the hidden dangers and the need for logical inference.</p></li>
+</ul>
+<p>Follow-up questions:</p>
+<ul>
+<li><p>How can we represent knowledge in a formal language, suitable for manipulation by an inference engine?</p></li>
+<li><p>How does the inference engine work, i.e., what algorithms and techniques are used to derive new knowledge?</p></li>
+<li><p>What are the limitations of propositional logic (a simple formal language), and how can we overcome them with more expressive logics like first-order logic?</p></li>
+</ul>
+<p>The next lecture will delve into propositional logic and its application to the Wumpus World, providing a concrete example of how knowledge can be represented and used for reasoning.</p>
+
+
+<!-- -->
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+  const viewSource = window.document.getElementById('quarto-view-source') ||
+                     window.document.getElementById('quarto-code-tools-source');
+  if (viewSource) {
+    const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
+    viewSource.addEventListener("click", function(e) {
+      if (sourceUrl) {
+        // rstudio viewer pane
+        if (/\bcapabilities=\b/.test(window.location)) {
+          window.open(sourceUrl);
+        } else {
+          window.location.href = sourceUrl;
+        }
+      } else {
+        const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
+        modal.show();
+      }
+      return false;
+    });
+  }
+  function toggleCodeHandler(show) {
+    return function(e) {
+      const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
+      for (let i=0; i<detailsSrc.length; i++) {
+        const details = detailsSrc[i].parentElement;
+        if (show) {
+          details.open = true;
+        } else {
+          details.removeAttribute("open");
+        }
+      }
+      const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
+      const fromCls = show ? "hidden" : "unhidden";
+      const toCls = show ? "unhidden" : "hidden";
+      for (let i=0; i<cellCodeDivs.length; i++) {
+        const codeDiv = cellCodeDivs[i];
+        if (codeDiv.classList.contains(fromCls)) {
+          codeDiv.classList.remove(fromCls);
+          codeDiv.classList.add(toCls);
+        } 
+      }
+      return false;
+    }
+  }
+  const hideAllCode = window.document.getElementById("quarto-hide-all-code");
+  if (hideAllCode) {
+    hideAllCode.addEventListener("click", toggleCodeHandler(false));
+  }
+  const showAllCode = window.document.getElementById("quarto-show-all-code");
+  if (showAllCode) {
+    showAllCode.addEventListener("click", toggleCodeHandler(true));
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp("git@github\.com-TheGhoul21:TheGhoul21\/AI-2024-2025");
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
+<div class="sourceCode" id="cb5" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "Artificial Intelligence - Lecture 7: Logic and Knowledge-Based Systems"</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="an">author:</span><span class="co"> "Your Name"</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="an">date:</span><span class="co"> "2025-03-24"</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="an">format:</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="co">  html:</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="co">    toc: true  # Table of Contents</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="co">    toc-depth: 2</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="co">    code-tools: true</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="co">    theme: cosmo  # Or "journal" for Distill-like minimalism</span></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a><span class="fu"># Introduction</span></span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>This lecture introduces logic and knowledge-based systems. We will</span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>complete the discussion on search and game playing from the previous</span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>lecture, and then transition to the main topic. The primary objectives</span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>are:</span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>Understand the Minimax algorithm and Alpha-Beta pruning.</span>
+<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>Introduce the concept of knowledge-based agents.</span>
+<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>Define the Wumpus World environment as a case study.</span>
+<span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-26"><a href="#cb5-26" aria-hidden="true" tabindex="-1"></a><span class="fu"># Course Logistics and Schedule</span></span>
+<span id="cb5-27"><a href="#cb5-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-28"><a href="#cb5-28" aria-hidden="true" tabindex="-1"></a><span class="fu">## Exam Dates and Format</span></span>
+<span id="cb5-29"><a href="#cb5-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-30"><a href="#cb5-30" aria-hidden="true" tabindex="-1"></a>The proposed exam dates are:</span>
+<span id="cb5-31"><a href="#cb5-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-32"><a href="#cb5-32" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>First Call: June 19th</span>
+<span id="cb5-33"><a href="#cb5-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-34"><a href="#cb5-34" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>Second Call: July 4th</span>
+<span id="cb5-35"><a href="#cb5-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-36"><a href="#cb5-36" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>Third Call: September 25th</span>
+<span id="cb5-37"><a href="#cb5-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-38"><a href="#cb5-38" aria-hidden="true" tabindex="-1"></a>These dates are tentative and will be confirmed later. The plan is to</span>
+<span id="cb5-39"><a href="#cb5-39" aria-hidden="true" tabindex="-1"></a>have the written exam in the morning (9:00 AM) and the oral exam in the</span>
+<span id="cb5-40"><a href="#cb5-40" aria-hidden="true" tabindex="-1"></a>afternoon (2:00 PM). This schedule may be adjusted for the first call</span>
+<span id="cb5-41"><a href="#cb5-41" aria-hidden="true" tabindex="-1"></a>(June 19th) due to higher attendance.</span>
+<span id="cb5-42"><a href="#cb5-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-43"><a href="#cb5-43" aria-hidden="true" tabindex="-1"></a><span class="fu">## Lecture Schedule Changes</span></span>
+<span id="cb5-44"><a href="#cb5-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-45"><a href="#cb5-45" aria-hidden="true" tabindex="-1"></a>The lecture on the following day will end at 4:00 PM sharp due to a</span>
+<span id="cb5-46"><a href="#cb5-46" aria-hidden="true" tabindex="-1"></a>seminar with foreign guests. There will likely be no break during that</span>
+<span id="cb5-47"><a href="#cb5-47" aria-hidden="true" tabindex="-1"></a>lecture.</span>
+<span id="cb5-48"><a href="#cb5-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-49"><a href="#cb5-49" aria-hidden="true" tabindex="-1"></a><span class="fu"># Search and Game Playing</span></span>
+<span id="cb5-50"><a href="#cb5-50" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-51"><a href="#cb5-51" aria-hidden="true" tabindex="-1"></a><span class="fu">## The Minimax Algorithm</span></span>
+<span id="cb5-52"><a href="#cb5-52" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-53"><a href="#cb5-53" aria-hidden="true" tabindex="-1"></a><span class="fu">### Core Idea and Game Tree Example</span></span>
+<span id="cb5-54"><a href="#cb5-54" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-55"><a href="#cb5-55" aria-hidden="true" tabindex="-1"></a>The Minimax algorithm is used in two-player, zero-sum games. The two</span>
+<span id="cb5-56"><a href="#cb5-56" aria-hidden="true" tabindex="-1"></a>players are typically called Max and Min. Max aims to maximize the</span>
+<span id="cb5-57"><a href="#cb5-57" aria-hidden="true" tabindex="-1"></a>utility, while Min aims to minimize it. The game is represented as a</span>
+<span id="cb5-58"><a href="#cb5-58" aria-hidden="true" tabindex="-1"></a>tree, where nodes represent game states and edges represent moves. The</span>
+<span id="cb5-59"><a href="#cb5-59" aria-hidden="true" tabindex="-1"></a>algorithm works by propagating utility values from the leaf nodes</span>
+<span id="cb5-60"><a href="#cb5-60" aria-hidden="true" tabindex="-1"></a>(terminal states) up the tree.</span>
+<span id="cb5-61"><a href="#cb5-61" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-62"><a href="#cb5-62" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>**Max Nodes**: Choose the move that maximizes the utility.</span>
+<span id="cb5-63"><a href="#cb5-63" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-64"><a href="#cb5-64" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>**Min Nodes**: Choose the move that minimizes the utility (assuming</span>
+<span id="cb5-65"><a href="#cb5-65" aria-hidden="true" tabindex="-1"></a>    perfect play by the opponent).</span>
+<span id="cb5-66"><a href="#cb5-66" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-67"><a href="#cb5-67" aria-hidden="true" tabindex="-1"></a>*Example:* The lecture uses the example of Pacman and a ghost, where</span>
+<span id="cb5-68"><a href="#cb5-68" aria-hidden="true" tabindex="-1"></a>Pacman (Max) tries to maximize its score by eating pellets, and the</span>
+<span id="cb5-69"><a href="#cb5-69" aria-hidden="true" tabindex="-1"></a>ghost (Min) tries to minimize Pacman's score. Another example shown is</span>
+<span id="cb5-70"><a href="#cb5-70" aria-hidden="true" tabindex="-1"></a>the Tic-Tac-Toe game.</span>
+<span id="cb5-71"><a href="#cb5-71" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-72"><a href="#cb5-72" aria-hidden="true" tabindex="-1"></a><span class="fu">### Formal Definition (Recursive)</span></span>
+<span id="cb5-73"><a href="#cb5-73" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-74"><a href="#cb5-74" aria-hidden="true" tabindex="-1"></a>The Minimax value of a node can be defined recursively:</span>
+<span id="cb5-75"><a href="#cb5-75" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-76"><a href="#cb5-76" aria-hidden="true" tabindex="-1"></a>::: tcolorbox</span>
+<span id="cb5-77"><a href="#cb5-77" aria-hidden="true" tabindex="-1"></a>Let $S$ be a node in the game tree. The Minimax value, denoted by</span>
+<span id="cb5-78"><a href="#cb5-78" aria-hidden="true" tabindex="-1"></a>$\text{Minimax}(S)$, is defined as follows:</span>
+<span id="cb5-79"><a href="#cb5-79" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-80"><a href="#cb5-80" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>If $S$ is a terminal node, then</span>
+<span id="cb5-81"><a href="#cb5-81" aria-hidden="true" tabindex="-1"></a>    $\text{Minimax}(S) = \text{Utility}(S, \text{Max})$, where</span>
+<span id="cb5-82"><a href="#cb5-82" aria-hidden="true" tabindex="-1"></a>    $\text{Utility}(S, \text{Max})$ is the utility of the state $S$ for</span>
+<span id="cb5-83"><a href="#cb5-83" aria-hidden="true" tabindex="-1"></a>    player Max.</span>
+<span id="cb5-84"><a href="#cb5-84" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-85"><a href="#cb5-85" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>If it's Max's turn to move at node $S$, then</span>
+<span id="cb5-86"><a href="#cb5-86" aria-hidden="true" tabindex="-1"></a>    $$\text{Minimax}(S) = \max_{a \in \text{Actions}(S)} \text{Minimax}(\text{Result}(S, a))$$</span>
+<span id="cb5-87"><a href="#cb5-87" aria-hidden="true" tabindex="-1"></a>    where $\text{Actions}(S)$ is the set of possible actions at state</span>
+<span id="cb5-88"><a href="#cb5-88" aria-hidden="true" tabindex="-1"></a>    $S$, and $\text{Result}(S, a)$ is the state resulting from taking</span>
+<span id="cb5-89"><a href="#cb5-89" aria-hidden="true" tabindex="-1"></a>    action $a$ in state $S$.</span>
+<span id="cb5-90"><a href="#cb5-90" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-91"><a href="#cb5-91" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>If it's Min's turn to move at node $S$, then</span>
+<span id="cb5-92"><a href="#cb5-92" aria-hidden="true" tabindex="-1"></a>    $$\text{Minimax}(S) = \min_{a \in \text{Actions}(S)} \text{Minimax}(\text{Result}(S, a))$$</span>
+<span id="cb5-93"><a href="#cb5-93" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb5-94"><a href="#cb5-94" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-95"><a href="#cb5-95" aria-hidden="true" tabindex="-1"></a><span class="fu">### Implementation (Pseudocode and Book Version)</span></span>
+<span id="cb5-96"><a href="#cb5-96" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-97"><a href="#cb5-97" aria-hidden="true" tabindex="-1"></a>The lecture presents two versions of the Minimax algorithm</span>
+<span id="cb5-98"><a href="#cb5-98" aria-hidden="true" tabindex="-1"></a>implementation.</span>
+<span id="cb5-99"><a href="#cb5-99" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-100"><a href="#cb5-100" aria-hidden="true" tabindex="-1"></a>**Version 1 (Pseudocode):**</span>
+<span id="cb5-101"><a href="#cb5-101" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-102"><a href="#cb5-102" aria-hidden="true" tabindex="-1"></a><span class="in">    function Minimax-Decision(state) returns an action</span></span>
+<span id="cb5-103"><a href="#cb5-103" aria-hidden="true" tabindex="-1"></a><span class="in">      return argmax_{a in Actions(state)} Minimax-Value(Result(state, a))</span></span>
+<span id="cb5-104"><a href="#cb5-104" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-105"><a href="#cb5-105" aria-hidden="true" tabindex="-1"></a><span class="in">    function Minimax-Value(state) returns a utility value</span></span>
+<span id="cb5-106"><a href="#cb5-106" aria-hidden="true" tabindex="-1"></a><span class="in">      if Terminal-Test(state) then return Utility(state)</span></span>
+<span id="cb5-107"><a href="#cb5-107" aria-hidden="true" tabindex="-1"></a><span class="in">      if To-Move(state) = Max then return max_{a in Actions(state)} Minimax-Value(Result(state, a))</span></span>
+<span id="cb5-108"><a href="#cb5-108" aria-hidden="true" tabindex="-1"></a><span class="in">      else return min_{a in Actions(state)} Minimax-Value(Result(state, a))</span></span>
+<span id="cb5-109"><a href="#cb5-109" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-110"><a href="#cb5-110" aria-hidden="true" tabindex="-1"></a>**Version 2 (Book Version - Figure 6.3):** This version is more detailed</span>
+<span id="cb5-111"><a href="#cb5-111" aria-hidden="true" tabindex="-1"></a>and uses three functions: 'Minimax-Search', 'Max-Value', and</span>
+<span id="cb5-112"><a href="#cb5-112" aria-hidden="true" tabindex="-1"></a>'Min-Value'.</span>
+<span id="cb5-113"><a href="#cb5-113" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-114"><a href="#cb5-114" aria-hidden="true" tabindex="-1"></a><span class="in">    function Minimax-Search(game, state) returns an action</span></span>
+<span id="cb5-115"><a href="#cb5-115" aria-hidden="true" tabindex="-1"></a><span class="in">      player = game.To-Move(state)</span></span>
+<span id="cb5-116"><a href="#cb5-116" aria-hidden="true" tabindex="-1"></a><span class="in">      value, move = Max-Value(game, state)</span></span>
+<span id="cb5-117"><a href="#cb5-117" aria-hidden="true" tabindex="-1"></a><span class="in">      return move</span></span>
+<span id="cb5-118"><a href="#cb5-118" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-119"><a href="#cb5-119" aria-hidden="true" tabindex="-1"></a><span class="in">    function Max-Value(game, state) returns a (utility, move) pair</span></span>
+<span id="cb5-120"><a href="#cb5-120" aria-hidden="true" tabindex="-1"></a><span class="in">      if game.Is-Terminal(state) then return game.Utility(state, player), null</span></span>
+<span id="cb5-121"><a href="#cb5-121" aria-hidden="true" tabindex="-1"></a><span class="in">      v = -Infinity</span></span>
+<span id="cb5-122"><a href="#cb5-122" aria-hidden="true" tabindex="-1"></a><span class="in">      move = -Infinity // Note: Initialization to -Infinity might be unnecessary</span></span>
+<span id="cb5-123"><a href="#cb5-123" aria-hidden="true" tabindex="-1"></a><span class="in">      for each a in game.Actions(state) do</span></span>
+<span id="cb5-124"><a href="#cb5-124" aria-hidden="true" tabindex="-1"></a><span class="in">        v2, a2 = Min-Value(game, game.Result(state, a))</span></span>
+<span id="cb5-125"><a href="#cb5-125" aria-hidden="true" tabindex="-1"></a><span class="in">        if v2 &gt; v then</span></span>
+<span id="cb5-126"><a href="#cb5-126" aria-hidden="true" tabindex="-1"></a><span class="in">          v = v2</span></span>
+<span id="cb5-127"><a href="#cb5-127" aria-hidden="true" tabindex="-1"></a><span class="in">          move = a</span></span>
+<span id="cb5-128"><a href="#cb5-128" aria-hidden="true" tabindex="-1"></a><span class="in">      return v, move</span></span>
+<span id="cb5-129"><a href="#cb5-129" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-130"><a href="#cb5-130" aria-hidden="true" tabindex="-1"></a><span class="in">    function Min-Value(game, state) returns a (utility, move) pair</span></span>
+<span id="cb5-131"><a href="#cb5-131" aria-hidden="true" tabindex="-1"></a><span class="in">      if game.Is-Terminal(state) then return game.Utility(state, player), null</span></span>
+<span id="cb5-132"><a href="#cb5-132" aria-hidden="true" tabindex="-1"></a><span class="in">      v = Infinity</span></span>
+<span id="cb5-133"><a href="#cb5-133" aria-hidden="true" tabindex="-1"></a><span class="in">      move = -Infinity // Note: Initialization to -Infinity might be unnecessary</span></span>
+<span id="cb5-134"><a href="#cb5-134" aria-hidden="true" tabindex="-1"></a><span class="in">      for each a in game.Actions(state) do</span></span>
+<span id="cb5-135"><a href="#cb5-135" aria-hidden="true" tabindex="-1"></a><span class="in">        v2, a2 = Max-Value(game, game.Result(state, a))</span></span>
+<span id="cb5-136"><a href="#cb5-136" aria-hidden="true" tabindex="-1"></a><span class="in">        if v2 &lt; v then</span></span>
+<span id="cb5-137"><a href="#cb5-137" aria-hidden="true" tabindex="-1"></a><span class="in">          v = v2</span></span>
+<span id="cb5-138"><a href="#cb5-138" aria-hidden="true" tabindex="-1"></a><span class="in">          move = a</span></span>
+<span id="cb5-139"><a href="#cb5-139" aria-hidden="true" tabindex="-1"></a><span class="in">      return v, move</span></span>
+<span id="cb5-140"><a href="#cb5-140" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-141"><a href="#cb5-141" aria-hidden="true" tabindex="-1"></a>The book version, while more verbose, is closer to executable code. It</span>
+<span id="cb5-142"><a href="#cb5-142" aria-hidden="true" tabindex="-1"></a>explicitly returns both the utility and the best move found. The</span>
+<span id="cb5-143"><a href="#cb5-143" aria-hidden="true" tabindex="-1"></a>pseudocode version is more concise and focuses on the core logic.</span>
+<span id="cb5-144"><a href="#cb5-144" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-145"><a href="#cb5-145" aria-hidden="true" tabindex="-1"></a><span class="fu">## Alpha-Beta Pruning</span></span>
+<span id="cb5-146"><a href="#cb5-146" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-147"><a href="#cb5-147" aria-hidden="true" tabindex="-1"></a><span class="fu">### Efficiency Issues with Minimax</span></span>
+<span id="cb5-148"><a href="#cb5-148" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-149"><a href="#cb5-149" aria-hidden="true" tabindex="-1"></a>The Minimax algorithm has a time complexity of $O(b^m)$, where $b$ is</span>
+<span id="cb5-150"><a href="#cb5-150" aria-hidden="true" tabindex="-1"></a>the branching factor (number of possible moves at each state) and $m$ is</span>
+<span id="cb5-151"><a href="#cb5-151" aria-hidden="true" tabindex="-1"></a>the maximum depth of the game tree. This makes it computationally</span>
+<span id="cb5-152"><a href="#cb5-152" aria-hidden="true" tabindex="-1"></a>infeasible for games like chess, where $b \approx 35$ and</span>
+<span id="cb5-153"><a href="#cb5-153" aria-hidden="true" tabindex="-1"></a>$m \approx 100$ (considering 50 moves per player). Such exponential</span>
+<span id="cb5-154"><a href="#cb5-154" aria-hidden="true" tabindex="-1"></a>complexity severely limits the depth of the search tree that can be</span>
+<span id="cb5-155"><a href="#cb5-155" aria-hidden="true" tabindex="-1"></a>explored in a reasonable amount of time.</span>
+<span id="cb5-156"><a href="#cb5-156" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-157"><a href="#cb5-157" aria-hidden="true" tabindex="-1"></a><span class="fu">### Pruning Concept and Example</span></span>
+<span id="cb5-158"><a href="#cb5-158" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-159"><a href="#cb5-159" aria-hidden="true" tabindex="-1"></a>Alpha-Beta pruning is a technique to improve the efficiency of Minimax</span>
+<span id="cb5-160"><a href="#cb5-160" aria-hidden="true" tabindex="-1"></a>by avoiding the exploration of parts of the game tree that are</span>
+<span id="cb5-161"><a href="#cb5-161" aria-hidden="true" tabindex="-1"></a>guaranteed not to affect the final decision. The core idea is to</span>
+<span id="cb5-162"><a href="#cb5-162" aria-hidden="true" tabindex="-1"></a>maintain two values:</span>
+<span id="cb5-163"><a href="#cb5-163" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-164"><a href="#cb5-164" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>$\alpha$: The best (highest) value found so far for Max along the</span>
+<span id="cb5-165"><a href="#cb5-165" aria-hidden="true" tabindex="-1"></a>    path. This represents the minimum score that Max is guaranteed to</span>
+<span id="cb5-166"><a href="#cb5-166" aria-hidden="true" tabindex="-1"></a>    achieve.</span>
+<span id="cb5-167"><a href="#cb5-167" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-168"><a href="#cb5-168" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>$\beta$: The best (lowest) value found so far for Min along the</span>
+<span id="cb5-169"><a href="#cb5-169" aria-hidden="true" tabindex="-1"></a>    path. This represents the maximum score that Min can achieve (or,</span>
+<span id="cb5-170"><a href="#cb5-170" aria-hidden="true" tabindex="-1"></a>    equivalently, the maximum score that Max can be limited to).</span>
+<span id="cb5-171"><a href="#cb5-171" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-172"><a href="#cb5-172" aria-hidden="true" tabindex="-1"></a>The lecture provides a detailed example demonstrating how Alpha-Beta</span>
+<span id="cb5-173"><a href="#cb5-173" aria-hidden="true" tabindex="-1"></a>pruning works. The key idea is that if a Min node finds a value less</span>
+<span id="cb5-174"><a href="#cb5-174" aria-hidden="true" tabindex="-1"></a>than or equal to $\alpha$, the rest of its children can be pruned</span>
+<span id="cb5-175"><a href="#cb5-175" aria-hidden="true" tabindex="-1"></a>because Max will never choose that branch (since Max already has a</span>
+<span id="cb5-176"><a href="#cb5-176" aria-hidden="true" tabindex="-1"></a>better option with value $\alpha$). Similarly, if a Max node finds a</span>
+<span id="cb5-177"><a href="#cb5-177" aria-hidden="true" tabindex="-1"></a>value greater than or equal to $\beta$, the rest of its children can be</span>
+<span id="cb5-178"><a href="#cb5-178" aria-hidden="true" tabindex="-1"></a>pruned (since Min already has a better option with value $\beta$).</span>
+<span id="cb5-179"><a href="#cb5-179" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-180"><a href="#cb5-180" aria-hidden="true" tabindex="-1"></a><span class="fu">### Formalizing Alpha-Beta Pruning</span></span>
+<span id="cb5-181"><a href="#cb5-181" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-182"><a href="#cb5-182" aria-hidden="true" tabindex="-1"></a>The general idea of Alpha-Beta pruning is as follows:</span>
+<span id="cb5-183"><a href="#cb5-183" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-184"><a href="#cb5-184" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>Maintain $\alpha$ (best for Max) and $\beta$ (best for Min) values</span>
+<span id="cb5-185"><a href="#cb5-185" aria-hidden="true" tabindex="-1"></a>    along the path from the root to the current node. These values are</span>
+<span id="cb5-186"><a href="#cb5-186" aria-hidden="true" tabindex="-1"></a>    updated as the search progresses.</span>
+<span id="cb5-187"><a href="#cb5-187" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-188"><a href="#cb5-188" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>At a Min node $n$, if the value $v$ of $n$ (after evaluating a</span>
+<span id="cb5-189"><a href="#cb5-189" aria-hidden="true" tabindex="-1"></a>    child) is less than or equal to $\alpha$ (considering all Max</span>
+<span id="cb5-190"><a href="#cb5-190" aria-hidden="true" tabindex="-1"></a>    ancestors), prune the remaining children of $n$. This is because Max</span>
+<span id="cb5-191"><a href="#cb5-191" aria-hidden="true" tabindex="-1"></a>    already has a guaranteed score of at least $\alpha$, and Min is</span>
+<span id="cb5-192"><a href="#cb5-192" aria-hidden="true" tabindex="-1"></a>    trying to minimize the score, so any further exploration of $n$'s</span>
+<span id="cb5-193"><a href="#cb5-193" aria-hidden="true" tabindex="-1"></a>    children will only lead to values less than or equal to $v$, which</span>
+<span id="cb5-194"><a href="#cb5-194" aria-hidden="true" tabindex="-1"></a>    are worse for Max.</span>
+<span id="cb5-195"><a href="#cb5-195" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-196"><a href="#cb5-196" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>At a Max node $n$, if the value $v$ of $n$ (after evaluating a</span>
+<span id="cb5-197"><a href="#cb5-197" aria-hidden="true" tabindex="-1"></a>    child) is greater than or equal to $\beta$ (considering all Min</span>
+<span id="cb5-198"><a href="#cb5-198" aria-hidden="true" tabindex="-1"></a>    ancestors), prune the remaining children of $n$. This is because Min</span>
+<span id="cb5-199"><a href="#cb5-199" aria-hidden="true" tabindex="-1"></a>    already has a guaranteed score of at most $\beta$, and Max is trying</span>
+<span id="cb5-200"><a href="#cb5-200" aria-hidden="true" tabindex="-1"></a>    to maximize the score, so any further exploration of $n$'s children</span>
+<span id="cb5-201"><a href="#cb5-201" aria-hidden="true" tabindex="-1"></a>    will only lead to values greater than or equal to $v$, which are</span>
+<span id="cb5-202"><a href="#cb5-202" aria-hidden="true" tabindex="-1"></a>    worse for Min.</span>
+<span id="cb5-203"><a href="#cb5-203" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-204"><a href="#cb5-204" aria-hidden="true" tabindex="-1"></a><span class="fu">### Implementation and Efficiency Gains</span></span>
+<span id="cb5-205"><a href="#cb5-205" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-206"><a href="#cb5-206" aria-hidden="true" tabindex="-1"></a>The Alpha-Beta pruning algorithm is a modification of the Minimax</span>
+<span id="cb5-207"><a href="#cb5-207" aria-hidden="true" tabindex="-1"></a>algorithm. The 'Max-Value' and 'Min-Value' functions are updated to take</span>
+<span id="cb5-208"><a href="#cb5-208" aria-hidden="true" tabindex="-1"></a>$\alpha$ and $\beta$ as parameters, and the pruning logic is</span>
+<span id="cb5-209"><a href="#cb5-209" aria-hidden="true" tabindex="-1"></a>incorporated.</span>
+<span id="cb5-210"><a href="#cb5-210" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-211"><a href="#cb5-211" aria-hidden="true" tabindex="-1"></a><span class="in">    function Alpha-Beta-Search(game, state) returns an action</span></span>
+<span id="cb5-212"><a href="#cb5-212" aria-hidden="true" tabindex="-1"></a><span class="in">      player = game.To-Move(state)</span></span>
+<span id="cb5-213"><a href="#cb5-213" aria-hidden="true" tabindex="-1"></a><span class="in">      value, move = Max-Value(game, state, -Infinity, Infinity)</span></span>
+<span id="cb5-214"><a href="#cb5-214" aria-hidden="true" tabindex="-1"></a><span class="in">      return move</span></span>
+<span id="cb5-215"><a href="#cb5-215" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-216"><a href="#cb5-216" aria-hidden="true" tabindex="-1"></a><span class="in">    function Max-Value(game, state, alpha, beta) returns a (utility, move) pair</span></span>
+<span id="cb5-217"><a href="#cb5-217" aria-hidden="true" tabindex="-1"></a><span class="in">      if game.Is-Terminal(state) then return game.Utility(state, player), null</span></span>
+<span id="cb5-218"><a href="#cb5-218" aria-hidden="true" tabindex="-1"></a><span class="in">      v = -Infinity</span></span>
+<span id="cb5-219"><a href="#cb5-219" aria-hidden="true" tabindex="-1"></a><span class="in">      move = null</span></span>
+<span id="cb5-220"><a href="#cb5-220" aria-hidden="true" tabindex="-1"></a><span class="in">      for each a in game.Actions(state) do</span></span>
+<span id="cb5-221"><a href="#cb5-221" aria-hidden="true" tabindex="-1"></a><span class="in">        v2, a2 = Min-Value(game, game.Result(state, a), alpha, beta)</span></span>
+<span id="cb5-222"><a href="#cb5-222" aria-hidden="true" tabindex="-1"></a><span class="in">        if v2 &gt; v then</span></span>
+<span id="cb5-223"><a href="#cb5-223" aria-hidden="true" tabindex="-1"></a><span class="in">          v = v2</span></span>
+<span id="cb5-224"><a href="#cb5-224" aria-hidden="true" tabindex="-1"></a><span class="in">          move = a</span></span>
+<span id="cb5-225"><a href="#cb5-225" aria-hidden="true" tabindex="-1"></a><span class="in">          alpha = max(alpha, v)</span></span>
+<span id="cb5-226"><a href="#cb5-226" aria-hidden="true" tabindex="-1"></a><span class="in">        if v &gt;= beta then return v, move // Pruning</span></span>
+<span id="cb5-227"><a href="#cb5-227" aria-hidden="true" tabindex="-1"></a><span class="in">      return v, move</span></span>
+<span id="cb5-228"><a href="#cb5-228" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-229"><a href="#cb5-229" aria-hidden="true" tabindex="-1"></a><span class="in">    function Min-Value(game, state, alpha, beta) returns a (utility, move) pair</span></span>
+<span id="cb5-230"><a href="#cb5-230" aria-hidden="true" tabindex="-1"></a><span class="in">      if game.Is-Terminal(state) then return game.Utility(state, player), null</span></span>
+<span id="cb5-231"><a href="#cb5-231" aria-hidden="true" tabindex="-1"></a><span class="in">      v = Infinity</span></span>
+<span id="cb5-232"><a href="#cb5-232" aria-hidden="true" tabindex="-1"></a><span class="in">      move = null</span></span>
+<span id="cb5-233"><a href="#cb5-233" aria-hidden="true" tabindex="-1"></a><span class="in">      for each a in game.Actions(state) do</span></span>
+<span id="cb5-234"><a href="#cb5-234" aria-hidden="true" tabindex="-1"></a><span class="in">        v2, a2 = Max-Value(game, game.Result(state, a), alpha, beta)</span></span>
+<span id="cb5-235"><a href="#cb5-235" aria-hidden="true" tabindex="-1"></a><span class="in">        if v2 &lt; v then</span></span>
+<span id="cb5-236"><a href="#cb5-236" aria-hidden="true" tabindex="-1"></a><span class="in">          v = v2</span></span>
+<span id="cb5-237"><a href="#cb5-237" aria-hidden="true" tabindex="-1"></a><span class="in">          move = a</span></span>
+<span id="cb5-238"><a href="#cb5-238" aria-hidden="true" tabindex="-1"></a><span class="in">          beta = min(beta, v)</span></span>
+<span id="cb5-239"><a href="#cb5-239" aria-hidden="true" tabindex="-1"></a><span class="in">        if v &lt;= alpha then return v, move // Pruning</span></span>
+<span id="cb5-240"><a href="#cb5-240" aria-hidden="true" tabindex="-1"></a><span class="in">      return v, move</span></span>
+<span id="cb5-241"><a href="#cb5-241" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-242"><a href="#cb5-242" aria-hidden="true" tabindex="-1"></a>Alpha-Beta pruning does <span class="sc">\*</span>not<span class="sc">\*</span> change the Minimax value; it only</span>
+<span id="cb5-243"><a href="#cb5-243" aria-hidden="true" tabindex="-1"></a>improves efficiency. It returns the same move as Minimax would, but it</span>
+<span id="cb5-244"><a href="#cb5-244" aria-hidden="true" tabindex="-1"></a>often does so much faster. With perfect ordering of the children (i.e.,</span>
+<span id="cb5-245"><a href="#cb5-245" aria-hidden="true" tabindex="-1"></a>the best moves for each player are considered first), the time</span>
+<span id="cb5-246"><a href="#cb5-246" aria-hidden="true" tabindex="-1"></a>complexity can be reduced to $O(b^{m/2})$, effectively doubling the</span>
+<span id="cb5-247"><a href="#cb5-247" aria-hidden="true" tabindex="-1"></a>searchable depth. However, even with Alpha-Beta pruning, chess remains</span>
+<span id="cb5-248"><a href="#cb5-248" aria-hidden="true" tabindex="-1"></a>computationally challenging, as $O(35^{50})$ is still a very large</span>
+<span id="cb5-249"><a href="#cb5-249" aria-hidden="true" tabindex="-1"></a>number. In practice, the actual performance of Alpha-Beta pruning</span>
+<span id="cb5-250"><a href="#cb5-250" aria-hidden="true" tabindex="-1"></a>depends on the order in which the children are evaluated. Heuristics are</span>
+<span id="cb5-251"><a href="#cb5-251" aria-hidden="true" tabindex="-1"></a>often used to try to achieve near-optimal ordering.</span>
+<span id="cb5-252"><a href="#cb5-252" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-253"><a href="#cb5-253" aria-hidden="true" tabindex="-1"></a><span class="fu">## Applications in Games</span></span>
+<span id="cb5-254"><a href="#cb5-254" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-255"><a href="#cb5-255" aria-hidden="true" tabindex="-1"></a><span class="fu">### Historical Context: Samuel's Checkers Program</span></span>
+<span id="cb5-256"><a href="#cb5-256" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-257"><a href="#cb5-257" aria-hidden="true" tabindex="-1"></a>Arthur Samuel's checkers program (1950s) was an early example of AI</span>
+<span id="cb5-258"><a href="#cb5-258" aria-hidden="true" tabindex="-1"></a>using game playing. It used Minimax, Alpha-Beta pruning, and some</span>
+<span id="cb5-259"><a href="#cb5-259" aria-hidden="true" tabindex="-1"></a>learning techniques. Samuel's program was notable for its ability to</span>
+<span id="cb5-260"><a href="#cb5-260" aria-hidden="true" tabindex="-1"></a>learn from its mistakes and improve its play over time. This was</span>
+<span id="cb5-261"><a href="#cb5-261" aria-hidden="true" tabindex="-1"></a>achieved through a combination of rote learning (memorizing board</span>
+<span id="cb5-262"><a href="#cb5-262" aria-hidden="true" tabindex="-1"></a>positions and their values) and generalization (using a scoring function</span>
+<span id="cb5-263"><a href="#cb5-263" aria-hidden="true" tabindex="-1"></a>to evaluate new positions).</span>
+<span id="cb5-264"><a href="#cb5-264" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-265"><a href="#cb5-265" aria-hidden="true" tabindex="-1"></a><span class="fu">### Deep Blue, Kasparov, and AI</span></span>
+<span id="cb5-266"><a href="#cb5-266" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-267"><a href="#cb5-267" aria-hidden="true" tabindex="-1"></a>Deep Blue's victory over Garry Kasparov in chess (1997) was a</span>
+<span id="cb5-268"><a href="#cb5-268" aria-hidden="true" tabindex="-1"></a>significant milestone in AI. Deep Blue used Alpha-Beta Minimax search</span>
+<span id="cb5-269"><a href="#cb5-269" aria-hidden="true" tabindex="-1"></a>with a static evaluation function, along with extensive hardware</span>
+<span id="cb5-270"><a href="#cb5-270" aria-hidden="true" tabindex="-1"></a>optimization. The evaluation function was handcrafted by chess experts</span>
+<span id="cb5-271"><a href="#cb5-271" aria-hidden="true" tabindex="-1"></a>and assigned numerical values to various features of a chess position</span>
+<span id="cb5-272"><a href="#cb5-272" aria-hidden="true" tabindex="-1"></a>(e.g., material balance, pawn structure, king safety). There was debate</span>
+<span id="cb5-273"><a href="#cb5-273" aria-hidden="true" tabindex="-1"></a>at the time about whether this constituted \"true\" AI or just brute</span>
+<span id="cb5-274"><a href="#cb5-274" aria-hidden="true" tabindex="-1"></a>force, as Deep Blue relied heavily on its ability to search a vast</span>
+<span id="cb5-275"><a href="#cb5-275" aria-hidden="true" tabindex="-1"></a>number of positions very quickly.</span>
+<span id="cb5-276"><a href="#cb5-276" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-277"><a href="#cb5-277" aria-hidden="true" tabindex="-1"></a><span class="fu">### AlphaGo, AlphaGo Zero, and Monte Carlo Tree Search</span></span>
+<span id="cb5-278"><a href="#cb5-278" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-279"><a href="#cb5-279" aria-hidden="true" tabindex="-1"></a>AlphaGo and AlphaGo Zero represent more recent advancements in AI game</span>
+<span id="cb5-280"><a href="#cb5-280" aria-hidden="true" tabindex="-1"></a>playing. AlphaGo used a combination of deep neural networks (trained</span>
+<span id="cb5-281"><a href="#cb5-281" aria-hidden="true" tabindex="-1"></a>through supervised learning from expert games and reinforcement learning</span>
+<span id="cb5-282"><a href="#cb5-282" aria-hidden="true" tabindex="-1"></a>from self-play) and Monte Carlo Tree Search (MCTS). AlphaGo Zero learned</span>
+<span id="cb5-283"><a href="#cb5-283" aria-hidden="true" tabindex="-1"></a>to play Go by playing against itself, without any human knowledge,</span>
+<span id="cb5-284"><a href="#cb5-284" aria-hidden="true" tabindex="-1"></a>relying solely on reinforcement learning. MCTS is often preferred over</span>
+<span id="cb5-285"><a href="#cb5-285" aria-hidden="true" tabindex="-1"></a>Alpha-Beta pruning for efficiency in games with large branching factors,</span>
+<span id="cb5-286"><a href="#cb5-286" aria-hidden="true" tabindex="-1"></a>like Go. MCTS works by selectively expanding the game tree, guided by</span>
+<span id="cb5-287"><a href="#cb5-287" aria-hidden="true" tabindex="-1"></a>simulations, and gradually converging towards the optimal moves.</span>
+<span id="cb5-288"><a href="#cb5-288" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-289"><a href="#cb5-289" aria-hidden="true" tabindex="-1"></a>Even with techniques like Alpha-Beta pruning and MCTS, pure search has</span>
+<span id="cb5-290"><a href="#cb5-290" aria-hidden="true" tabindex="-1"></a>limitations. Heuristic evaluation functions and learning techniques are</span>
+<span id="cb5-291"><a href="#cb5-291" aria-hidden="true" tabindex="-1"></a>often necessary to achieve high performance in complex games. For games</span>
+<span id="cb5-292"><a href="#cb5-292" aria-hidden="true" tabindex="-1"></a>like chess and Go, it's impossible to search the entire game tree, so</span>
+<span id="cb5-293"><a href="#cb5-293" aria-hidden="true" tabindex="-1"></a>the agent must rely on an evaluation function to estimate the value of</span>
+<span id="cb5-294"><a href="#cb5-294" aria-hidden="true" tabindex="-1"></a>non-terminal positions. The quality of this evaluation function is</span>
+<span id="cb5-295"><a href="#cb5-295" aria-hidden="true" tabindex="-1"></a>crucial to the agent's performance. Learning techniques, such as those</span>
+<span id="cb5-296"><a href="#cb5-296" aria-hidden="true" tabindex="-1"></a>used in AlphaGo and AlphaGo Zero, allow the agent to improve its</span>
+<span id="cb5-297"><a href="#cb5-297" aria-hidden="true" tabindex="-1"></a>evaluation function and its search strategy over time.</span>
+<span id="cb5-298"><a href="#cb5-298" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-299"><a href="#cb5-299" aria-hidden="true" tabindex="-1"></a><span class="fu"># Knowledge-Based Agents: Foundations</span></span>
+<span id="cb5-300"><a href="#cb5-300" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-301"><a href="#cb5-301" aria-hidden="true" tabindex="-1"></a><span class="fu">## Introduction and Motivation</span></span>
+<span id="cb5-302"><a href="#cb5-302" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-303"><a href="#cb5-303" aria-hidden="true" tabindex="-1"></a><span class="fu">### Human Knowledge and Reasoning</span></span>
+<span id="cb5-304"><a href="#cb5-304" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-305"><a href="#cb5-305" aria-hidden="true" tabindex="-1"></a>Humans possess a vast amount of knowledge about the world and use it to</span>
+<span id="cb5-306"><a href="#cb5-306" aria-hidden="true" tabindex="-1"></a>reason, make decisions, and solve problems. For example, we know that if</span>
+<span id="cb5-307"><a href="#cb5-307" aria-hidden="true" tabindex="-1"></a>it rains, we should take an umbrella. We also know that umbrellas</span>
+<span id="cb5-308"><a href="#cb5-308" aria-hidden="true" tabindex="-1"></a>provide protection from rain, and that getting wet in the rain can be</span>
+<span id="cb5-309"><a href="#cb5-309" aria-hidden="true" tabindex="-1"></a>unpleasant or lead to illness. This interconnected web of knowledge</span>
+<span id="cb5-310"><a href="#cb5-310" aria-hidden="true" tabindex="-1"></a>allows us to make informed choices.</span>
+<span id="cb5-311"><a href="#cb5-311" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-312"><a href="#cb5-312" aria-hidden="true" tabindex="-1"></a><span class="fu">### Limitations of Previous Agents</span></span>
+<span id="cb5-313"><a href="#cb5-313" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-314"><a href="#cb5-314" aria-hidden="true" tabindex="-1"></a>The problem-solving agents discussed previously (search-based agents,</span>
+<span id="cb5-315"><a href="#cb5-315" aria-hidden="true" tabindex="-1"></a>like those using A<span class="sc">\*</span> or Minimax) have limited knowledge. They can solve</span>
+<span id="cb5-316"><a href="#cb5-316" aria-hidden="true" tabindex="-1"></a>specific, well-defined problems (e.g., finding a path in a graph,</span>
+<span id="cb5-317"><a href="#cb5-317" aria-hidden="true" tabindex="-1"></a>playing chess), but they lack general knowledge about the world (e.g.,</span>
+<span id="cb5-318"><a href="#cb5-318" aria-hidden="true" tabindex="-1"></a>weather, distances, object properties). They cannot answer questions</span>
+<span id="cb5-319"><a href="#cb5-319" aria-hidden="true" tabindex="-1"></a>outside their narrow domain of expertise or adapt to novel situations</span>
+<span id="cb5-320"><a href="#cb5-320" aria-hidden="true" tabindex="-1"></a>that require common sense reasoning. For instance, a chess-playing agent</span>
+<span id="cb5-321"><a href="#cb5-321" aria-hidden="true" tabindex="-1"></a>doesn't understand the concept of \"tomorrow\" or \"weather.\"</span>
+<span id="cb5-322"><a href="#cb5-322" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-323"><a href="#cb5-323" aria-hidden="true" tabindex="-1"></a><span class="fu">## Knowledge Representation and Knowledge Bases</span></span>
+<span id="cb5-324"><a href="#cb5-324" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-325"><a href="#cb5-325" aria-hidden="true" tabindex="-1"></a><span class="fu">### Sentences and Formal Languages</span></span>
+<span id="cb5-326"><a href="#cb5-326" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-327"><a href="#cb5-327" aria-hidden="true" tabindex="-1"></a>Knowledge-based agents store knowledge explicitly in a **knowledge base</span>
+<span id="cb5-328"><a href="#cb5-328" aria-hidden="true" tabindex="-1"></a>(KB)**. The knowledge base is a set of **sentences** expressed in a</span>
+<span id="cb5-329"><a href="#cb5-329" aria-hidden="true" tabindex="-1"></a>formal language. A formal language has a well-defined syntax (rules for</span>
+<span id="cb5-330"><a href="#cb5-330" aria-hidden="true" tabindex="-1"></a>forming valid sentences) and semantics (rules for determining the</span>
+<span id="cb5-331"><a href="#cb5-331" aria-hidden="true" tabindex="-1"></a>meaning of sentences). Historically, this language has often been</span>
+<span id="cb5-332"><a href="#cb5-332" aria-hidden="true" tabindex="-1"></a>first-order predicate calculus (logic), but other representations are</span>
+<span id="cb5-333"><a href="#cb5-333" aria-hidden="true" tabindex="-1"></a>possible, including semantic networks, frames, and, more recently,</span>
+<span id="cb5-334"><a href="#cb5-334" aria-hidden="true" tabindex="-1"></a>natural language (with the aid of large language models).</span>
+<span id="cb5-335"><a href="#cb5-335" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-336"><a href="#cb5-336" aria-hidden="true" tabindex="-1"></a><span class="fu">### Axioms and Derived Knowledge</span></span>
+<span id="cb5-337"><a href="#cb5-337" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-338"><a href="#cb5-338" aria-hidden="true" tabindex="-1"></a>The knowledge base contains:</span>
+<span id="cb5-339"><a href="#cb5-339" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-340"><a href="#cb5-340" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>**Axioms**: Sentences that are given as true initially (provided by</span>
+<span id="cb5-341"><a href="#cb5-341" aria-hidden="true" tabindex="-1"></a>    the system designer or learned through some initial training</span>
+<span id="cb5-342"><a href="#cb5-342" aria-hidden="true" tabindex="-1"></a>    process). These are the foundational facts and rules that the agent</span>
+<span id="cb5-343"><a href="#cb5-343" aria-hidden="true" tabindex="-1"></a>    starts with.</span>
+<span id="cb5-344"><a href="#cb5-344" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-345"><a href="#cb5-345" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>**Derived Knowledge**: Sentences that are inferred from the axioms</span>
+<span id="cb5-346"><a href="#cb5-346" aria-hidden="true" tabindex="-1"></a>    and other derived sentences using an inference engine. This is the</span>
+<span id="cb5-347"><a href="#cb5-347" aria-hidden="true" tabindex="-1"></a>    knowledge that the agent deduces based on its initial knowledge and</span>
+<span id="cb5-348"><a href="#cb5-348" aria-hidden="true" tabindex="-1"></a>    reasoning capabilities.</span>
+<span id="cb5-349"><a href="#cb5-349" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-350"><a href="#cb5-350" aria-hidden="true" tabindex="-1"></a><span class="fu">## Inference Engines</span></span>
+<span id="cb5-351"><a href="#cb5-351" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-352"><a href="#cb5-352" aria-hidden="true" tabindex="-1"></a><span class="fu">### Tell and Ask Functions</span></span>
+<span id="cb5-353"><a href="#cb5-353" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-354"><a href="#cb5-354" aria-hidden="true" tabindex="-1"></a>Knowledge-based agents interact with the knowledge base through two</span>
+<span id="cb5-355"><a href="#cb5-355" aria-hidden="true" tabindex="-1"></a>primary functions:</span>
+<span id="cb5-356"><a href="#cb5-356" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-357"><a href="#cb5-357" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>**Tell**: Adds new sentences to the knowledge base. This is how the</span>
+<span id="cb5-358"><a href="#cb5-358" aria-hidden="true" tabindex="-1"></a>    agent learns new facts or rules, either from external input (e.g., a</span>
+<span id="cb5-359"><a href="#cb5-359" aria-hidden="true" tabindex="-1"></a>    user telling it something) or from its own perception and learning</span>
+<span id="cb5-360"><a href="#cb5-360" aria-hidden="true" tabindex="-1"></a>    mechanisms.</span>
+<span id="cb5-361"><a href="#cb5-361" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-362"><a href="#cb5-362" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>**Ask**: Queries the knowledge base, potentially requiring</span>
+<span id="cb5-363"><a href="#cb5-363" aria-hidden="true" tabindex="-1"></a>    inference. This is how the agent retrieves information and makes</span>
+<span id="cb5-364"><a href="#cb5-364" aria-hidden="true" tabindex="-1"></a>    decisions. The query might be a simple question about a known fact,</span>
+<span id="cb5-365"><a href="#cb5-365" aria-hidden="true" tabindex="-1"></a>    or it might require the agent to deduce an answer based on its</span>
+<span id="cb5-366"><a href="#cb5-366" aria-hidden="true" tabindex="-1"></a>    existing knowledge.</span>
+<span id="cb5-367"><a href="#cb5-367" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-368"><a href="#cb5-368" aria-hidden="true" tabindex="-1"></a><span class="fu">### Deriving Consequences</span></span>
+<span id="cb5-369"><a href="#cb5-369" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-370"><a href="#cb5-370" aria-hidden="true" tabindex="-1"></a>The inference engine is responsible for deriving logical consequences</span>
+<span id="cb5-371"><a href="#cb5-371" aria-hidden="true" tabindex="-1"></a>from the knowledge base. This is what distinguishes a knowledge base</span>
+<span id="cb5-372"><a href="#cb5-372" aria-hidden="true" tabindex="-1"></a>from a simple database. A database typically stores facts and retrieves</span>
+<span id="cb5-373"><a href="#cb5-373" aria-hidden="true" tabindex="-1"></a>them directly. A knowledge base, on the other hand, can infer new facts</span>
+<span id="cb5-374"><a href="#cb5-374" aria-hidden="true" tabindex="-1"></a>that are not explicitly stored but are logically implied by the existing</span>
+<span id="cb5-375"><a href="#cb5-375" aria-hidden="true" tabindex="-1"></a>knowledge. The 'Ask' function can return not only explicitly stored</span>
+<span id="cb5-376"><a href="#cb5-376" aria-hidden="true" tabindex="-1"></a>facts but also inferred facts.</span>
+<span id="cb5-377"><a href="#cb5-377" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-378"><a href="#cb5-378" aria-hidden="true" tabindex="-1"></a>*Example:* If the KB knows that $A = 0$, and it is asked if</span>
+<span id="cb5-379"><a href="#cb5-379" aria-hidden="true" tabindex="-1"></a>$A \times B = 0$, it can infer the answer (yes) even if it's not</span>
+<span id="cb5-380"><a href="#cb5-380" aria-hidden="true" tabindex="-1"></a>explicitly stored, because it has knowledge about the properties of</span>
+<span id="cb5-381"><a href="#cb5-381" aria-hidden="true" tabindex="-1"></a>multiplication. Similarly, if it knows $x + y = 2$ and $x = 1$, it can</span>
+<span id="cb5-382"><a href="#cb5-382" aria-hidden="true" tabindex="-1"></a>infer that $y = 1$ using basic algebraic principles. More complex</span>
+<span id="cb5-383"><a href="#cb5-383" aria-hidden="true" tabindex="-1"></a>inferences are possible, involving multiple steps of reasoning and</span>
+<span id="cb5-384"><a href="#cb5-384" aria-hidden="true" tabindex="-1"></a>combining different pieces of knowledge.</span>
+<span id="cb5-385"><a href="#cb5-385" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-386"><a href="#cb5-386" aria-hidden="true" tabindex="-1"></a><span class="fu">## Agent Architecture</span></span>
+<span id="cb5-387"><a href="#cb5-387" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-388"><a href="#cb5-388" aria-hidden="true" tabindex="-1"></a><span class="fu">### Generic Knowledge-Based Agent Code</span></span>
+<span id="cb5-389"><a href="#cb5-389" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-390"><a href="#cb5-390" aria-hidden="true" tabindex="-1"></a>A generic knowledge-based agent can be described with the following</span>
+<span id="cb5-391"><a href="#cb5-391" aria-hidden="true" tabindex="-1"></a>pseudocode:</span>
+<span id="cb5-392"><a href="#cb5-392" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-393"><a href="#cb5-393" aria-hidden="true" tabindex="-1"></a>::: tcolorbox</span>
+<span id="cb5-394"><a href="#cb5-394" aria-hidden="true" tabindex="-1"></a>    function KB-Agent(percept) returns an action</span>
+<span id="cb5-395"><a href="#cb5-395" aria-hidden="true" tabindex="-1"></a>      persistent: KB, a knowledge base</span>
+<span id="cb5-396"><a href="#cb5-396" aria-hidden="true" tabindex="-1"></a>                  t, a counter, initially 0</span>
+<span id="cb5-397"><a href="#cb5-397" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-398"><a href="#cb5-398" aria-hidden="true" tabindex="-1"></a><span class="in">      Tell(KB, Make-Percept-Sentence(percept, t))</span></span>
+<span id="cb5-399"><a href="#cb5-399" aria-hidden="true" tabindex="-1"></a><span class="in">      action = Ask(KB, Make-Action-Query(t))</span></span>
+<span id="cb5-400"><a href="#cb5-400" aria-hidden="true" tabindex="-1"></a><span class="in">      Tell(KB, Make-Action-Sentence(action, t))</span></span>
+<span id="cb5-401"><a href="#cb5-401" aria-hidden="true" tabindex="-1"></a><span class="in">      t = t + 1</span></span>
+<span id="cb5-402"><a href="#cb5-402" aria-hidden="true" tabindex="-1"></a><span class="in">      return action</span></span>
+<span id="cb5-403"><a href="#cb5-403" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb5-404"><a href="#cb5-404" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-405"><a href="#cb5-405" aria-hidden="true" tabindex="-1"></a>The \"intelligence\" of this agent resides in the knowledge base (the</span>
+<span id="cb5-406"><a href="#cb5-406" aria-hidden="true" tabindex="-1"></a>'KB') and the 'Ask' function's implementation (the inference engine).</span>
+<span id="cb5-407"><a href="#cb5-407" aria-hidden="true" tabindex="-1"></a>The agent's behavior is determined by what it knows and how it can</span>
+<span id="cb5-408"><a href="#cb5-408" aria-hidden="true" tabindex="-1"></a>reason with that knowledge. The 'Make-Percept-Sentence',</span>
+<span id="cb5-409"><a href="#cb5-409" aria-hidden="true" tabindex="-1"></a>'Make-Action-Query', and 'Make-Action-Sentence' functions are</span>
+<span id="cb5-410"><a href="#cb5-410" aria-hidden="true" tabindex="-1"></a>responsible for translating between the agent's internal representation</span>
+<span id="cb5-411"><a href="#cb5-411" aria-hidden="true" tabindex="-1"></a>and the external world (percepts and actions).</span>
+<span id="cb5-412"><a href="#cb5-412" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-413"><a href="#cb5-413" aria-hidden="true" tabindex="-1"></a><span class="fu">### Declarative vs. Procedural Approaches</span></span>
+<span id="cb5-414"><a href="#cb5-414" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-415"><a href="#cb5-415" aria-hidden="true" tabindex="-1"></a>Knowledge-based agents represent a **declarative** approach, where</span>
+<span id="cb5-416"><a href="#cb5-416" aria-hidden="true" tabindex="-1"></a>knowledge is represented explicitly as sentences in a formal language.</span>
+<span id="cb5-417"><a href="#cb5-417" aria-hidden="true" tabindex="-1"></a>This contrasts with a **procedural** approach, where knowledge is</span>
+<span id="cb5-418"><a href="#cb5-418" aria-hidden="true" tabindex="-1"></a>encoded implicitly within the program's code (e.g., the specific steps</span>
+<span id="cb5-419"><a href="#cb5-419" aria-hidden="true" tabindex="-1"></a>of the Minimax algorithm or the weights in a neural network).</span>
+<span id="cb5-420"><a href="#cb5-420" aria-hidden="true" tabindex="-1"></a>Historically, there were debates about which approach was better for</span>
+<span id="cb5-421"><a href="#cb5-421" aria-hidden="true" tabindex="-1"></a>building intelligent systems, but it's now understood that both have</span>
+<span id="cb5-422"><a href="#cb5-422" aria-hidden="true" tabindex="-1"></a>their strengths and weaknesses, and a combination of both is often</span>
+<span id="cb5-423"><a href="#cb5-423" aria-hidden="true" tabindex="-1"></a>beneficial. Declarative approaches are often more flexible and easier to</span>
+<span id="cb5-424"><a href="#cb5-424" aria-hidden="true" tabindex="-1"></a>understand and modify, while procedural approaches can be more efficient</span>
+<span id="cb5-425"><a href="#cb5-425" aria-hidden="true" tabindex="-1"></a>for specific tasks.</span>
+<span id="cb5-426"><a href="#cb5-426" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-427"><a href="#cb5-427" aria-hidden="true" tabindex="-1"></a><span class="fu">### Knowledge Level</span></span>
+<span id="cb5-428"><a href="#cb5-428" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-429"><a href="#cb5-429" aria-hidden="true" tabindex="-1"></a>Knowledge-based agents allow reasoning at the **knowledge level**,</span>
+<span id="cb5-430"><a href="#cb5-430" aria-hidden="true" tabindex="-1"></a>meaning we can discuss what the agent <span class="sc">\*</span>knows<span class="sc">\*</span> rather than just how</span>
+<span id="cb5-431"><a href="#cb5-431" aria-hidden="true" tabindex="-1"></a>it's implemented. We can analyze the agent's behavior in terms of its</span>
+<span id="cb5-432"><a href="#cb5-432" aria-hidden="true" tabindex="-1"></a>beliefs, goals, and the inferences it can make, independent of the</span>
+<span id="cb5-433"><a href="#cb5-433" aria-hidden="true" tabindex="-1"></a>specific algorithms or data structures used to implement the knowledge</span>
+<span id="cb5-434"><a href="#cb5-434" aria-hidden="true" tabindex="-1"></a>base and inference engine. This provides a higher level of abstraction</span>
+<span id="cb5-435"><a href="#cb5-435" aria-hidden="true" tabindex="-1"></a>for understanding and designing intelligent systems.</span>
+<span id="cb5-436"><a href="#cb5-436" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-437"><a href="#cb5-437" aria-hidden="true" tabindex="-1"></a><span class="fu"># The Wumpus World: A Case Study</span></span>
+<span id="cb5-438"><a href="#cb5-438" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-439"><a href="#cb5-439" aria-hidden="true" tabindex="-1"></a><span class="fu">## Environment Definition (PEAS)</span></span>
+<span id="cb5-440"><a href="#cb5-440" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-441"><a href="#cb5-441" aria-hidden="true" tabindex="-1"></a><span class="fu">### Performance Measure</span></span>
+<span id="cb5-442"><a href="#cb5-442" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-443"><a href="#cb5-443" aria-hidden="true" tabindex="-1"></a>The agent's performance is measured by a score that reflects its success</span>
+<span id="cb5-444"><a href="#cb5-444" aria-hidden="true" tabindex="-1"></a>in achieving its goals and avoiding dangers:</span>
+<span id="cb5-445"><a href="#cb5-445" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-446"><a href="#cb5-446" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>+1000 for finding the gold, returning to the starting square (1,1),</span>
+<span id="cb5-447"><a href="#cb5-447" aria-hidden="true" tabindex="-1"></a>    and climbing out of the cave.</span>
+<span id="cb5-448"><a href="#cb5-448" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-449"><a href="#cb5-449" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>-1000 for falling into a pit or being eaten by the Wumpus (game</span>
+<span id="cb5-450"><a href="#cb5-450" aria-hidden="true" tabindex="-1"></a>    over).</span>
+<span id="cb5-451"><a href="#cb5-451" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-452"><a href="#cb5-452" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>-1 for each action taken (to encourage efficiency).</span>
+<span id="cb5-453"><a href="#cb5-453" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-454"><a href="#cb5-454" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>-10 for using the arrow (to encourage using it strategically).</span>
+<span id="cb5-455"><a href="#cb5-455" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-456"><a href="#cb5-456" aria-hidden="true" tabindex="-1"></a><span class="fu">### Environment Structure</span></span>
+<span id="cb5-457"><a href="#cb5-457" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-458"><a href="#cb5-458" aria-hidden="true" tabindex="-1"></a>The Wumpus World is a 4x4 grid of rooms (a cave) with the following</span>
+<span id="cb5-459"><a href="#cb5-459" aria-hidden="true" tabindex="-1"></a>characteristics:</span>
+<span id="cb5-460"><a href="#cb5-460" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-461"><a href="#cb5-461" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>**Grid Size:** 4x4, totaling 16 rooms.</span>
+<span id="cb5-462"><a href="#cb5-462" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-463"><a href="#cb5-463" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>**Agent Starting Position:** The agent always starts in the square</span>
+<span id="cb5-464"><a href="#cb5-464" aria-hidden="true" tabindex="-1"></a>    (1,1), facing east.</span>
+<span id="cb5-465"><a href="#cb5-465" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-466"><a href="#cb5-466" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>**Wumpus and Pit Locations:** The locations of the Wumpus and pits</span>
+<span id="cb5-467"><a href="#cb5-467" aria-hidden="true" tabindex="-1"></a>    are randomly chosen at the beginning of each game, with the</span>
+<span id="cb5-468"><a href="#cb5-468" aria-hidden="true" tabindex="-1"></a>    following constraints:</span>
+<span id="cb5-469"><a href="#cb5-469" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-470"><a href="#cb5-470" aria-hidden="true" tabindex="-1"></a><span class="ss">    -   </span>The Wumpus and pits cannot be in the starting square (1,1).</span>
+<span id="cb5-471"><a href="#cb5-471" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-472"><a href="#cb5-472" aria-hidden="true" tabindex="-1"></a><span class="ss">    -   </span>There is exactly one Wumpus, placed uniformly randomly in one of</span>
+<span id="cb5-473"><a href="#cb5-473" aria-hidden="true" tabindex="-1"></a>        the remaining 15 squares.</span>
+<span id="cb5-474"><a href="#cb5-474" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-475"><a href="#cb5-475" aria-hidden="true" tabindex="-1"></a><span class="ss">    -   </span>Each room (except (1,1)) has an independent probability of 0.2</span>
+<span id="cb5-476"><a href="#cb5-476" aria-hidden="true" tabindex="-1"></a>        of containing a pit. This means there could be anywhere from</span>
+<span id="cb5-477"><a href="#cb5-477" aria-hidden="true" tabindex="-1"></a>        zero to 15 pits.</span>
+<span id="cb5-478"><a href="#cb5-478" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-479"><a href="#cb5-479" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>**Gold Location:** There is one piece of gold, placed randomly in</span>
+<span id="cb5-480"><a href="#cb5-480" aria-hidden="true" tabindex="-1"></a>    one of the squares.</span>
+<span id="cb5-481"><a href="#cb5-481" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-482"><a href="#cb5-482" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>**Walls:** The entire grid is surrounded by walls.</span>
+<span id="cb5-483"><a href="#cb5-483" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-484"><a href="#cb5-484" aria-hidden="true" tabindex="-1"></a><span class="fu">### Actuators/Actions</span></span>
+<span id="cb5-485"><a href="#cb5-485" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-486"><a href="#cb5-486" aria-hidden="true" tabindex="-1"></a>The agent has the following actions available:</span>
+<span id="cb5-487"><a href="#cb5-487" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-488"><a href="#cb5-488" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="in">`Forward`</span>: Move forward one square in the direction the agent is</span>
+<span id="cb5-489"><a href="#cb5-489" aria-hidden="true" tabindex="-1"></a>    facing. If the agent attempts to move into a wall, it stays in the</span>
+<span id="cb5-490"><a href="#cb5-490" aria-hidden="true" tabindex="-1"></a>    same square and receives a \"bump\" percept.</span>
+<span id="cb5-491"><a href="#cb5-491" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-492"><a href="#cb5-492" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="in">`TurnLeft`</span>: Turn 90 degrees to the left (counterclockwise).</span>
+<span id="cb5-493"><a href="#cb5-493" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-494"><a href="#cb5-494" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="in">`TurnRight`</span>: Turn 90 degrees to the right (clockwise).</span>
+<span id="cb5-495"><a href="#cb5-495" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-496"><a href="#cb5-496" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="in">`Grab`</span>: Pick up the gold if the agent is in the same square as the</span>
+<span id="cb5-497"><a href="#cb5-497" aria-hidden="true" tabindex="-1"></a>    gold.</span>
+<span id="cb5-498"><a href="#cb5-498" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-499"><a href="#cb5-499" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="in">`Shoot`</span>: Fire the arrow in a straight line in the direction the</span>
+<span id="cb5-500"><a href="#cb5-500" aria-hidden="true" tabindex="-1"></a>    agent is facing. The arrow continues until it hits the Wumpus</span>
+<span id="cb5-501"><a href="#cb5-501" aria-hidden="true" tabindex="-1"></a>    (killing it) or a wall. The agent has only one arrow.</span>
+<span id="cb5-502"><a href="#cb5-502" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-503"><a href="#cb5-503" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="in">`Climb`</span>: Exit the cave. This action is only successful if the agent</span>
+<span id="cb5-504"><a href="#cb5-504" aria-hidden="true" tabindex="-1"></a>    is in the starting square (1,1).</span>
+<span id="cb5-505"><a href="#cb5-505" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-506"><a href="#cb5-506" aria-hidden="true" tabindex="-1"></a><span class="fu">### Sensors</span></span>
+<span id="cb5-507"><a href="#cb5-507" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-508"><a href="#cb5-508" aria-hidden="true" tabindex="-1"></a>The agent has five sensors that provide information about its immediate</span>
+<span id="cb5-509"><a href="#cb5-509" aria-hidden="true" tabindex="-1"></a>surroundings:</span>
+<span id="cb5-510"><a href="#cb5-510" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-511"><a href="#cb5-511" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="in">`Stench`</span>: Detects if the agent is in a square directly adjacent</span>
+<span id="cb5-512"><a href="#cb5-512" aria-hidden="true" tabindex="-1"></a>    (north, south, east, or west, but not diagonally) to the Wumpus.</span>
+<span id="cb5-513"><a href="#cb5-513" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-514"><a href="#cb5-514" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="in">`Breeze`</span>: Detects if the agent is in a square directly adjacent</span>
+<span id="cb5-515"><a href="#cb5-515" aria-hidden="true" tabindex="-1"></a>    (north, south, east, or west) to a pit.</span>
+<span id="cb5-516"><a href="#cb5-516" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-517"><a href="#cb5-517" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="in">`Glitter`</span>: Detects if the agent is in the same square as the gold.</span>
+<span id="cb5-518"><a href="#cb5-518" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-519"><a href="#cb5-519" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="in">`Bump`</span>: Detects if the agent has attempted to move into a wall.</span>
+<span id="cb5-520"><a href="#cb5-520" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-521"><a href="#cb5-521" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="in">`Scream`</span>: Detects the Wumpus's scream when it is killed by the</span>
+<span id="cb5-522"><a href="#cb5-522" aria-hidden="true" tabindex="-1"></a>    arrow. This scream is perceived anywhere in the cave.</span>
+<span id="cb5-523"><a href="#cb5-523" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-524"><a href="#cb5-524" aria-hidden="true" tabindex="-1"></a>\"Adjacent\" means directly north, south, east, or west (not diagonal).</span>
+<span id="cb5-525"><a href="#cb5-525" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-526"><a href="#cb5-526" aria-hidden="true" tabindex="-1"></a><span class="fu">## Example Reasoning Scenario</span></span>
+<span id="cb5-527"><a href="#cb5-527" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-528"><a href="#cb5-528" aria-hidden="true" tabindex="-1"></a><span class="fu">### Why Simple Search Fails</span></span>
+<span id="cb5-529"><a href="#cb5-529" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-530"><a href="#cb5-530" aria-hidden="true" tabindex="-1"></a>Simple search algorithms, like breadth-first search or depth-first</span>
+<span id="cb5-531"><a href="#cb5-531" aria-hidden="true" tabindex="-1"></a>search, are inadequate for the Wumpus World because the environment is</span>
+<span id="cb5-532"><a href="#cb5-532" aria-hidden="true" tabindex="-1"></a>*partially observable*. The agent cannot directly perceive the location</span>
+<span id="cb5-533"><a href="#cb5-533" aria-hidden="true" tabindex="-1"></a>of the Wumpus or pits. It only receives local sensory information</span>
+<span id="cb5-534"><a href="#cb5-534" aria-hidden="true" tabindex="-1"></a>(stench, breeze, glitter, bump, scream). Trying a random action (e.g.,</span>
+<span id="cb5-535"><a href="#cb5-535" aria-hidden="true" tabindex="-1"></a>moving forward) can lead to death if the agent unknowingly moves into a</span>
+<span id="cb5-536"><a href="#cb5-536" aria-hidden="true" tabindex="-1"></a>square with a pit or the Wumpus. A pure search approach, without</span>
+<span id="cb5-537"><a href="#cb5-537" aria-hidden="true" tabindex="-1"></a>reasoning about the implications of percepts, would be extremely</span>
+<span id="cb5-538"><a href="#cb5-538" aria-hidden="true" tabindex="-1"></a>inefficient and dangerous.</span>
+<span id="cb5-539"><a href="#cb5-539" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-540"><a href="#cb5-540" aria-hidden="true" tabindex="-1"></a><span class="fu">### Deductive Reasoning</span></span>
+<span id="cb5-541"><a href="#cb5-541" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-542"><a href="#cb5-542" aria-hidden="true" tabindex="-1"></a>The agent must use deductive reasoning, combining its percepts with its</span>
+<span id="cb5-543"><a href="#cb5-543" aria-hidden="true" tabindex="-1"></a>knowledge of the rules of the Wumpus World, to infer the locations of</span>
+<span id="cb5-544"><a href="#cb5-544" aria-hidden="true" tabindex="-1"></a>dangers and safe squares. It needs to build a model of the world and</span>
+<span id="cb5-545"><a href="#cb5-545" aria-hidden="true" tabindex="-1"></a>update that model as it gathers more information.</span>
+<span id="cb5-546"><a href="#cb5-546" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-547"><a href="#cb5-547" aria-hidden="true" tabindex="-1"></a>*Example:*</span>
+<span id="cb5-548"><a href="#cb5-548" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-549"><a href="#cb5-549" aria-hidden="true" tabindex="-1"></a><span class="ss">1.  </span>The agent starts in (1,1) and perceives nothing (no stench, no</span>
+<span id="cb5-550"><a href="#cb5-550" aria-hidden="true" tabindex="-1"></a>    breeze, no glitter). It can safely conclude that the adjacent</span>
+<span id="cb5-551"><a href="#cb5-551" aria-hidden="true" tabindex="-1"></a>    squares (1,2) and (2,1) are safe (no Wumpus, no pit). It can then</span>
+<span id="cb5-552"><a href="#cb5-552" aria-hidden="true" tabindex="-1"></a>    safely move to, say, (2,1).</span>
+<span id="cb5-553"><a href="#cb5-553" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-554"><a href="#cb5-554" aria-hidden="true" tabindex="-1"></a><span class="ss">2.  </span>In (2,1), the agent perceives a breeze. This means there's a pit in</span>
+<span id="cb5-555"><a href="#cb5-555" aria-hidden="true" tabindex="-1"></a>    at least one of the adjacent squares: (2,2) or (3,1) (or both), but</span>
+<span id="cb5-556"><a href="#cb5-556" aria-hidden="true" tabindex="-1"></a>    the agent doesn't know which. It cannot safely move to either of</span>
+<span id="cb5-557"><a href="#cb5-557" aria-hidden="true" tabindex="-1"></a>    those squares without more information.</span>
+<span id="cb5-558"><a href="#cb5-558" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-559"><a href="#cb5-559" aria-hidden="true" tabindex="-1"></a><span class="ss">3.  </span>The agent can return to (1,1) (which it knows is safe) and then move</span>
+<span id="cb5-560"><a href="#cb5-560" aria-hidden="true" tabindex="-1"></a>    to (1,2).</span>
+<span id="cb5-561"><a href="#cb5-561" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-562"><a href="#cb5-562" aria-hidden="true" tabindex="-1"></a><span class="ss">4.  </span>In (1,2), the agent perceives a stench but no breeze. Since there's</span>
+<span id="cb5-563"><a href="#cb5-563" aria-hidden="true" tabindex="-1"></a>    no breeze, the agent can deduce that there is <span class="sc">\*</span>no<span class="sc">\*</span> pit in (2,2).</span>
+<span id="cb5-564"><a href="#cb5-564" aria-hidden="true" tabindex="-1"></a>    This is a crucial step that requires logical reasoning, not just</span>
+<span id="cb5-565"><a href="#cb5-565" aria-hidden="true" tabindex="-1"></a>    search. If there <span class="sc">\*</span>were<span class="sc">\*</span> a pit in (2,2), the agent would have</span>
+<span id="cb5-566"><a href="#cb5-566" aria-hidden="true" tabindex="-1"></a>    perceived a breeze in (1,2). The stench indicates the Wumpus is</span>
+<span id="cb5-567"><a href="#cb5-567" aria-hidden="true" tabindex="-1"></a>    nearby, likely in (1,3) or (2,3).</span>
+<span id="cb5-568"><a href="#cb5-568" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-569"><a href="#cb5-569" aria-hidden="true" tabindex="-1"></a>This example illustrates how the agent must use logic to combine</span>
+<span id="cb5-570"><a href="#cb5-570" aria-hidden="true" tabindex="-1"></a>percepts and deduce the state of the world. It cannot simply explore the</span>
+<span id="cb5-571"><a href="#cb5-571" aria-hidden="true" tabindex="-1"></a>search space blindly. It needs to reason about the implications of its</span>
+<span id="cb5-572"><a href="#cb5-572" aria-hidden="true" tabindex="-1"></a>percepts to avoid danger and find the gold.</span>
+<span id="cb5-573"><a href="#cb5-573" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-574"><a href="#cb5-574" aria-hidden="true" tabindex="-1"></a><span class="fu"># Conclusion</span></span>
+<span id="cb5-575"><a href="#cb5-575" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-576"><a href="#cb5-576" aria-hidden="true" tabindex="-1"></a>This lecture introduced knowledge-based agents and the Wumpus World. Key</span>
+<span id="cb5-577"><a href="#cb5-577" aria-hidden="true" tabindex="-1"></a>takeaways include:</span>
+<span id="cb5-578"><a href="#cb5-578" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-579"><a href="#cb5-579" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>Knowledge-based agents store knowledge explicitly in a knowledge</span>
+<span id="cb5-580"><a href="#cb5-580" aria-hidden="true" tabindex="-1"></a>    base, allowing for a declarative approach to AI.</span>
+<span id="cb5-581"><a href="#cb5-581" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-582"><a href="#cb5-582" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>Inference engines derive new knowledge from existing knowledge,</span>
+<span id="cb5-583"><a href="#cb5-583" aria-hidden="true" tabindex="-1"></a>    enabling the agent to go beyond simple retrieval of facts.</span>
+<span id="cb5-584"><a href="#cb5-584" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-585"><a href="#cb5-585" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>The Wumpus World is a partially observable environment that requires</span>
+<span id="cb5-586"><a href="#cb5-586" aria-hidden="true" tabindex="-1"></a>    reasoning and deduction, highlighting the limitations of pure</span>
+<span id="cb5-587"><a href="#cb5-587" aria-hidden="true" tabindex="-1"></a>    search.</span>
+<span id="cb5-588"><a href="#cb5-588" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-589"><a href="#cb5-589" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>Simple search algorithms are insufficient for the Wumpus World due</span>
+<span id="cb5-590"><a href="#cb5-590" aria-hidden="true" tabindex="-1"></a>    to the hidden dangers and the need for logical inference.</span>
+<span id="cb5-591"><a href="#cb5-591" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-592"><a href="#cb5-592" aria-hidden="true" tabindex="-1"></a>Follow-up questions:</span>
+<span id="cb5-593"><a href="#cb5-593" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-594"><a href="#cb5-594" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>How can we represent knowledge in a formal language, suitable for</span>
+<span id="cb5-595"><a href="#cb5-595" aria-hidden="true" tabindex="-1"></a>    manipulation by an inference engine?</span>
+<span id="cb5-596"><a href="#cb5-596" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-597"><a href="#cb5-597" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>How does the inference engine work, i.e., what algorithms and</span>
+<span id="cb5-598"><a href="#cb5-598" aria-hidden="true" tabindex="-1"></a>    techniques are used to derive new knowledge?</span>
+<span id="cb5-599"><a href="#cb5-599" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-600"><a href="#cb5-600" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>What are the limitations of propositional logic (a simple formal</span>
+<span id="cb5-601"><a href="#cb5-601" aria-hidden="true" tabindex="-1"></a>    language), and how can we overcome them with more expressive logics</span>
+<span id="cb5-602"><a href="#cb5-602" aria-hidden="true" tabindex="-1"></a>    like first-order logic?</span>
+<span id="cb5-603"><a href="#cb5-603" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-604"><a href="#cb5-604" aria-hidden="true" tabindex="-1"></a>The next lecture will delve into propositional logic and its application</span>
+<span id="cb5-605"><a href="#cb5-605" aria-hidden="true" tabindex="-1"></a>to the Wumpus World, providing a concrete example of how knowledge can</span>
+<span id="cb5-606"><a href="#cb5-606" aria-hidden="true" tabindex="-1"></a>be represented and used for reasoning.</span></code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
+</div></div></div></div></div>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
